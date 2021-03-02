@@ -15,7 +15,7 @@ class HNavbar extends React.Component {
 
   render() {
     return (
-      <div className="mx-5 mb-4 mt-2 nav-wrapper mx-auto">
+      <div className="mx-5 mb-4 mt-3 nav-wrapper mx-auto">
         <Navbar>
           <Navbar.Brand>
             HuCoPIA

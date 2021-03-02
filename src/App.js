@@ -3,25 +3,13 @@ import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import { HNavbar } from 'components/HNavbar/HNavbar';
+import { Home } from 'pages/Home/Home';
 
 function App() {
   return (
     <Container fluid className="App px-0">
       <HNavbar/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Home/>
     </Container>
   );
 }

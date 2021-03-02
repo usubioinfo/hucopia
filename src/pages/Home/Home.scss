@@ -1,0 +1,10 @@
+@import '~scss/colors';
+
+.col-title {
+  font-size: 110%;
+  font-weight: 600;
+}
+
+.line {
+  border-bottom: solid 1px $color-light-grey;
+}

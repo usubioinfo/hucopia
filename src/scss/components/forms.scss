@@ -1,0 +1,21 @@
+@import '~scss/colors';
+
+.form-control:focus {
+  outline: none!important;
+  box-shadow: none!important;
+}
+
+.kbl-form {
+  background: #ececec;
+  border-radius: 12px;
+  transition: 0.3s;
+  border: solid 1px #dedede!important;
+
+  &:hover {
+    background: $white;
+  }
+
+  &:focus {
+    background: $white!important;
+  }
+}
