@@ -1,0 +1,25 @@
+@import '~scss/colors';
+@import '~scss/globals';
+@use "sass:list";
+
+$colors: ("1": $palette-1, "2": $palette-2, "3": $palette-3);
+$shades: ("1": $palette-1-dark, "2": $palette-2-dark, "3": $palette-3-dark);
+
+@each $num, $color in $colors {
+  .kbl-btn-#{$num} {
+    background: $color;
+    border-radius: $radius-btn;
+    border-color: $color;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+}
+
+@each $num, $shade in $shades {
+  .kbl-btn-#{$num} {
+    &:hover {
+      background: $shade;
+      border-color: $shade;
+    }
+  }
+}

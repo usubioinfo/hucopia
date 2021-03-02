@@ -1,4 +1,5 @@
 @import '~scss/colors';
+@import '~scss/globals';
 
 .form-control:focus {
   outline: none!important;
@@ -7,7 +8,7 @@
 
 .kbl-form {
   background: #ececec;
-  border-radius: 12px;
+  border-radius: $border-radius;
   transition: 0.3s;
   border: solid 1px #dedede!important;
 
