@@ -65,8 +65,8 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <Container className="px-4">
-          <Row>
+        <Container className="px-4 pt-5">
+          <Row className="mb-2">
             <Col sm={6}>
               <div className="col-title">
                 Human Search Criteria
@@ -91,18 +91,19 @@ export class Home extends Component {
                   <Button className="kbl-btn-1 mr-3">Sample Data</Button>
                   <Button className="kbl-btn-2">Clear Data</Button>
 
-                  <h6 className="mt-4 pl-2"><b>File Upload</b></h6>
-                  <InputGroup className="mb-4">
+                  <h6 className="mt-5 pl-2"><b>File Upload</b></h6>
+                  <InputGroup className="mb-5">
                     <Form.Control placeholder="No file selected" className="kbl-form"/>
                     <InputGroup.Append>
                       <Button className="kbl-btn-1">Upload</Button>
                     </InputGroup.Append>
                   </InputGroup>
 
-                  <h6 className="pl-2"><b>Annotation Type</b></h6>
+                  <h5 className="pl-2"><b>Annotation Type</b></h5>
                   <div className="px-0"><div className="line mt-2 mb-3"></div></div>
 
                   <HSelector text="Tissue Expression" selected={this.isAnnotationSelected('tissue')} name="tissue" ch={this.selectAnnotation}/>
+                  <HSelector text="Localization" selected={this.isAnnotationSelected('local')} name="local" ch={this.selectAnnotation}/>
                   <HSelector text="KEGG Pathway" selected={this.isAnnotationSelected('kegg')} name="kegg" ch={this.selectAnnotation}/>
                   <HSelector text="Gene Ontology" selected={this.isAnnotationSelected('gene')} name="gene" ch={this.selectAnnotation}/>
                 </Col>
@@ -130,6 +131,22 @@ export class Home extends Component {
                   <HSelector text="Unique" selected={this.isCategorySelected('unique')} name="unique" ch={this.selectIntCategory}/><br/>
                   <HSelector text="Common" selected={this.isCategorySelected('common')} name="common" ch={this.selectIntCategory}/><br/>
                   <HSelector text="Both" selected={this.isCategorySelected('all')} name="all" ch={this.selectIntCategory}/><br/>
+                </Col>
+              </Row>
+
+              <Row className="mt-4">
+                <Col sm={12} className="text-left">
+                  <h5 className="mt-3"><b>Pathogen Proteins</b></h5>
+                  <Row>
+                    <Col sm={7}>
+                      <Form.Control placeholder="Search proteins" className="kbl-form"/>
+                    </Col>
+
+                    <Col sm={5}>
+                      <Button className="kbl-btn-1 mr-2">Select All</Button>
+                      <Button className="kbl-btn-2">Clear All</Button>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
             </Col>
