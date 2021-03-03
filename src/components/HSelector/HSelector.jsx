@@ -24,7 +24,7 @@ export class HSelector extends React.Component {
 
     let icon;
 
-    if (this.state.selected) {
+    if (this.props.selected) {
       icon = (<IconContext.Provider value={{ className: "selected-icon mr-1" }}>
                 <FaRegDotCircle/>
               </IconContext.Provider>);
@@ -36,7 +36,7 @@ export class HSelector extends React.Component {
 
     return (
       <div className="h-selector" onClick={(e) => {
-          this.setSelected();
+          this.props.ch(this.props.name)
         }}>
         {icon}
         {this.props.text}
