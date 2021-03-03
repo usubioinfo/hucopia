@@ -8,3 +8,12 @@
 .line {
   border-bottom: solid 1px $color-light-grey;
 }
+
+.q-icon {
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    color: $palette-1;
+  }
+}

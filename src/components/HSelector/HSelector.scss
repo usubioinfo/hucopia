@@ -1,0 +1,29 @@
+@import '~scss/colors';
+@import '~scss/globals';
+
+.h-selector {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  display: inline-block;
+  font-weight: 600;
+  color: $text-main;
+  transition: 0.3s;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background: $chip-bg;
+
+    color: $chip-font;
+
+    .selected-icon {
+      color: $chip-font;
+    }
+  }
+
+  .selected-icon {
+    color: $chip-font;
+    margin-bottom: 3px;
+  }
+}
