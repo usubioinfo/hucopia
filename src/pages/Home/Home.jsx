@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import Fuse from 'fuse.js';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
+
+import SelectSearch from 'react-select-search';
 
 import Form from 'react-bootstrap/Form';
 
@@ -13,25 +16,47 @@ import { FaRegQuestionCircle } from 'react-icons/fa';
 import './Home.scss';
 import 'scss/components/forms.scss';
 import 'scss/components/buttons.scss';
+import 'scss/components/search-form.scss';
 
 import { HSelector } from 'components/HSelector/HSelector';
 import { HChip } from 'components/HChip/HChip';
 
 import { PATHOGEN_PROTEINS } from 'constants.js';
 
+const fuzzySearch = (options) => {
+  const fuse = new Fuse(options, {
+      keys: ['name', 'groupName'],
+      threshold: 0.3,
+  });
+
+  return (value) => {
+      if (!value.length) {
+          return options;
+      }
+
+      return fuse.search(value);
+  };
+}
+
 export class Home extends Component {
+
+  searchOptions;
 
   constructor(props) {
     super(props);
 
-    console.log(PATHOGEN_PROTEINS)
+    this.searchOptions = PATHOGEN_PROTEINS.map(protein => {
+      return {name: protein, value: protein};
+    });
 
     this.state = {
       selectedAnnotation: 'tissue',
       selectedVirus: 'scv2',
       interactionCategory: 'unique',
-      selectedPatProteins: PATHOGEN_PROTEINS
+      selectedPatProteins: [...PATHOGEN_PROTEINS]
     }
+
+
 
     this.selectAnnotation = this.selectAnnotation.bind(this);
     this.selectVirus = this.selectVirus.bind(this);
@@ -92,11 +117,27 @@ export class Home extends Component {
     });
   }
 
+  selectSearch(protein) {
+    console.log(protein);
+  }
+
   render() {
 
     let protChips = this.state.selectedPatProteins.map(protein => (
       <HChip text={protein} key={protein} ch={this.patProtClicked}/>
     ));
+
+    this.searchOptions = PATHOGEN_PROTEINS.filter(protein => {
+      if (!this.state.selectedPatProteins.includes(protein)) {
+        return true;
+      }
+    })
+    .map(protein => {
+      return {name: protein, value: protein};
+    });
+
+    console.log(PATHOGEN_PROTEINS);
+    console.log(this.searchOptions);
 
     return (
       <div>
@@ -174,7 +215,9 @@ export class Home extends Component {
                   <h5 className="mt-3"><b>Pathogen Proteins</b></h5>
                   <Row>
                     <Col sm={7}>
-                      <Form.Control placeholder="Search proteins" className="kbl-form"/>
+                      <SelectSearch
+                        options={this.searchOptions} search placeholder="Search proteins" name="protein" filterOptions={fuzzySearch} onChange={this.selectSearch}
+                        />
                     </Col>
 
                     <Col sm={5}>
