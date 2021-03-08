@@ -65,6 +65,7 @@ export class Home extends Component {
     this.selectIntCategory = this.selectIntCategory.bind(this);
     this.patProtClicked = this.patProtClicked.bind(this);
     this.selectIntType = this.selectIntType.bind(this);
+    this.selectSearch = this.selectSearch.bind(this);
   }
 
   selectAnnotation(type) {
@@ -152,6 +153,8 @@ export class Home extends Component {
     }
 
     patProteins.push(protein);
+
+    this.setState({selectedPatProteins: patProteins});
 
   }
 
