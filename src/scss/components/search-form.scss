@@ -1,7 +1,11 @@
+@import '~scss/colors';
+@import '~scss/globals';
+
 /**
  * Main wrapper
  */
 .select-search {
+  transition: 0.3s;
     width: 300px;
     position: relative;
     font-family: 'Nunito Sans', sans-serif;
@@ -12,6 +16,7 @@
 .select-search *::after,
 .select-search *::before {
     box-sizing: inherit;
+    transition: 0.3s;
 }
 
 /**
@@ -67,9 +72,26 @@
 /**
  * Options wrapper
  */
+ ::-webkit-scrollbar {
+   width: 6px;
+ }
+
+ ::-webkit-scrollbar-track {
+   background: #f1f1f1;
+ }
+
+ ::-webkit-scrollbar-thumb {
+   background: $palette-1;
+   border-radius: 10px;
+ }
+
+ ::-webkit-scrollbar-thumb:hover {
+   background: $palette-1-dark;
+ }
 .select-search__select {
     background: #fff;
     box-shadow: 0 .0625rem .125rem rgba(0, 0, 0, 0.15);
+
 }
 
 /**
