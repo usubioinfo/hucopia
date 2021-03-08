@@ -8,7 +8,7 @@ import { Home } from 'pages/Home/Home';
 function App() {
   return (
     <Container fluid className="App px-0">
-      <HNavbar/>
+      <HNavbar active={'home'}/>
       <Home/>
     </Container>
   );

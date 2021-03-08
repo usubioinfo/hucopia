@@ -120,7 +120,7 @@ export class Home extends Component {
   }
 
   selectAllClicked() {
-    this.setState({selectedPatProteins: PATHOGEN_PROTEINS});
+    this.setState({selectedPatProteins: [...PATHOGEN_PROTEINS]});
   }
 
   // Clear all pathogen proteins
@@ -144,6 +144,15 @@ export class Home extends Component {
 
   selectSearch(protein) {
     console.log(protein);
+
+    let patProteins = this.state.selectedPatProteins;
+
+    if (patProteins.includes(protein)) {
+      return;
+    }
+
+    patProteins.push(protein);
+
   }
 
   render() {
@@ -156,10 +165,15 @@ export class Home extends Component {
       if (!this.state.selectedPatProteins.includes(protein)) {
         return true;
       }
+
+      return false;
     })
     .map(protein => {
       return {name: protein, value: protein};
     });
+
+    console.log(PATHOGEN_PROTEINS);
+    console.log(this.searchOptions);
 
     return (
       <div>
@@ -220,7 +234,7 @@ export class Home extends Component {
                   <h6><b>Virus</b></h6>
 
                   <HSelector text="SARS-CoV-2" selected={this.isVirusSelected('scv2')} name="scv2" ch={this.selectVirus}/><br/>
-                  <HSelector text="SARS-CoV-1" selected={this.isVirusSelected('scv1')} name="scv1" ch={this.selectVirus}/><br/>
+                  <HSelector text="SARS-CoV" selected={this.isVirusSelected('scv1')} name="scv1" ch={this.selectVirus}/><br/>
                   <HSelector text="MERS" selected={this.isVirusSelected('mers')} name="mers" ch={this.selectVirus}/><br/>
                 </Col>
                 <Col sm={6} className="text-left">

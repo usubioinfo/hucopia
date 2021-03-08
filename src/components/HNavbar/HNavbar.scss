@@ -28,7 +28,11 @@
   font-weight: 600;
   color: $text-ghost!important;
 
-  &:hover {
+  &.active {
+    color: $text-main!important;
+  }
+
+  &:hover:not(.active) {
     border-color: $palette-1;
     color: $text-light!important;
   }
