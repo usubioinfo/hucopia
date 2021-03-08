@@ -1,0 +1,33 @@
+@import '~scss/colors';
+@import '~scss/globals';
+
+.h-chip {
+  border-radius: 999px;
+  border: 1px solid $palette-1;
+  padding: 5px 13px;
+  margin-right: 6px;
+  margin-bottom: 7px;
+  display: inline-block;
+  font-weight: 600;
+  color: $text-main;
+  transition: 0.3s;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background: $chip-bg;
+    border-color: $chip-bg;
+
+    color: $chip-font;
+
+    .selected-icon {
+      color: #c3154a;
+    }
+  }
+
+  .selected-icon {
+    transition: 0.3s;
+    color: #d5d5d5;
+    margin-bottom: 1px;
+  }
+}

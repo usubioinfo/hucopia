@@ -15,21 +15,28 @@ import 'scss/components/forms.scss';
 import 'scss/components/buttons.scss';
 
 import { HSelector } from 'components/HSelector/HSelector';
+import { HChip } from 'components/HChip/HChip';
+
+import { PATHOGEN_PROTEINS } from 'constants.js';
 
 export class Home extends Component {
 
   constructor(props) {
     super(props);
 
+    console.log(PATHOGEN_PROTEINS)
+
     this.state = {
       selectedAnnotation: 'tissue',
       selectedVirus: 'scv2',
-      interactionCategory: 'unique'
+      interactionCategory: 'unique',
+      selectedPatProteins: PATHOGEN_PROTEINS
     }
 
     this.selectAnnotation = this.selectAnnotation.bind(this);
     this.selectVirus = this.selectVirus.bind(this);
     this.selectIntCategory = this.selectIntCategory.bind(this);
+    this.patProtClicked = this.patProtClicked.bind(this);
   }
 
   selectAnnotation(type) {
@@ -62,7 +69,35 @@ export class Home extends Component {
     return this.state.interactionCategory === category ? true : false;
   }
 
+  selectAllClicked() {
+    this.setState({selectedPatProteins: PATHOGEN_PROTEINS});
+  }
+
+  // Clear all pathogen proteins
+  clearAllClicked() {
+    this.setState({selectedPatProteins: []});
+  }
+
+  patProtClicked(protein) {
+    let index = this.state.selectedPatProteins.indexOf(protein);
+    if (index <= -1) {
+      return;
+    }
+
+    let prots = this.state.selectedPatProteins;
+    prots.splice(index, 1);
+
+    this.setState((state) => {
+      return {selectedPatProteins: prots}
+    });
+  }
+
   render() {
+
+    let protChips = this.state.selectedPatProteins.map(protein => (
+      <HChip text={protein} key={protein} ch={this.patProtClicked}/>
+    ));
+
     return (
       <div>
         <Container className="px-4 pt-5">
@@ -143,12 +178,28 @@ export class Home extends Component {
                     </Col>
 
                     <Col sm={5}>
-                      <Button className="kbl-btn-1 mr-2">Select All</Button>
-                      <Button className="kbl-btn-2">Clear All</Button>
+                      <Button className="kbl-btn-1 mr-2" onClick={(e) => {
+                          this.selectAllClicked()
+                        }}>Select All</Button>
+                      <Button className="kbl-btn-2" onClick={(e) => {
+                          this.clearAllClicked()
+                        }}>Clear All</Button>
+                    </Col>
+                  </Row>
+
+                  <Row className="mt-3 justify-content-center">
+                    <Col sm={12}>
+                      {protChips}
                     </Col>
                   </Row>
                 </Col>
               </Row>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Button className="kbl-btn-1">Show Interactions</Button>
             </Col>
           </Row>
         </Container>
