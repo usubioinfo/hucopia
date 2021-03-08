@@ -1,7 +1,7 @@
 import React from 'react';
 import './HSelector.scss';
 
-import { FaRegCircle, FaRegDotCircle } from 'react-icons/fa';
+import { FaRegCircle, FaRegDotCircle, FaCheckSquare, FaRegSquare } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 
 export class HSelector extends React.Component {
@@ -24,14 +24,26 @@ export class HSelector extends React.Component {
 
     let icon;
 
-    if (this.props.selected) {
-      icon = (<IconContext.Provider value={{ className: "selected-icon mr-1" }}>
-                <FaRegDotCircle/>
-              </IconContext.Provider>);
+    if (!this.props.multi) {
+      if (this.props.selected) {
+        icon = (<IconContext.Provider value={{ className: "selected-icon mr-1" }}>
+                  <FaRegDotCircle/>
+                </IconContext.Provider>);
+      } else {
+        icon = (<IconContext.Provider value={{ className: "selected-icon mr-1" }}>
+                  <FaRegCircle/>
+                </IconContext.Provider>);
+      }
     } else {
-      icon = (<IconContext.Provider value={{ className: "selected-icon mr-1" }}>
-                <FaRegCircle/>
-              </IconContext.Provider>);
+      if (this.props.selected) {
+        icon = (<IconContext.Provider value={{ className: "selected-icon mr-1" }}>
+                  <FaCheckSquare/>
+                </IconContext.Provider>);
+      } else {
+        icon = (<IconContext.Provider value={{ className: "selected-icon mr-1" }}>
+                  <FaRegSquare/>
+                </IconContext.Provider>);
+      }
     }
 
     return (

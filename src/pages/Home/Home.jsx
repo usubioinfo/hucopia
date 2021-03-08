@@ -14,6 +14,7 @@ import { IconContext } from 'react-icons';
 import { FaRegQuestionCircle } from 'react-icons/fa';
 
 import './Home.scss';
+import 'scss/style.scss';
 import 'scss/components/forms.scss';
 import 'scss/components/buttons.scss';
 import 'scss/components/search-form.scss';
@@ -141,7 +142,7 @@ export class Home extends Component {
 
     return (
       <div>
-        <Container className="px-4 pt-5">
+        <Container className="px-0 pt-5">
           <Row className="mb-2">
             <Col sm={6}>
               <div className="col-title">
@@ -210,6 +211,15 @@ export class Home extends Component {
                 </Col>
               </Row>
 
+              <Row className="mt-3">
+                <Col className="text-left">
+                  <h6><b>Interaction Type</b></h6>
+                  <HSelector multi={true} text="Interolog"/>
+                  <HSelector multi={true} text="Consensus"/>
+                  <HSelector multi={true} text="Interolog"/>
+                </Col>
+              </Row>
+
               <Row className="mt-4">
                 <Col sm={12} className="text-left">
                   <h5 className="mt-3"><b>Pathogen Proteins</b></h5>
@@ -240,9 +250,9 @@ export class Home extends Component {
             </Col>
           </Row>
 
-          <Row>
+          <Row className="mt-5">
             <Col>
-              <Button className="kbl-btn-1">Show Interactions</Button>
+              <Button className="kbl-btn-1 px-5">Show Interactions</Button>
             </Col>
           </Row>
         </Container>
