@@ -54,7 +54,8 @@ export class Home extends Component {
       selectedAnnotation: 'tissue',
       selectedVirus: 'scv2',
       interactionCategory: 'unique',
-      selectedPatProteins: [...PATHOGEN_PROTEINS]
+      selectedPatProteins: [...PATHOGEN_PROTEINS],
+      selectedIntTypes: ['interolog']
     }
 
 
@@ -63,6 +64,7 @@ export class Home extends Component {
     this.selectVirus = this.selectVirus.bind(this);
     this.selectIntCategory = this.selectIntCategory.bind(this);
     this.patProtClicked = this.patProtClicked.bind(this);
+    this.selectIntType = this.selectIntType.bind(this);
   }
 
   selectAnnotation(type) {
@@ -83,6 +85,24 @@ export class Home extends Component {
     });
   }
 
+  selectIntType(intType) {
+    let selectedIntTypes = this.state.selectedIntTypes;
+
+    if (this.state.selectedIntTypes.includes(intType)) {
+      let index = this.state.selectedIntTypes.indexOf(intType);
+
+      selectedIntTypes.splice(index, 1);
+      this.setState((state) => {
+        return {selectedIntTypes: selectedIntTypes}
+      });
+    } else {
+      selectedIntTypes.push(intType);
+      this.setState((state) => {
+        return {selectedIntTypes: selectedIntTypes}
+      });
+    }
+  }
+
   isAnnotationSelected(type) {
     return this.state.selectedAnnotation === type ? true : false;
   }
@@ -93,6 +113,10 @@ export class Home extends Component {
 
   isCategorySelected(category) {
     return this.state.interactionCategory === category ? true : false;
+  }
+
+  isIntTypeSelected(intType) {
+    return this.state.selectedIntTypes.includes(intType) ? true : false;
   }
 
   selectAllClicked() {
@@ -136,9 +160,6 @@ export class Home extends Component {
     .map(protein => {
       return {name: protein, value: protein};
     });
-
-    console.log(PATHOGEN_PROTEINS);
-    console.log(this.searchOptions);
 
     return (
       <div>
@@ -214,9 +235,9 @@ export class Home extends Component {
               <Row className="mt-3">
                 <Col className="text-left">
                   <h6><b>Interaction Type</b></h6>
-                  <HSelector multi={true} text="Interolog"/>
-                  <HSelector multi={true} text="Consensus"/>
-                  <HSelector multi={true} text="Interolog"/>
+                  <HSelector multi={true} text="Interolog" name='interolog' selected={this.isIntTypeSelected('interolog')} ch={this.selectIntType}/>
+                  <HSelector multi={true} text="Domain" name='domain' selected={this.isIntTypeSelected('domain')} ch={this.selectIntType}/>
+                  <HSelector multi={true} text="Consensus" name='consensus' selected={this.isIntTypeSelected('consensus')} ch={this.selectIntType}/>
                 </Col>
               </Row>
 
