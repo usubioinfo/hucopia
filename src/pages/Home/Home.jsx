@@ -288,7 +288,7 @@ export class Home extends Component {
             </Col>
           </Row>
 
-          <Row className="mt-5">
+          <Row className="mt-5 mb-5">
             <Col>
               <Button className="kbl-btn-1 px-5">Show Interactions</Button>
             </Col>
