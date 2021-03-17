@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Fuse from 'fuse.js';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -15,6 +16,7 @@ import { FaRegQuestionCircle } from 'react-icons/fa';
 
 import './Home.scss';
 import 'scss/style.scss';
+import 'scss/loaders/loader1.scss';
 import 'scss/components/forms.scss';
 import 'scss/components/buttons.scss';
 import 'scss/components/search-form.scss';
@@ -52,11 +54,12 @@ export class Home extends Component {
 
     this.state = {
       selectedAnnotation: 'tissue',
-      selectedVirus: 'scv2',
+      selectedVirus: 'sars-cov-2',
       interactionCategory: 'unique',
       selectedPatProteins: [...PATHOGEN_PROTEINS],
       selectedIntTypes: ['interolog'],
-      genes: ''
+      genes: '',
+      interactionLoading: false
     }
 
 
@@ -71,7 +74,6 @@ export class Home extends Component {
   }
 
   handleGeneChange(e) {
-    console.log(e.target.value);
     this.setState({ genes: e.target.value });
   }
 
@@ -151,8 +153,6 @@ export class Home extends Component {
   }
 
   selectSearch(protein) {
-    console.log(protein);
-
     let patProteins = this.state.selectedPatProteins;
 
     if (patProteins.includes(protein)) {
@@ -166,15 +166,40 @@ export class Home extends Component {
   }
 
   showInteractionsClicked() {
+    this.setState({interactionLoading: true});
     const postBody = {
       pathogenProteins: this.state.selectedPatProteins,
-      pathogen: this.state.selectedVirus
+      pathogen: this.state.selectedVirus,
+      genes: this.state.genes.replace(/ \s+/g, '').trim().split(','),
+      interactionType: this.state.selectedIntTypes[0],
+      interactionCategory: this.state.interactionCategory
     };
 
+    console.log(postBody);
 
+    axios.post('http://localhost:3100/expression/new', postBody)
+      .then(res => {
+        console.log(res.data);
+        this.setState({interactionLoading: false});
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({interactionLoading: false});
+      })
   }
 
   render() {
+
+    let interactionButton;
+
+    if (this.state.interactionLoading) {
+      interactionButton = (<div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>)
+    } else {
+      interactionButton = (<Button className="kbl-btn-1 px-5" onClick={(e) => {
+          this.showInteractionsClicked()
+        }}>Show Interactions
+      </Button>)
+    }
 
     let protChips = this.state.selectedPatProteins.map(protein => (
       <HChip text={protein} key={protein} ch={this.patProtClicked}/>
@@ -190,9 +215,6 @@ export class Home extends Component {
     .map(protein => {
       return {name: protein, value: protein};
     });
-
-    console.log(PATHOGEN_PROTEINS);
-    console.log(this.searchOptions);
 
     return (
       <div>
@@ -252,8 +274,8 @@ export class Home extends Component {
                 <Col sm={6} className="text-left">
                   <h6><b>Virus</b></h6>
 
-                  <HSelector text="SARS-CoV-2" selected={this.isVirusSelected('scv2')} name="scv2" ch={this.selectVirus}/><br/>
-                  <HSelector text="SARS-CoV" selected={this.isVirusSelected('scv1')} name="scv1" ch={this.selectVirus}/><br/>
+                  <HSelector text="SARS-CoV-2" selected={this.isVirusSelected('sars-cov-2')} name="sars-cov-2" ch={this.selectVirus}/><br/>
+                  <HSelector text="SARS-CoV" selected={this.isVirusSelected('sars-cov-1')} name="sars-cov-1" ch={this.selectVirus}/><br/>
                   <HSelector text="MERS" selected={this.isVirusSelected('mers')} name="mers" ch={this.selectVirus}/><br/>
                 </Col>
                 <Col sm={6} className="text-left">
@@ -306,7 +328,7 @@ export class Home extends Component {
 
           <Row className="mt-5 mb-5">
             <Col>
-              <Button className="kbl-btn-1 px-5">Show Interactions</Button>
+              {interactionButton}
             </Col>
           </Row>
         </Container>
