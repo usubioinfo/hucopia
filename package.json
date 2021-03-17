@@ -27,6 +27,7 @@
     "start": "react-scripts start",
     "local": "serve -s build -l 3000",
     "build": "react-scripts build",
+    "update": "git pull origin main && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
