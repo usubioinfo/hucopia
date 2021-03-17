@@ -55,7 +55,8 @@ export class Home extends Component {
       selectedVirus: 'scv2',
       interactionCategory: 'unique',
       selectedPatProteins: [...PATHOGEN_PROTEINS],
-      selectedIntTypes: ['interolog']
+      selectedIntTypes: ['interolog'],
+      genes: ''
     }
 
 
@@ -66,6 +67,12 @@ export class Home extends Component {
     this.patProtClicked = this.patProtClicked.bind(this);
     this.selectIntType = this.selectIntType.bind(this);
     this.selectSearch = this.selectSearch.bind(this);
+    this.handleGeneChange = this.handleGeneChange.bind(this);
+  }
+
+  handleGeneChange(e) {
+    console.log(e.target.value);
+    this.setState({ genes: e.target.value });
   }
 
   selectAnnotation(type) {
@@ -158,6 +165,15 @@ export class Home extends Component {
 
   }
 
+  showInteractionsClicked() {
+    const postBody = {
+      pathogenProteins: this.state.selectedPatProteins,
+      pathogen: this.state.selectedVirus
+    };
+
+
+  }
+
   render() {
 
     let protChips = this.state.selectedPatProteins.map(protein => (
@@ -202,7 +218,7 @@ export class Home extends Component {
 
               <Row>
                 <Col sm={12}>
-                  <Form.Control className="kbl-form mb-4" as="textarea" rows={5} placeholder="Example: NR3C1, NR1I2, ANXA1" />
+                  <Form.Control className="kbl-form mb-4" as="textarea" rows={5} placeholder="Example: NR3C1, NR1I2, ANXA1" onChange={ this.handleGeneChange }/>
                   <Button className="kbl-btn-1 mr-3">Sample Data</Button>
                   <Button className="kbl-btn-2">Clear Data</Button>
 
