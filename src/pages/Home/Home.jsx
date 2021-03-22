@@ -190,7 +190,6 @@ export class Home extends Component {
         this.setState(state => {
           return {displayedResults: 'tissue', results: res.data}
         });
-        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
