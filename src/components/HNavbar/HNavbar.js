@@ -29,7 +29,7 @@ class HNavbar extends React.Component {
 
   render() {console.log(this.props.active)
     let className = 'mx-1';
-    let active = 'mx-1 active';
+    let active = 'mx-1 current';
 
     return (
       <div className="mx-5 mb-4 mt-3 nav-wrapper mx-auto">
@@ -39,7 +39,7 @@ class HNavbar extends React.Component {
           </Navbar.Brand>
 
           <Nav className="mr-auto">
-            <Nav.Link href="#" className={'home' === this.props.active ? active : className}>
+            <Nav.Link href="/home" className={'home' === this.props.active ? active : className}>
               Home
             </Nav.Link>
             <Nav.Link href="#" className={'about' === this.props.active ? active : className}>

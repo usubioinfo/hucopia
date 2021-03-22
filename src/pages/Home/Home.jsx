@@ -26,6 +26,10 @@ import { HChip } from 'components/HChip/HChip';
 
 import { PATHOGEN_PROTEINS } from 'constants.js';
 
+import { useHistory } from 'react-router-dom';
+
+import TissueResults from 'pages/TissueResults/TissueResults';
+
 const fuzzySearch = (options) => {
   const fuse = new Fuse(options, {
       keys: ['name', 'groupName'],
@@ -59,7 +63,9 @@ export class Home extends Component {
       selectedPatProteins: [...PATHOGEN_PROTEINS],
       selectedIntTypes: ['interolog'],
       genes: '',
-      interactionLoading: false
+      interactionLoading: false,
+      displayedResults: '',
+      results: []
     }
 
 
@@ -179,8 +185,12 @@ export class Home extends Component {
 
     axios.post('http://bioinfo.usu.edu/newhbe/expression/new', postBody)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({interactionLoading: false});
+        this.setState(state => {
+          return {displayedResults: 'tissue', results: res.data}
+        });
+        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -215,6 +225,12 @@ export class Home extends Component {
     .map(protein => {
       return {name: protein, value: protein};
     });
+
+    let resultComponent = (<div></div>);
+
+    if (this.state.displayedResults === 'tissue') {
+      resultComponent = <Container><TissueResults results={this.state.results}/></Container>;
+    }
 
     return (
       <div>
@@ -332,6 +348,8 @@ export class Home extends Component {
             </Col>
           </Row>
         </Container>
+
+        {resultComponent}
       </div>
     );
   }
