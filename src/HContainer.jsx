@@ -37,7 +37,7 @@ export class HContainer extends Component {
           <HNavbar active={document.location.pathname.split('/')[1]}/>
           <div>{document.location.pathname.split('/')[0]}</div>
           <Switch>
-            <Route path="/home">
+            <Route path="/">
               <Home sendTissueData={this.getTissueData} />
             </Route>
             <Route path="/tissue" render={props => <TissueResults results={this.state.tissueResults} {...props} />} />
