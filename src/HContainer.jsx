@@ -13,16 +13,20 @@ import {
   withRouter
 } from 'react-router-dom';
 
+import env from 'react-dotenv';
+
 export class HContainer extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      tissueResults: []
+      tissueResults: [],
+      baseUrlLen: env.BASE_URL.split('/').length
     }
 
     this.getTissueData = this.getTissueData.bind(this);
+    console.log(`Env: ${env.BASE_URL}`);
   }
 
   getTissueData(data) {
@@ -34,13 +38,12 @@ export class HContainer extends Component {
     return (
       <Router>
         <Container fluid className="App px-0">
-          <HNavbar active={document.location.pathname.split('/')[1]}/>
-          <div>{document.location.pathname.split('/')[0]}</div>
+          <HNavbar active={document.location.pathname.split('/')[this.state.baseUrlLen + 1]}/>
           <Switch>
-            <Route path="/">
+            <Route path={`${env.BASE_URL}/home`}>
               <Home sendTissueData={this.getTissueData} />
             </Route>
-            <Route path="/tissue" render={props => <TissueResults results={this.state.tissueResults} {...props} />} />
+            <Route path={`${env.BASE_URL}/tissue`} render={props => <TissueResults results={this.state.tissueResults} {...props} />} />
           </Switch>
         </Container>
       </Router>);

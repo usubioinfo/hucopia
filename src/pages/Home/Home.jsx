@@ -251,12 +251,12 @@ export class Home extends Component {
 
     let newButton = <div></div>
 
-  if (!this.state.showControls) {
-    newButton = (<Button className="kbl-btn-1 px-5 my-4" onClick={(e) => {
-        this.setState({height: 'auto', showControls: true})
-      }}>Find More Interactions
-    </Button>)
-  }
+    if (!this.state.showControls) {
+      newButton = (<Button className="kbl-btn-1 px-5 my-4" onClick={(e) => {
+          this.setState({height: 'auto', showControls: true})
+        }}>Find More Interactions
+      </Button>)
+    }
 
     return (
       <div>

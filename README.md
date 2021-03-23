@@ -1,3 +1,7 @@
+### Dev Notes
+
+This project uses `react-dotenv`, which loads .env variables into window.env. **Do not put sensitive data into `.env`!**
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
