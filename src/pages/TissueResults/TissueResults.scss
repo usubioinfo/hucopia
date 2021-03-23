@@ -1,0 +1,32 @@
+@import '~scss/colors';
+@import '~scss/globals';
+
+.kbl-table {
+  overflow: hidden;
+  border-radius: $border-radius;
+  box-shadow: 0 .0925rem .165rem rgba(0, 0, 0, 0.19);
+  border: none;
+
+  .kbl-thead {
+    background: $palette-2;
+    border-bottom: 1px solid $color-light-grey;
+    color: white;
+  }
+
+  tr {
+    border-bottom: 1px solid $color-light-grey;
+
+    &:last-child {
+      border-bottom: none!important;
+    }
+  }
+
+  tbody:last-child {
+    border-bottom: none!important;
+  }
+}
+
+.table-responsive {
+  padding: 5px 10px;
+  border: none;
+}

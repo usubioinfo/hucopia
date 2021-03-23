@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Table from 'react-bootstrap/Table';
+import './TissueResults.scss';
 
 class TissueResults extends Component {
 
@@ -28,9 +29,9 @@ class TissueResults extends Component {
   render() {
     console.log(this.props.results.payload);
     return (
-      <div>
-        <Table responsive>
-          <thead>
+      <div className="mb-5">
+        <Table responsive className="kbl-table table-borderless">
+          <thead className="kbl-thead">
             <tr>
               <th>#</th>
               <th>Pathogen</th>
