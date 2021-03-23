@@ -29,7 +29,7 @@
     "start": "react-scripts start",
     "local": "serve -s build -l 3000",
     "build": "react-scripts build",
-    "update": "git pull origin main && react-scripts build && pm2 restart hucopia",
+    "update": "git pull origin main && npm i && react-scripts build && pm2 restart hucopia",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
