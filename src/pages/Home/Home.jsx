@@ -233,7 +233,14 @@ export class Home extends Component {
     let resultComponent = (<div></div>);
 
     if (this.state.displayedResults === 'tissue') {
-      resultComponent = <Container><TissueResults results={this.state.results}/></Container>;
+      resultComponent = (
+        <Container fluid className="px-5">
+          <Row className="justify-content-center">
+            <Col sm={9}>
+              <TissueResults results={this.state.results}/>
+            </Col>
+          </Row>
+        </Container>);
     }
 
     let containerClass = "px-0 pt-5 t-3";
@@ -242,9 +249,18 @@ export class Home extends Component {
       containerClass = "px-0 pt-5 t-3 o-0";
     }
 
+    let newButton = <div></div>
+
+  if (!this.state.showControls) {
+    newButton = (<Button className="kbl-btn-1 px-5 my-4" onClick={(e) => {
+        this.setState({height: 'auto', showControls: true})
+      }}>Find More Interactions
+    </Button>)
+  }
+
     return (
       <div>
-        <AnimateHeight duration={500} height={height}>
+        <AnimateHeight duration={400} height={height}>
           <Container className={containerClass}>
             <Row className="mb-2">
               <Col sm={6}>
@@ -267,9 +283,14 @@ export class Home extends Component {
 
                 <Row>
                   <Col sm={12}>
-                    <Form.Control className="kbl-form mb-4" as="textarea" rows={5} placeholder="Example: NR3C1, NR1I2, ANXA1" onChange={ this.handleGeneChange }/>
-                    <Button className="kbl-btn-1 mr-3">Sample Data</Button>
-                    <Button className="kbl-btn-2">Clear Data</Button>
+                    <Form.Control className="kbl-form mb-4" as="textarea" rows={5} placeholder="Example: NR3C1, NR1I2, ANXA1" onChange={ this.handleGeneChange }
+                      value={this.state.genes} />
+                    <Button className="kbl-btn-1 mr-3" onClick={e => {
+                        this.setState({genes: "PTPRR,PTPN2,PTPN7,PTPN20,PTPN5,GRB2,PTPRM"})
+                      }}>Sample Data</Button>
+                    <Button className="kbl-btn-2" onClick={e => {
+                        this.setState({genes: ""})
+                      }}>Clear Data</Button>
 
                     <h6 className="mt-5 pl-2"><b>File Upload</b></h6>
                     <InputGroup className="mb-5">
@@ -360,7 +381,7 @@ export class Home extends Component {
             </Row>
           </Container>
         </AnimateHeight>
-
+        {newButton}
         {resultComponent}
       </div>
     );
