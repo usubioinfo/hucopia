@@ -11,6 +11,15 @@
     background: $palette-2;
     border-bottom: 1px solid $color-light-grey;
     color: white;
+
+    .human {
+      background: $palette-2-dark;
+    }
+
+    .bottom {
+      background: $palette-2-light;
+      color: $text-main;
+    }
   }
 
   tr {
