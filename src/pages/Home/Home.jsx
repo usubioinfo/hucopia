@@ -180,13 +180,14 @@ export class Home extends Component {
       pathogenProteins: this.state.selectedPatProteins,
       pathogen: this.state.selectedVirus,
       genes: this.state.genes.replace(/ \s+/g, '').trim().split(','),
-      interactionType: this.state.selectedIntTypes[0],
+      interactionType: this.state.selectedIntTypes,
       interactionCategory: this.state.interactionCategory
     };
 
     console.log(postBody);
-
-    axios.post('http://bioinfo.usu.edu/newhbe/expression/new', postBody)
+    // localhost:3100/expression/new
+    // http://bioinfo.usu.edu/newhbe/expression/new
+    axios.post('http://localhost:3100/expression/new', postBody)
       .then(res => {
         // console.log(res.data);
         this.setState({interactionLoading: false});
@@ -331,7 +332,7 @@ export class Home extends Component {
 
                     <HSelector text="Unique" selected={this.isCategorySelected('unique')} name="unique" ch={this.selectIntCategory}/><br/>
                     <HSelector text="Common" selected={this.isCategorySelected('common')} name="common" ch={this.selectIntCategory}/><br/>
-                    <HSelector text="Both" selected={this.isCategorySelected('all')} name="all" ch={this.selectIntCategory}/><br/>
+                    <HSelector text="Both" selected={this.isCategorySelected('both')} name="both" ch={this.selectIntCategory}/><br/>
                   </Col>
                 </Row>
 
@@ -340,7 +341,7 @@ export class Home extends Component {
                     <h6><b>Interaction Type</b></h6>
                     <HSelector multi={true} text="Interolog" name='interolog' selected={this.isIntTypeSelected('interolog')} ch={this.selectIntType}/>
                     <HSelector multi={true} text="Domain" name='domain' selected={this.isIntTypeSelected('domain')} ch={this.selectIntType}/>
-                    <HSelector multi={true} text="Consensus" name='consensus' selected={this.isIntTypeSelected('consensus')} ch={this.selectIntType}/>
+                    <HSelector multi={true} text="Consensus" name='both' selected={this.isIntTypeSelected('both')} ch={this.selectIntType}/>
                   </Col>
                 </Row>
 
