@@ -187,7 +187,7 @@ export class Home extends Component {
     console.log(postBody);
     // localhost:3100/expression/new
     // http://bioinfo.usu.edu/newhbe/expression/new
-    axios.post('http://localhost:3100/expression/new', postBody)
+    axios.post('http://bioinfo.usu.edu/newhbe/expression/new', postBody)
       .then(res => {
         // console.log(res.data);
         this.setState({interactionLoading: false});
