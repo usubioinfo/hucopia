@@ -33,16 +33,19 @@ import TissueResults from 'pages/TissueResults/TissueResults';
 
 const fuzzySearch = (options) => {
   const fuse = new Fuse(options, {
-      keys: ['name', 'groupName'],
+      keys: ['name', 'value'],
       threshold: 0.3,
   });
 
   return (value) => {
-      if (!value.length) {
-          return options;
-      }
 
-      return fuse.search(value);
+    if (!value.length) {
+        return options;
+    }
+
+    return fuse.search(value).map(searchItem => {
+      return searchItem.item;
+    });
   };
 }
 
@@ -139,11 +142,15 @@ export class Home extends Component {
   }
 
   selectAllClicked() {
+    this.searchOptions = [];
     this.setState({selectedPatProteins: [...PATHOGEN_PROTEINS]});
   }
 
   // Clear all pathogen proteins
   clearAllClicked() {
+    this.searchOptions = PATHOGEN_PROTEINS.map(protein => {
+      return {name: protein, value: protein};
+    });
     this.setState({selectedPatProteins: []});
   }
 
@@ -272,6 +279,8 @@ export class Home extends Component {
         </Row>)
     }
 
+    console.log(this.searchOptions);
+
     return (
       <div>
         <AnimateHeight duration={400} height={height}>
@@ -363,7 +372,7 @@ export class Home extends Component {
                     <h5 className="mt-3"><b>Pathogen Proteins</b></h5>
                     <Row>
                       <Col sm={7}>
-                        <SelectSearch emptyMessage="Protein not found"
+                        <SelectSearch emptyMessage="Protein not found" printOptions="always"
                           options={this.searchOptions} search placeholder="Search proteins" name="protein" filterOptions={fuzzySearch} onChange={this.selectSearch}
                           />
                       </Col>
