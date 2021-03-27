@@ -309,7 +309,7 @@ export class Home extends Component {
                     <Form.Control className="kbl-form mb-4" as="textarea" rows={5} placeholder="Example: NR3C1, NR1I2, ANXA1" onChange={ this.handleGeneChange }
                       value={this.state.genes} />
                     <Button className="kbl-btn-1 mr-3" onClick={e => {
-                        this.setState({genes: "PTPRR,PTPN2,PTPN7,PTPN20,PTPN5,GRB2,PTPRM"})
+                        this.setState({genes: "PTPRR, PTPN2, PTPN7, PTPN20, PTPN5"})
                       }}>Sample Data</Button>
                     <Button className="kbl-btn-2" onClick={e => {
                         this.setState({genes: ""})
