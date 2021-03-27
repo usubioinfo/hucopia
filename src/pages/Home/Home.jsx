@@ -61,7 +61,7 @@ export class Home extends Component {
       selectedAnnotation: 'tissue',
       selectedVirus: 'sars-cov-2',
       interactionCategory: 'unique',
-      selectedPatProteins: [...PATHOGEN_PROTEINS],
+      selectedPatProteins: [],
       selectedIntTypes: ['interolog'],
       genes: '',
       interactionLoading: false,
@@ -259,6 +259,19 @@ export class Home extends Component {
       </Button>)
     }
 
+    let noProteinMsg = <div></div>;
+
+    if (!this.state.selectedPatProteins.length) {
+      noProteinMsg = (
+        <Row className="mt-3">
+          <Col sm={12} className="text-center">
+            <p>
+              No pathogen proteins selected
+            </p>
+          </Col>
+        </Row>)
+    }
+
     return (
       <div>
         <AnimateHeight duration={400} height={height}>
@@ -364,6 +377,8 @@ export class Home extends Component {
                           }}>Clear All</Button>
                       </Col>
                     </Row>
+
+                    {noProteinMsg}
 
                     <Row className="mt-3 justify-content-center">
                       <Col sm={12}>
