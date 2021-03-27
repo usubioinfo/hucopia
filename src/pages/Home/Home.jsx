@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Modal from 'react-bootstrap/Modal';
 import AnimateHeight from 'react-animate-height';
 
 import SelectSearch from 'react-select-search';
@@ -30,6 +31,7 @@ import { PATHOGEN_PROTEINS } from 'constants.js';
 import { useHistory } from 'react-router-dom';
 
 import TissueResults from 'pages/TissueResults/TissueResults';
+import { TissueModal } from './TissueModal';
 
 const fuzzySearch = (options) => {
   const fuse = new Fuse(options, {
@@ -71,7 +73,8 @@ export class Home extends Component {
       displayedResults: '',
       results: [],
       showControls: true,
-      height: 'auto'
+      height: 'auto',
+      showTissueModal: false
     }
 
 
@@ -83,6 +86,7 @@ export class Home extends Component {
     this.selectIntType = this.selectIntType.bind(this);
     this.selectSearch = this.selectSearch.bind(this);
     this.handleGeneChange = this.handleGeneChange.bind(this);
+    this.closeTissueModal = this.closeTissueModal.bind(this);
   }
 
   handleGeneChange(e) {
@@ -206,6 +210,10 @@ export class Home extends Component {
         console.log(err);
         this.setState({interactionLoading: false});
       })
+  }
+
+  closeTissueModal() {
+    this.setState({showTissueModal: false});
   }
 
   render() {
@@ -335,7 +343,9 @@ export class Home extends Component {
 
                 <Row className="pt-4">
                   <Col sm={12}>
-                    <Button className="kbl-btn-1 mr-3">Select Annotation Terms</Button>
+                    <Button className="kbl-btn-1 mr-3" onClick={e => {
+                        this.setState({showTissueModal: true});
+                      }}>Select Annotation Terms</Button>
                   </Col>
                 </Row>
               </Col>
@@ -408,6 +418,8 @@ export class Home extends Component {
         </AnimateHeight>
         {newButton}
         {resultComponent}
+
+        <TissueModal show={this.state.showTissueModal} handler={this.closeTissueModal}/>
       </div>
     );
   }
