@@ -372,7 +372,7 @@ export class Home extends Component {
                     <h5 className="mt-3"><b>Pathogen Proteins</b></h5>
                     <Row>
                       <Col sm={7}>
-                        <SelectSearch emptyMessage="Protein not found" printOptions="always"
+                        <SelectSearch emptyMessage="Protein not found"
                           options={this.searchOptions} search placeholder="Search proteins" name="protein" filterOptions={fuzzySearch} onChange={this.selectSearch}
                           />
                       </Col>
