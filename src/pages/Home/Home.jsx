@@ -74,9 +74,9 @@ export class Home extends Component {
       results: [],
       showControls: true,
       height: 'auto',
-      showTissueModal: false
+      showTissueModal: false,
+      tissueOptions: []
     }
-
 
 
     this.selectAnnotation = this.selectAnnotation.bind(this);
@@ -87,6 +87,14 @@ export class Home extends Component {
     this.selectSearch = this.selectSearch.bind(this);
     this.handleGeneChange = this.handleGeneChange.bind(this);
     this.closeTissueModal = this.closeTissueModal.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('http://bioinfo.usu.edu/newhbe/expression/annotations')
+      .then(res => {
+        console.log(res.data);
+        this.setState({tissueOptions: res.data.payload});
+      });
   }
 
   handleGeneChange(e) {
@@ -419,7 +427,7 @@ export class Home extends Component {
         {newButton}
         {resultComponent}
 
-        <TissueModal show={this.state.showTissueModal} handler={this.closeTissueModal}/>
+        <TissueModal tissues={this.state.tissueOptions} show={this.state.showTissueModal} handler={this.closeTissueModal}/>
       </div>
     );
   }
