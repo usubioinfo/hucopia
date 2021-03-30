@@ -6,7 +6,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
-import Modal from 'react-bootstrap/Modal';
 import AnimateHeight from 'react-animate-height';
 
 import SelectSearch from 'react-select-search';
@@ -75,7 +74,8 @@ export class Home extends Component {
       showControls: true,
       height: 'auto',
       showTissueModal: false,
-      tissueOptions: []
+      tissueOptions: [],
+      selectedTissues: []
     }
 
 
@@ -220,8 +220,8 @@ export class Home extends Component {
       })
   }
 
-  closeTissueModal() {
-    this.setState({showTissueModal: false});
+  closeTissueModal(selectedTissues) {
+    this.setState({showTissueModal: false, selectedTissues: selectedTissues});
   }
 
   render() {
@@ -292,7 +292,7 @@ export class Home extends Component {
               No pathogen proteins selected
             </p>
           </Col>
-        </Row>)
+        </Row>);
     }
 
     console.log(this.searchOptions);
