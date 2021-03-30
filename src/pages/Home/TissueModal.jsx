@@ -40,6 +40,7 @@ export class TissueModal extends Component {
     };
 
     this.selectSearch = this.selectSearch.bind(this);
+    this.tissueChipClicked = this.tissueChipClicked.bind(this);
   }
 
   openModal() {
@@ -67,9 +68,21 @@ export class TissueModal extends Component {
 
   }
 
+  tissueChipClicked(tissue) {
+    let index = this.state.selectedTissues.indexOf(tissue);
+    if (index <= -1) {
+      return;
+    }
+
+    let tissueCopy = this.state.selectedTissues;
+    tissueCopy.splice(index, 1);
+
+    this.setState({selectedTissues: tissueCopy})
+  }
+
   render() {
     let protChips = this.state.selectedTissues.map(protein => (
-      <HChip text={protein} key={protein} />
+      <HChip text={protein} key={protein}  ch={this.tissueChipClicked}/>
     ));
 
     let emptyTissueMsg = <div></div>;
@@ -96,21 +109,23 @@ export class TissueModal extends Component {
       return {name: tissue, value: tissue};
     });
 
+    console.log(this.searchOptions);
+
     return (
       <Modal dialogClassName="modal-wid tissue-modal" show={this.props.show} onHide={e => {
           this.props.handler();
         }}>
         <Modal.Body>
           <Container>
-            <Row className="mb-4">
+            <Row className="mb-4 mt-3">
               <Col sm={7}>
-                <SelectSearch emptyMessage="Protein not found"
+                <SelectSearch emptyMessage="Tissue not found"
                   options={this.searchOptions} search placeholder="Search tissues" name="tissue" filterOptions={fuzzySearch} onChange={this.selectSearch}
                   />
               </Col>
               <Col sm={5}>
                 <Button className="kbl-btn-1 mr-2" onClick={(e) => {
-                    this.setState({selectedTissues: this.props.tissues});
+                    this.setState({selectedTissues: [...this.props.tissues]});
                   }}>Select All</Button>
                 <Button className="kbl-btn-2" onClick={(e) => {
                     this.setState({selectedTissues: []});
