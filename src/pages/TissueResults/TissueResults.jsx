@@ -32,11 +32,11 @@ class TissueResults extends Component {
       <div className="mb-5">
         <Table responsive className="kbl-table table-borderless">
           <thead className="kbl-thead">
-            <tr class="top">
+            <tr className="top">
               <th></th>
-              <th colspan="4" className="pathogen">Pathogen</th>
-              <th colspan="3" className="human">Human</th>
-              <th colspan="2" className="interaction">Interaction</th>
+              <th colSpan="4" className="pathogen">Pathogen</th>
+              <th colSpan="3" className="human">Human</th>
+              <th colSpan="2" className="interaction">Interaction</th>
             </tr>
 
             <tr className="bottom">

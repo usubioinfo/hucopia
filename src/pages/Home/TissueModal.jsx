@@ -92,7 +92,7 @@ export class TissueModal extends Component {
         <Row className="mt-3">
           <Col sm={12} className="text-center">
             <p>
-              No tissues selected
+              No tissues selected. This will default to a search that includes all available tissues.
             </p>
           </Col>
         </Row>)
@@ -108,8 +108,6 @@ export class TissueModal extends Component {
     .map(tissue => {
       return {name: tissue, value: tissue};
     });
-
-    console.log(this.searchOptions);
 
     return (
       <Modal dialogClassName="modal-wid tissue-modal" show={this.props.show} onHide={e => {

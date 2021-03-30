@@ -200,7 +200,8 @@ export class Home extends Component {
       pathogen: this.state.selectedVirus,
       genes: this.state.genes.replace(/ \s+/g, '').trim().split(','),
       interactionType: this.state.selectedIntTypes,
-      interactionCategory: this.state.interactionCategory
+      interactionCategory: this.state.interactionCategory,
+      tissues: this.state.selectedTissues
     };
 
     console.log(postBody);
@@ -231,12 +232,12 @@ export class Home extends Component {
     let interactionButton;
 
     if (this.state.interactionLoading) {
-      interactionButton = (<div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>)
+      interactionButton = (<div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>);
     } else {
       interactionButton = (<Button className="kbl-btn-1 px-5" onClick={(e) => {
-          this.showInteractionsClicked()
+          this.showInteractionsClicked();
         }}>Show Interactions
-      </Button>)
+      </Button>);
     }
 
     let protChips = this.state.selectedPatProteins.map(protein => (
