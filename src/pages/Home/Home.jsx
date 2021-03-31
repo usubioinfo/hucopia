@@ -24,10 +24,9 @@ import 'scss/components/search-form.scss';
 
 import { HSelector } from 'components/HSelector/HSelector';
 import { HChip } from 'components/HChip/HChip';
+import { FileInput } from 'components/FileInput/FileInput';
 
 import { PATHOGEN_PROTEINS } from 'constants.js';
-
-import { useHistory } from 'react-router-dom';
 
 import TissueResults from 'pages/TissueResults/TissueResults';
 import { TissueModal } from './TissueModal';
@@ -87,6 +86,7 @@ export class Home extends Component {
     this.selectSearch = this.selectSearch.bind(this);
     this.handleGeneChange = this.handleGeneChange.bind(this);
     this.closeTissueModal = this.closeTissueModal.bind(this);
+    this.fileSelected = this.fileSelected.bind(this);
   }
 
   componentDidMount() {
@@ -225,6 +225,10 @@ export class Home extends Component {
     this.setState({showTissueModal: false, selectedTissues: selectedTissues});
   }
 
+  fileSelected(fileText) {
+    this.setState({genes: fileText});
+  }
+
   render() {
 
     const height = this.state.height;
@@ -333,12 +337,8 @@ export class Home extends Component {
                       }}>Clear Data</Button>
 
                     <h6 className="mt-5 pl-2"><b>File Upload</b></h6>
-                    <InputGroup className="mb-5">
-                      <Form.Control placeholder="No file selected" className="kbl-form"/>
-                      <InputGroup.Append>
-                        <Button className="kbl-btn-1">Upload</Button>
-                      </InputGroup.Append>
-                    </InputGroup>
+
+                    <FileInput handler={this.fileSelected} />
 
                     <h5 className="pl-2"><b>Annotation Type</b></h5>
                     <div className="px-0"><div className="line mt-2 mb-3"></div></div>

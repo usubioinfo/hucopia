@@ -11,6 +11,7 @@ $shades: ("1": $palette-1-dark, "2": $palette-2-dark, "3": $palette-3-dark);
     border-radius: $radius-btn;
     border-color: $color;
     font-weight: 500;
+    color: white;
     transition: 0.3s;
     box-shadow: 0 .0625rem .125rem rgba(0, 0, 0, 0.2)!important;
 
@@ -26,11 +27,13 @@ $shades: ("1": $palette-1-dark, "2": $palette-2-dark, "3": $palette-3-dark);
     &:hover {
       background: $shade;
       border-color: $shade;
+      color: white;
     }
 
     &:focus {
       background: $shade!important;
       border-color: $shade!important;
+      color: white;
     }
   }
 }
