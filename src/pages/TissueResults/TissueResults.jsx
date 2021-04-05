@@ -15,14 +15,14 @@ class TissueResults extends Component {
 
     this.properties = [
       'pathogen',
-      'gene',
-      'interactionCategory',
-      'interactionType',
       'isolate',
-      'tissueExpression',
       'pathogenProtein',
+      'pLength',
+      'gene',
+      'tissueExpression',
       'hLength',
-      'pLength'
+      'interactionType',
+      'interactionCategory'
     ];
   }
 
