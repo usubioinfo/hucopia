@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Fuse from 'fuse.js';
 
 import SelectSearch from 'react-select-search';
 
@@ -12,23 +11,7 @@ import SelectSearch from 'react-select-search';
 import { HChip } from 'components/HChip/HChip';
 import './TissueModal.scss';
 
-const fuzzySearch = (options) => {
-  const fuse = new Fuse(options, {
-      keys: ['name', 'value'],
-      threshold: 0.3,
-  });
-
-  return (value) => {
-
-    if (!value.length) {
-        return options;
-    }
-
-    return fuse.search(value).map(searchItem => {
-      return searchItem.item;
-    });
-  };
-}
+import fuzzySearch from 'utils/fuzzy-search';
 
 export class TissueModal extends Component {
   constructor(props) {

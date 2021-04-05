@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Fuse from 'fuse.js';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -25,28 +24,12 @@ import { HSelector } from 'components/HSelector/HSelector';
 import { HChip } from 'components/HChip/HChip';
 import { FileInput } from 'components/FileInput/FileInput';
 
+import fuzzySearch from 'utils/fuzzy-search';
+
 import { PATHOGEN_PROTEINS } from 'constants.js';
 
 import TissueResults from 'pages/TissueResults/TissueResults';
 import { TissueModal } from './TissueModal';
-
-const fuzzySearch = (options) => {
-  const fuse = new Fuse(options, {
-      keys: ['name', 'value'],
-      threshold: 0.3,
-  });
-
-  return (value) => {
-
-    if (!value.length) {
-        return options;
-    }
-
-    return fuse.search(value).map(searchItem => {
-      return searchItem.item;
-    });
-  };
-}
 
 export class Home extends Component {
 
