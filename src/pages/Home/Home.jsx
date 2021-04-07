@@ -174,10 +174,9 @@ export class Home extends Component {
     patProteins.push(protein);
 
     this.setState({selectedPatProteins: patProteins});
-
   }
 
-  showInteractionsClicked() {
+  async showInteractionsClicked() {
 
     let tissues = this.state.tissueOptions;
 
@@ -186,13 +185,18 @@ export class Home extends Component {
     }
 
     this.setState({interactionLoading: true});
+
+    const getIdRes = await axios.get(`${env.BACKEND}/expression/newexpid`);
+    const newId = getIdRes.data.payload;
+
     const postBody = {
       pathogenProteins: this.state.selectedPatProteins,
       pathogen: this.state.selectedVirus,
       genes: this.state.genes.replace(/ \s+/g, '').trim().split(','),
       interactionType: this.state.selectedIntTypes,
       interactionCategory: this.state.interactionCategory,
-      tissues: tissues
+      tissues: tissues,
+      expId: newId
     };
 
     console.log(postBody);

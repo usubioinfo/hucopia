@@ -44,7 +44,8 @@ export class HContainer extends Component {
               <Home sendTissueData={this.getTissueData} />
             </Route>
             <Route path={`${env.BASE_URL}/tissue`} render={props => <TissueResults results={this.state.tissueResults} {...props} />} />
-          </Switch>
+            <route path={`${env.BASE_URL}/exp/result/:id`} />
+        </Switch>
         </Container>
       </Router>);
   }
