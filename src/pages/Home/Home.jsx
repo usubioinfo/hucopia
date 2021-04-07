@@ -31,6 +31,8 @@ import { PATHOGEN_PROTEINS } from 'constants.js';
 import TissueResults from 'pages/TissueResults/TissueResults';
 import { TissueModal } from './TissueModal';
 
+import env from 'react-dotenv';
+
 export class Home extends Component {
 
   searchOptions;
@@ -72,7 +74,7 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://bioinfo.usu.edu/newhbe/expression/annotations')
+    axios.get(`${env.BACKEND}/expression/annotations`)
       .then(res => {
         console.log(res.data);
         this.setState({tissueOptions: res.data.payload});
@@ -176,6 +178,13 @@ export class Home extends Component {
   }
 
   showInteractionsClicked() {
+
+    let tissues = this.state.tissueOptions;
+
+    if (this.state.selectedTissues && this.state.selectedTissues.length) {
+      tissues = this.state.selectedTissues;
+    }
+
     this.setState({interactionLoading: true});
     const postBody = {
       pathogenProteins: this.state.selectedPatProteins,
@@ -183,13 +192,13 @@ export class Home extends Component {
       genes: this.state.genes.replace(/ \s+/g, '').trim().split(','),
       interactionType: this.state.selectedIntTypes,
       interactionCategory: this.state.interactionCategory,
-      tissues: this.state.selectedTissues
+      tissues: tissues
     };
 
     console.log(postBody);
     // localhost:3100/expression/new
     // http://bioinfo.usu.edu/newhbe/expression/new
-    axios.post('http://bioinfo.usu.edu/newhbe/expression/new', postBody)
+    axios.post(`${env.BACKEND}/expression/new`, postBody)
       .then(res => {
         // console.log(res.data);
         this.setState({interactionLoading: false});
