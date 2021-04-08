@@ -3,6 +3,9 @@ import Container from 'react-bootstrap/Container';
 import { HNavbar } from 'components/HNavbar/HNavbar';
 import { Home } from 'pages/Home/Home';
 import TissueResults from 'pages/TissueResults/TissueResults';
+import { ResultsTable } from 'components/ResultsTable/ResultsTable';
+
+import { env } from 'env.js';
 
 import {
   BrowserRouter as Router,
@@ -12,8 +15,6 @@ import {
   useLocation,
   withRouter
 } from 'react-router-dom';
-
-import env from 'react-dotenv';
 
 export class HContainer extends Component {
 
@@ -44,7 +45,11 @@ export class HContainer extends Component {
               <Home sendTissueData={this.getTissueData} />
             </Route>
             <Route path={`${env.BASE_URL}/tissue`} render={props => <TissueResults results={this.state.tissueResults} {...props} />} />
-            <route path={`${env.BASE_URL}/exp/result/:id`} />
+            <Route path={`${env.BASE_URL}/exp/result/:id`}>
+              <Container>
+                <ResultsTable/>
+              </Container>
+            </Route>
         </Switch>
         </Container>
       </Router>);
