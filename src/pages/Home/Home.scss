@@ -1,4 +1,5 @@
 @import '~scss/colors';
+@import '~scss/globals';
 
 .col-title {
   font-size: 120%;
@@ -24,4 +25,32 @@
 
 .o-0 {
   opacity: 0!important;
+}
+
+.result-card {
+  cursor: pointer;
+  padding: 10px 0;
+  box-shadow: 0px 2px 6px 1px rgba(102,102,102,0.2);
+  border-radius: $border-radius;
+  background: white;
+  // border: 1px solid $color-light-grey;
+  transition: 0.3s;
+
+  &:hover {
+    $shadow: 170;
+    box-shadow: 0px 3px 8px 3px rgba($shadow,$shadow,$shadow,0.45);
+  }
+
+  a {
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+    color: $palette-1-dark;
+    font-weight: 500;
+    font-size: 110%;
+
+    &:hover {
+      border-color: $palette-1;
+      text-decoration: none;
+    }
+  }
 }

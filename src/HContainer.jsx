@@ -38,7 +38,7 @@ export class HContainer extends Component {
   render() {
     return (
       <Router>
-        <Container fluid className="App px-0">
+        <Container fluid className="App px-4">
           <HNavbar active={document.location.pathname.split('/')[this.state.baseUrlLen]}/>
           <Switch>
             <Route path={`${env.BASE_URL}/home`}>

@@ -11,7 +11,7 @@ import SelectSearch from 'react-select-search';
 import Form from 'react-bootstrap/Form';
 
 import { IconContext } from 'react-icons';
-import { FaRegQuestionCircle } from 'react-icons/fa';
+import { FaRegQuestionCircle, FaClipboard } from 'react-icons/fa';
 
 import './Home.scss';
 import 'scss/style.scss';
@@ -31,7 +31,7 @@ import { PATHOGEN_PROTEINS } from 'constants.js';
 import TissueResults from 'pages/TissueResults/TissueResults';
 import { TissueModal } from './TissueModal';
 
-import env from 'react-dotenv';
+import { env } from 'env.js';
 
 export class Home extends Component {
 
@@ -58,7 +58,9 @@ export class Home extends Component {
       height: 'auto',
       showTissueModal: false,
       tissueOptions: [],
-      selectedTissues: []
+      selectedTissues: [],
+      resultId: '',
+      resultUrls: []
     }
 
 
@@ -188,6 +190,14 @@ export class Home extends Component {
 
     const getIdRes = await axios.get(`${env.BACKEND}/expression/newexpid`);
     const newId = getIdRes.data.payload;
+    let newUrl;
+    if (env.BASE_URL.length) {
+      newUrl = `/${env.BASE_URL}/exp/result/${newId}`;
+    } else {
+      newUrl = `/exp/result/${newId}`;
+    }
+
+    this.setState({resultId: newId, resultUrls: [...this.state.resultUrls, newUrl]});
 
     const postBody = {
       pathogenProteins: this.state.selectedPatProteins,
@@ -207,7 +217,12 @@ export class Home extends Component {
         // console.log(res.data);
         this.setState({interactionLoading: false});
         this.setState(state => {
-          return {displayedResults: 'tissue', results: res.data, showControls: false, height: 0}
+          return {
+            displayedResults: 'tissue',
+            results: res.data,
+            showControls: false,
+            height: 0
+          }
         });
       })
       .catch(err => {
@@ -296,6 +311,20 @@ export class Home extends Component {
     }
 
     console.log(this.searchOptions);
+
+    let resultUrlComponent;
+    let resultUrl
+
+    if (this.state.resultUrls.length) {
+      resultUrlComponent = Array.from(this.state.resultUrls).map((url, index) => (
+        <Col sm={3}>
+          <div className="result-card">
+            <a href={url} className="kbl-link">Result {index}</a>
+            <div>Test Text</div>
+          </div>
+        </Col>
+      ));
+    }
 
     return (
       <div>
@@ -420,7 +449,13 @@ export class Home extends Component {
             </Row>
           </Container>
         </AnimateHeight>
+
         {newButton}
+
+        <Row className="mb-4 mt-2 px-5">
+          {resultUrlComponent}
+        </Row>
+
         {resultComponent}
 
         <TissueModal tissues={this.state.tissueOptions} show={this.state.showTissueModal} handler={this.closeTissueModal}/>
