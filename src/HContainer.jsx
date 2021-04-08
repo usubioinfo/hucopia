@@ -46,7 +46,7 @@ export class HContainer extends Component {
             </Route>
             <Route path={`${env.BASE_URL}/tissue`} render={props => <TissueResults results={this.state.tissueResults} {...props} />} />
             <Route path={`${env.BASE_URL}/exp/result/:id`}>
-              <Container>
+              <Container className="py-5">
                 <ResultsTable/>
               </Container>
             </Route>
