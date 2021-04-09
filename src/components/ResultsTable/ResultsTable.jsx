@@ -16,10 +16,13 @@ export const ResultsTable = () => {
   useEffect(() => {
     axios.get(`${env.BACKEND}/expression/result/${id}`)
       .then(res => {
-        setData(res.data.payload.expressions)
-        console.log(res.data);
-        data.current = res.data.payload.expressions;
-        console.log(data);
+        if (!res.data.success) {
+
+        } else {
+          console.log(res.data);
+          console.log(data);
+        }
+        setData(res.data);
       });
   }, []);
 
@@ -35,8 +38,10 @@ export const ResultsTable = () => {
     'interactionCategory'
   ];
 
-  return (
-    <div className="mb-5">
+  let results;
+
+  if (data.payload && data.payload.reqTime) {
+    results = (
       <Table responsive className="kbl-table table-borderless">
         <thead className="kbl-thead">
           <tr className="top">
@@ -61,7 +66,7 @@ export const ResultsTable = () => {
         </thead>
 
         <tbody>
-          {Array.from(data).map((result, index) => (
+          {Array.from(data.payload.expressions).map((result, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(properties).map((_, index) => (
@@ -71,6 +76,18 @@ export const ResultsTable = () => {
           ))}
         </tbody>
       </Table>
+    );
+  } else {
+    results = (
+      <div>
+        Your query is still running! Check back later.
+      </div>
+    )
+  }
+
+  return (
+    <div className="mb-5">
+      {results}
     </div>
   );
 }

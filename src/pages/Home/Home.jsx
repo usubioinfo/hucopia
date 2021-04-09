@@ -319,7 +319,7 @@ export class Home extends Component {
       resultUrlComponent = Array.from(this.state.resultUrls).map((url, index) => (
         <Col sm={3}>
           <div className="result-card">
-            <a href={url} className="kbl-link">Result {index}</a>
+            <a href={url} className="kbl-link" target="_blank" rel="noreferrer">Result {index + 1}</a>
             <div>Test Text</div>
           </div>
         </Col>
@@ -450,11 +450,11 @@ export class Home extends Component {
           </Container>
         </AnimateHeight>
 
-        {newButton}
-
         <Row className="mb-4 mt-2 px-5">
           {resultUrlComponent}
         </Row>
+
+        {newButton}
 
         {resultComponent}
 
