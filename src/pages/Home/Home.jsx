@@ -365,9 +365,9 @@ export class Home extends Component {
       selectGo = (
         <div className="mt-3">
           <div className="pl-2"><b>Select GO terms:</b></div>
-          <HSelector multi={true} text="Molecular Function" name='mf' selected={this.isGoTermSelected('mf')} ch={this.selectGoTerm}/>
-          <HSelector multi={true} text="Cellular Component" name='cc' selected={this.isGoTermSelected('cc')} ch={this.selectGoTerm}/>
-          <HSelector multi={true} text="Biological Process" name='bp' selected={this.isGoTermSelected('bp')} ch={this.selectGoTerm}/>
+          <HSelector multi={true} text="Molecular Function" name='molecfunction' selected={this.isGoTermSelected('molecfunction')} ch={this.selectGoTerm}/>
+          <HSelector multi={true} text="Cellular Component" name='cellcomp' selected={this.isGoTermSelected('cellcomp')} ch={this.selectGoTerm}/>
+          <HSelector multi={true} text="Biological Process" name='biopathway' selected={this.isGoTermSelected('biopathway')} ch={this.selectGoTerm}/>
         </div>
       )
     }
