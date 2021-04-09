@@ -60,11 +60,13 @@ export class Home extends Component {
       tissueOptions: [],
       selectedTissues: [],
       resultId: '',
-      resultUrls: []
+      resultUrls: [],
+      selectedGoTerms: []
     }
 
 
     this.selectAnnotation = this.selectAnnotation.bind(this);
+    this.selectGoTerm = this.selectGoTerm.bind(this);
     this.selectVirus = this.selectVirus.bind(this);
     this.selectIntCategory = this.selectIntCategory.bind(this);
     this.patProtClicked = this.patProtClicked.bind(this);
@@ -121,6 +123,28 @@ export class Home extends Component {
         return {selectedIntTypes: selectedIntTypes}
       });
     }
+  }
+
+  selectGoTerm(term) {
+    let selectedGoTerms = this.state.selectedGoTerms;
+
+    if (this.state.selectedGoTerms.includes(term)) {
+      let index = this.state.selectedGoTerms.indexOf(term);
+
+      selectedGoTerms.splice(index, 1);
+      this.setState((state) => {
+        return {selectedGoTerms: selectedGoTerms}
+      });
+    } else {
+      selectedGoTerms.push(term);
+      this.setState((state) => {
+        return {selectedGoTerms: selectedGoTerms}
+      });
+    }
+  }
+
+  isGoTermSelected(term) {
+    return this.state.selectedGoTerms.includes(term) ? true : false;
   }
 
   isAnnotationSelected(type) {
@@ -197,7 +221,17 @@ export class Home extends Component {
       newUrl = `/exp/result/${newId}`;
     }
 
-    this.setState({resultId: newId, resultUrls: [...this.state.resultUrls, newUrl]});
+    const annotationDict = {
+      tissue: 'Tissue Expression',
+      kegg: 'KEGG Pathway',
+      gene: 'Gene Ontology',
+      local: 'Localization'
+    }
+
+    this.setState({
+      resultId: newId,
+      resultUrls: [...this.state.resultUrls, {url: newUrl, type: annotationDict[this.state.selectedAnnotation]}]
+    });
 
     const postBody = {
       pathogenProteins: this.state.selectedPatProteins,
@@ -313,17 +347,29 @@ export class Home extends Component {
     console.log(this.searchOptions);
 
     let resultUrlComponent;
-    let resultUrl
 
     if (this.state.resultUrls.length) {
-      resultUrlComponent = Array.from(this.state.resultUrls).map((url, index) => (
+      resultUrlComponent = Array.from(this.state.resultUrls).map((urlObj, index) => (
         <Col sm={3}>
           <div className="result-card">
-            <a href={url} className="kbl-link" target="_blank" rel="noreferrer">Result {index + 1}</a>
-            <div>Test Text</div>
+            <a href={urlObj.url} className="kbl-link" target="_blank" rel="noreferrer">Result {index + 1}</a>
+            <div>{urlObj.type}</div>
           </div>
         </Col>
       ));
+    }
+
+    let selectGo = <div></div>;
+
+    if (this.state.selectedAnnotation === 'gene') {
+      selectGo = (
+        <div className="mt-3">
+          <div className="pl-2"><b>Select GO terms:</b></div>
+          <HSelector multi={true} text="Molecular Function" name='mf' selected={this.isGoTermSelected('mf')} ch={this.selectGoTerm}/>
+          <HSelector multi={true} text="Cellular Component" name='cc' selected={this.isGoTermSelected('cc')} ch={this.selectGoTerm}/>
+          <HSelector multi={true} text="Biological Process" name='bp' selected={this.isGoTermSelected('bp')} ch={this.selectGoTerm}/>
+        </div>
+      )
     }
 
     return (
@@ -371,6 +417,9 @@ export class Home extends Component {
                     <HSelector text="Localization" selected={this.isAnnotationSelected('local')} name="local" ch={this.selectAnnotation}/>
                     <HSelector text="KEGG Pathway" selected={this.isAnnotationSelected('kegg')} name="kegg" ch={this.selectAnnotation}/>
                     <HSelector text="Gene Ontology" selected={this.isAnnotationSelected('gene')} name="gene" ch={this.selectAnnotation}/>
+                  </Col>
+                  <Col sm={12}>
+                    {selectGo}
                   </Col>
                 </Row>
 
