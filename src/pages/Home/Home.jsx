@@ -14,6 +14,8 @@ import { IconContext } from 'react-icons';
 import { FaRegQuestionCircle, FaClipboard } from 'react-icons/fa';
 
 import * as ExpressionService from 'services/expression.service';
+import * as ResultService from 'services/result.service';
+import * as GoService from 'services/go.service';
 
 import './Home.scss';
 import 'scss/style.scss';
@@ -214,8 +216,9 @@ export class Home extends Component {
 
     this.setState({interactionLoading: true});
 
-    const getIdRes = await axios.get(`${env.BACKEND}/expression/newexpid`);
-    const newId = getIdRes.data.payload;
+    const getIdRes = await ResultService.getNewResultId();
+    const newId = getIdRes.payload;
+
     let newUrl;
     if (env.BASE_URL.length) {
       newUrl = `/${env.BASE_URL}/exp/result/${newId}`;

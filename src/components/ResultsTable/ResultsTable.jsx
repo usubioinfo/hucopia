@@ -14,7 +14,7 @@ export const ResultsTable = () => {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`${env.BACKEND}/expression/result/${id}`)
+    axios.get(`${env.BACKEND}/results/id/${id}`)
       .then(res => {
         if (!res.data.success) {
 
@@ -66,7 +66,7 @@ export const ResultsTable = () => {
         </thead>
 
         <tbody>
-          {Array.from(data.payload.expressions).map((result, index) => (
+          {Array.from(data.payload.results).map((result, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(properties).map((_, index) => (
