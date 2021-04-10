@@ -13,6 +13,8 @@ import Form from 'react-bootstrap/Form';
 import { IconContext } from 'react-icons';
 import { FaRegQuestionCircle, FaClipboard } from 'react-icons/fa';
 
+import * as ExpressionService from 'services/expression.service';
+
 import './Home.scss';
 import 'scss/style.scss';
 import 'scss/loaders/loader1.scss';
@@ -243,26 +245,19 @@ export class Home extends Component {
       expId: newId
     };
 
+    const responseData = await ExpressionService.getTissueExpressions(postBody);
+
+    this.setState({interactionLoading: false});
+    this.setState(state => {
+      return {
+        displayedResults: 'tissue',
+        results: responseData,
+        showControls: false,
+        height: 0
+      }
+    });
+
     console.log(postBody);
-    // localhost:3100/expression/new
-    // http://bioinfo.usu.edu/newhbe/expression/new
-    axios.post(`${env.BACKEND}/expression/new`, postBody)
-      .then(res => {
-        // console.log(res.data);
-        this.setState({interactionLoading: false});
-        this.setState(state => {
-          return {
-            displayedResults: 'tissue',
-            results: res.data,
-            showControls: false,
-            height: 0
-          }
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({interactionLoading: false});
-      })
   }
 
   closeTissueModal(selectedTissues) {
@@ -274,7 +269,6 @@ export class Home extends Component {
   }
 
   render() {
-
     const height = this.state.height;
 
     let interactionButton;
