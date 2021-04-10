@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useAsync } from 'react-async';
 
 import axios from 'axios';
 import { env } from 'env.js';
+import * as ResultService from 'services/result.service';
 
 import Table from 'react-bootstrap/Table';
 import './ResultsTable.scss';
@@ -14,16 +16,12 @@ export const ResultsTable = () => {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`${env.BACKEND}/results/id/${id}`)
-      .then(res => {
-        if (!res.data.success) {
+    const fetchData = async () => {
+      const results = await ResultService.getResultById(id);
+      setData(results);
+    }
 
-        } else {
-          console.log(res.data);
-          console.log(data);
-        }
-        setData(res.data);
-      });
+    fetchData();
   }, []);
 
   const properties = [
