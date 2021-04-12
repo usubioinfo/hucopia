@@ -3,7 +3,8 @@ import Container from 'react-bootstrap/Container';
 import { HNavbar } from 'components/HNavbar/HNavbar';
 import { Home } from 'pages/Home/Home';
 import TissueResults from 'pages/TissueResults/TissueResults';
-import { ResultsTable } from 'components/ResultsTable/ResultsTable';
+import { ExpResultsTable } from 'components/ExpResultsTable/ExpResultsTable';
+import { GoResultsTable } from 'components/GoResultsTable/GoResultsTable';
 
 import { env } from 'env.js';
 
@@ -44,10 +45,16 @@ export class HContainer extends Component {
             <Route path={`${env.BASE_URL}/home`}>
               <Home sendTissueData={this.getTissueData} />
             </Route>
-            <Route path={`${env.BASE_URL}/tissue`} render={props => <TissueResults results={this.state.tissueResults} {...props} />} />
-            <Route path={`${env.BASE_URL}/exp/result/:id`}>
+
+            <Route path={`${env.BASE_URL}/tissue/result/:id`}>
               <Container className="py-5">
-                <ResultsTable/>
+                <ExpResultsTable/>
+              </Container>
+            </Route>
+
+            <Route path={`${env.BASE_URL}/gene/result/:id`}>
+              <Container className="py-5">
+                <GoResultsTable/>
               </Container>
             </Route>
         </Switch>

@@ -221,9 +221,9 @@ export class Home extends Component {
 
     let newUrl;
     if (env.BASE_URL.length) {
-      newUrl = `/${env.BASE_URL}/exp/result/${newId}`;
+      newUrl = `/${env.BASE_URL}/${this.state.selectedAnnotation}/result/${newId}`;
     } else {
-      newUrl = `/exp/result/${newId}`;
+      newUrl = `/${this.state.selectedAnnotation}/result/${newId}`;
     }
 
     const annotationDict = {
@@ -248,7 +248,14 @@ export class Home extends Component {
       expId: newId
     };
 
-    const responseData = await ExpressionService.getTissueExpressions(postBody);
+    let responseData;
+
+    if (this.state.selectedAnnotation === 'tissue') {
+      responseData = await ExpressionService.getTissueExpressions(postBody);
+    } else if (this.state.selectedAnnotation === 'gene') {
+      postBody['goTerms'] = this.state.selectedGoTerms;
+      responseData = await GoService.getGoEnrichments(postBody);
+    }
 
     this.setState({interactionLoading: false});
     this.setState(state => {

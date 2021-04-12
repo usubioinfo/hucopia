@@ -1,36 +1,40 @@
 import { useState, useEffect } from 'react';
-import { useAsync } from 'react-async';
+import { useParams } from 'react-router-dom';
 
-import axios from 'axios';
-import { env } from 'env.js';
 import * as ResultService from 'services/result.service';
 
 import Table from 'react-bootstrap/Table';
-import './ResultsTable.scss';
 
-import { useParams } from 'react-router-dom';
-
-export const ResultsTable = () => {
+export const GoResultsTable = () => {
   const { id } = useParams();
 
-  let [data, setData] = useState([]);
+  let [intData, setIntData] = useState([]);
+  let [goData, setGoData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const results = await ResultService.getResultById(id);
-      setData(results);
+      setGoData(results);
     }
 
     fetchData();
   }, []);
 
-  const properties = [
+  const goProperties = [
+    'goId',
+    'category',
+    'description',
+    'geneRatio',
+    'bgRatio',
+    'pathogen'
+  ];
+
+  const intProperties = [
     'pathogen',
     'isolate',
     'pathogenProtein',
     'pLength',
     'gene',
-    'tissueExpression',
     'hLength',
     'interactionType',
     'interactionCategory'
@@ -38,37 +42,32 @@ export const ResultsTable = () => {
 
   let results;
 
-  if (data.payload && data.payload.reqTime) {
+  if (goData.payload && goData.payload.reqTime) {
     results = (
       <Table responsive className="kbl-table table-borderless">
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colSpan="4" className="pathogen">Pathogen</th>
-            <th colSpan="3" className="human">Human</th>
-            <th colSpan="2" className="interaction">Interaction</th>
+            <th colspan="7" className="pathogen">GO Enrichment</th>
           </tr>
 
           <tr className="bottom">
             <th>#</th>
+            <th>GO ID</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Gene Ratio</th>
+            <th>BG Ratio</th>
             <th>Pathogen</th>
-            <th>Isolate</th>
-            <th>Protein</th>
-            <th>P-length</th>
-            <th>Gene</th>
-            <th>Tissue</th>
-            <th>H-length</th>
-            <th>Int. Type</th>
-            <th>Int. Category</th>
           </tr>
         </thead>
 
         <tbody>
-          {Array.from(data.payload.results).map((result, index) => (
+          {Array.from(goData.payload.results).map((result, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              {Array.from(properties).map((_, index) => (
-                <td>{result[properties[index]]}</td>
+              {Array.from(goProperties).map((_, index) => (
+                <td>{result[goProperties[index]]}</td>
               ))}
             </tr>
           ))}

@@ -75,7 +75,7 @@ export class TissueModal extends Component {
         <Row className="mt-3">
           <Col sm={12} className="text-center">
             <p>
-              No tissues selected. This will default to a search that includes all available tissues.
+              By default, all tissues are selected. Use the searchbar to select tissues.
             </p>
           </Col>
         </Row>)
