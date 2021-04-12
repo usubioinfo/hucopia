@@ -33,6 +33,7 @@ import fuzzySearch from 'utils/fuzzy-search';
 import { PATHOGEN_PROTEINS } from 'constants.js';
 
 import TissueResults from 'pages/TissueResults/TissueResults';
+import GoResults from 'components/GoResults/GoResults';
 import { TissueModal } from './TissueModal';
 
 import { env } from 'env.js';
@@ -254,13 +255,14 @@ export class Home extends Component {
       responseData = await ExpressionService.getTissueExpressions(postBody);
     } else if (this.state.selectedAnnotation === 'gene') {
       postBody['goTerms'] = this.state.selectedGoTerms;
+      postBody.tissues = [];
       responseData = await GoService.getGoEnrichments(postBody);
     }
 
     this.setState({interactionLoading: false});
     this.setState(state => {
       return {
-        displayedResults: 'tissue',
+        displayedResults: this.state.selectedAnnotation,
         results: responseData,
         showControls: false,
         height: 0
@@ -315,6 +317,15 @@ export class Home extends Component {
           <Row className="justify-content-center">
             <Col sm={9}>
               <TissueResults results={this.state.results}/>
+            </Col>
+          </Row>
+        </Container>);
+    } else if (this.state.displayedResults === 'gene') {
+      resultComponent = (
+        <Container fluid className="px-5">
+          <Row className="justify-content-center">
+            <Col sm={9}>
+              <GoResults results={this.state.results}/>
             </Col>
           </Row>
         </Container>);
