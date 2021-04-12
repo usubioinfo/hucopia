@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import {Brand} from 'react-bootstrap';
 
 import './HNavbar.scss';
+import { env } from 'env.js';
 
 class HNavbar extends React.Component {
 
@@ -39,7 +40,7 @@ class HNavbar extends React.Component {
           </Navbar.Brand>
 
           <Nav className="mr-auto">
-            <Nav.Link href="/home" className={'home' === this.props.active ? active : className}>
+            <Nav.Link href={`${env.BASE_URL}/home`} className={'home' === this.props.active ? active : className}>
               Home
             </Nav.Link>
             <Nav.Link href="#" className={'about' === this.props.active ? active : className}>
