@@ -222,7 +222,7 @@ export class Home extends Component {
 
     let newUrl;
     if (env.BASE_URL.length) {
-      newUrl = `/${env.BASE_URL}/${this.state.selectedAnnotation}/result/${newId}`;
+      newUrl = `${env.BASE_URL}/${this.state.selectedAnnotation}/result/${newId}`;
     } else {
       newUrl = `/${this.state.selectedAnnotation}/result/${newId}`;
     }
@@ -362,7 +362,7 @@ export class Home extends Component {
     console.log(this.searchOptions);
 
     let resultUrlComponent;
-
+    // TODO: Fix this!!!!
     if (this.state.resultUrls.length) {
       resultUrlComponent = Array.from(this.state.resultUrls).map((urlObj, index) => (
         <Col sm={3}>
