@@ -66,7 +66,8 @@ export class Home extends Component {
       selectedTissues: [],
       resultId: '',
       resultUrls: [],
-      selectedGoTerms: []
+      selectedGoTerms: [],
+      geneHintOn: false
     }
 
 
@@ -95,6 +96,11 @@ export class Home extends Component {
   }
 
   selectAnnotation(type) {
+    if (this.state.selectedAnnotation === 'kegg' && type !== this.state.selectedAnnotation) {
+      this.setState({genes: ''});
+    } else if (this.state.selectedAnnotation !== 'kegg' && type === 'kegg') {
+      this.setState({genes: ''});
+    }
     this.setState((state) => {
       return {selectedAnnotation: type}
     });
@@ -280,7 +286,26 @@ export class Home extends Component {
     this.setState({genes: fileText});
   }
 
+  setGeneHint(hint) {
+    this.setState({geneHintOn: hint});
+  }
+
+
   render() {
+    let geneHintClass = 'gene-hint';
+
+    let genePlaceholder = 'Example: NR3C1, NR1I2, ANXA1';
+    let geneSample = 'PTPRR, PTPN2, PTPN7, PTPN20, PTPN5';
+
+    if (this.state.selectedAnnotation === 'kegg') {
+      genePlaceholder = 'Example: 10376, 1000, 6714';
+      geneSample = '5605, 1564, 2946, 116444';
+    }
+
+    if (this.state.geneHintOn) {
+      geneHintClass = 'gene-hint active';
+    }
+
     const height = this.state.height;
 
     let interactionButton;
@@ -412,10 +437,11 @@ export class Home extends Component {
 
                 <Row>
                   <Col sm={12}>
-                    <Form.Control className="kbl-form mb-4" as="textarea" rows={5} placeholder="Example: NR3C1, NR1I2, ANXA1" onChange={ this.handleGeneChange }
-                      value={this.state.genes} />
+                    <div className={geneHintClass + " pl-2 pb-2"}>Enter genes or gene IDs here.</div>
+                    <Form.Control className="kbl-form mb-4" as="textarea" rows={5} placeholder={genePlaceholder} onChange={ this.handleGeneChange }
+                      value={this.state.genes} onMouseEnter={() => this.setGeneHint(true)} onMouseLeave={() => this.setGeneHint(false)}/>
                     <Button className="kbl-btn-1 mr-3" onClick={e => {
-                        this.setState({genes: "PTPRR, PTPN2, PTPN7, PTPN20, PTPN5"})
+                        this.setState({genes: geneSample});
                       }}>Sample Data</Button>
                     <Button className="kbl-btn-2" onClick={e => {
                         this.setState({genes: ""})
