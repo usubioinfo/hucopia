@@ -16,6 +16,7 @@ import { FaRegQuestionCircle, FaClipboard } from 'react-icons/fa';
 import * as ExpressionService from 'services/expression.service';
 import * as ResultService from 'services/result.service';
 import * as GoService from 'services/go.service';
+import * as KeggService from 'services/kegg.service';
 
 import './Home.scss';
 import 'scss/style.scss';
@@ -34,6 +35,8 @@ import { PATHOGEN_PROTEINS } from 'constants.js';
 
 import TissueResults from 'pages/TissueResults/TissueResults';
 import GoResults from 'components/GoResults/GoResults';
+import KeggResults from 'components/KeggResults/KeggResults';
+
 import { TissueModal } from './TissueModal';
 
 import { env } from 'env.js';
@@ -263,6 +266,9 @@ export class Home extends Component {
       postBody['goTerms'] = this.state.selectedGoTerms;
       postBody.tissues = [];
       responseData = await GoService.getGoEnrichments(postBody);
+    } else if (this.state.selectedAnnotation === 'kegg') {
+      postBody.tissues = [];
+      responseData = await KeggService.getKeggEnrichments(postBody);
     }
 
     this.setState({interactionLoading: false});
@@ -354,6 +360,16 @@ export class Home extends Component {
             </Col>
           </Row>
         </Container>);
+    } else if (this.state.displayedResults === 'kegg') {
+      console.log('keggtest');
+      resultComponent = (
+        <Container fluid className="px-5">
+          <Row className="justify-content-center">
+            <Col sm={9}>
+              <KeggResults results={this.state.results}/>
+            </Col>
+          </Row>
+        </Container>);
     }
 
     let containerClass = "px-0 pt-5 t-3";
@@ -387,7 +403,7 @@ export class Home extends Component {
     console.log(this.searchOptions);
 
     let resultUrlComponent;
-    // TODO: Fix this!!!!
+
     if (this.state.resultUrls.length) {
       resultUrlComponent = Array.from(this.state.resultUrls).map((urlObj, index) => (
         <Col sm={3}>

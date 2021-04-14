@@ -5,6 +5,7 @@ import { Home } from 'pages/Home/Home';
 import TissueResults from 'pages/TissueResults/TissueResults';
 import { ExpResultsTable } from 'components/ExpResultsTable/ExpResultsTable';
 import { GoResultsTable } from 'components/GoResultsTable/GoResultsTable';
+import { KeggResultsTable } from 'components/KeggResultsTable/KeggResultsTable';
 
 import { env } from 'env.js';
 
@@ -55,6 +56,12 @@ export class HContainer extends Component {
             <Route path={`${env.BASE_URL}/gene/result/:id`}>
               <Container className="py-5">
                 <GoResultsTable/>
+              </Container>
+            </Route>
+
+            <Route path={`${env.BASE_URL}/kegg/result/:id`}>
+              <Container className="py-5">
+                <KeggResultsTable/>
               </Container>
             </Route>
         </Switch>
