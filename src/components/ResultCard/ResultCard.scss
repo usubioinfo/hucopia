@@ -1,0 +1,72 @@
+@import '~scss/colors';
+@import '~scss/globals';
+
+$url-text-size: 110%;
+
+.result-card {
+  cursor: default;
+  padding: 10px 0;
+  box-shadow: 0px 2px 6px 1px rgba(102,102,102,0.2);
+  border-radius: $border-radius;
+  background: white;
+  // border: 1px solid $color-light-grey;
+  transition: 0.3s;
+
+  &:hover {
+    $shadow: 170;
+    box-shadow: 0px 3px 8px 3px rgba($shadow,$shadow,$shadow,0.45);
+  }
+
+  .name {
+    font-size: 110%;
+    font-weight: 600;
+    cursor: text;
+
+  }
+
+  a {
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+    color: $palette-1-dark;
+    font-weight: 500;
+    font-size: 90%;
+
+    &:hover {
+      border-color: $palette-1;
+      text-decoration: none;
+    }
+  }
+
+  .write-icon {
+    font-weight: 500;
+    font-size: 110%;
+    transition: 0.3s;
+
+    &:hover {
+      color: $palette-1-dark;
+    }
+  }
+}
+
+input[type="text"] {
+  font-size: $url-text-size;
+  font-weight: 600;
+}
+
+.result-card-input {
+  transition: 0.3s;
+
+  border: none;
+  border-bottom: 2px solid transparent;
+
+  outline: none!important;
+  text-align: center;
+
+  &:hover:not(:focus) {
+    border-color: $palette-1-light;
+  }
+
+  &:focus {
+    border-color: $palette-1-dark;
+  }
+}

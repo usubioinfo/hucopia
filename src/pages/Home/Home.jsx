@@ -11,7 +11,7 @@ import SelectSearch from 'react-select-search';
 import Form from 'react-bootstrap/Form';
 
 import { IconContext } from 'react-icons';
-import { FaRegQuestionCircle, FaClipboard } from 'react-icons/fa';
+import { FaRegQuestionCircle } from 'react-icons/fa';
 
 import * as ExpressionService from 'services/expression.service';
 import * as ResultService from 'services/result.service';
@@ -28,6 +28,7 @@ import 'scss/components/search-form.scss';
 import { HSelector } from 'components/HSelector/HSelector';
 import { HChip } from 'components/HChip/HChip';
 import { FileInput } from 'components/FileInput/FileInput';
+import { ResultCard } from 'components/ResultCard/ResultCard';
 
 import fuzzySearch from 'utils/fuzzy-search';
 
@@ -383,7 +384,7 @@ export class Home extends Component {
     if (!this.state.showControls) {
       newButton = (<Button className="kbl-btn-1 px-5 my-4" onClick={(e) => {
           this.setState({height: 'auto', showControls: true})
-        }}>Find More Interactions
+        }}>Search Again
       </Button>)
     }
 
@@ -406,12 +407,8 @@ export class Home extends Component {
 
     if (this.state.resultUrls.length) {
       resultUrlComponent = Array.from(this.state.resultUrls).map((urlObj, index) => (
-        <Col sm={3}>
-          <div className="result-card">
-            <a href={urlObj.url} className="kbl-link" target="_blank" rel="noreferrer">Result {index + 1}</a>
-            <div>{urlObj.type}</div>
-          </div>
-        </Col>
+        <ResultCard  type={urlObj.type} url={urlObj.url} name={`Result ${index + 1}`} />
+
       ));
     }
 
