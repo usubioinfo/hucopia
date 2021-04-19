@@ -341,38 +341,6 @@ export class Home extends Component {
       return {name: protein, value: protein};
     });
 
-    let resultComponent = (<div></div>);
-
-    if (this.state.displayedResults === 'tissue') {
-      resultComponent = (
-        <Container fluid className="px-5">
-          <Row className="justify-content-center">
-            <Col sm={9}>
-              <TissueResults results={this.state.results}/>
-            </Col>
-          </Row>
-        </Container>);
-    } else if (this.state.displayedResults === 'gene') {
-      resultComponent = (
-        <Container fluid className="px-5">
-          <Row className="justify-content-center">
-            <Col sm={9}>
-              <GoResults results={this.state.results}/>
-            </Col>
-          </Row>
-        </Container>);
-    } else if (this.state.displayedResults === 'kegg') {
-      console.log('keggtest');
-      resultComponent = (
-        <Container fluid className="px-5">
-          <Row className="justify-content-center">
-            <Col sm={9}>
-              <KeggResults results={this.state.results}/>
-            </Col>
-          </Row>
-        </Container>);
-    }
-
     let containerClass = "px-0 pt-5 t-3";
 
     if (!this.state.showControls) {
@@ -558,8 +526,6 @@ export class Home extends Component {
         </Row>
 
         {newButton}
-
-        {resultComponent}
 
         <TissueModal tissues={this.state.tissueOptions} show={this.state.showTissueModal} handler={this.closeTissueModal}/>
       </div>
