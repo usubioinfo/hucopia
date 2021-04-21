@@ -34,11 +34,9 @@ import fuzzySearch from 'utils/fuzzy-search';
 
 import { PATHOGEN_PROTEINS } from 'constants.js';
 
-import TissueResults from 'pages/TissueResults/TissueResults';
-import GoResults from 'components/GoResults/GoResults';
-import KeggResults from 'components/KeggResults/KeggResults';
-
 import { TissueModal } from './TissueModal';
+import { KeggModal } from './KeggModal';
+import { GoModal } from './GoModal';
 
 import { env } from 'env.js';
 
@@ -67,11 +65,15 @@ export class Home extends Component {
       height: 'auto',
       showTissueModal: false,
       tissueOptions: [],
+      keggOptions: [],
+      showKeggModal: false,
+      showGoModal: false,
       selectedTissues: [],
       resultId: '',
       resultUrls: [],
       selectedGoTerms: [],
-      geneHintOn: false
+      geneHintOn: false,
+      selectedAnnotationOptions: []
     }
 
 
@@ -85,6 +87,8 @@ export class Home extends Component {
     this.handleGeneChange = this.handleGeneChange.bind(this);
     this.closeTissueModal = this.closeTissueModal.bind(this);
     this.fileSelected = this.fileSelected.bind(this);
+    this.closeKeggModal = this.closeKeggModal.bind(this);
+    this.closeGoModal = this.closeGoModal.bind(this);
   }
 
   componentDidMount() {
@@ -93,6 +97,12 @@ export class Home extends Component {
         console.log(res.data);
         this.setState({tissueOptions: res.data.payload});
       });
+
+    axios.get(`${env.BACKEND}/kegg/annotations`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({keggOptions: res.data.payload});
+      });
   }
 
   handleGeneChange(e) {
@@ -100,6 +110,7 @@ export class Home extends Component {
   }
 
   selectAnnotation(type) {
+    this.setState({selectedAnnotationOptions: []});
     if (this.state.selectedAnnotation === 'kegg' && type !== this.state.selectedAnnotation) {
       this.setState({genes: ''});
     } else if (this.state.selectedAnnotation !== 'kegg' && type === 'kegg') {
@@ -259,6 +270,10 @@ export class Home extends Component {
       expId: newId
     };
 
+    if (this.state.selectedAnnotationOptions && this.state.selectedAnnotationOptions.length) {
+      postBody['descriptions'] = this.state.selectedAnnotationOptions;
+    }
+
     let responseData;
 
     if (this.state.selectedAnnotation === 'tissue') {
@@ -289,12 +304,32 @@ export class Home extends Component {
     this.setState({showTissueModal: false, selectedTissues: selectedTissues});
   }
 
+  closeKeggModal(selectedAnnotations) {
+    console.log(selectedAnnotations)
+    this.setState({showKeggModal: false, selectedAnnotationOptions: selectedAnnotations});
+  }
+
+  closeGoModal(selectedAnnotations) {
+    console.log(selectedAnnotations)
+    this.setState({showGoModal: false, selectedAnnotationOptions: selectedAnnotations});
+  }
+
   fileSelected(fileText) {
     this.setState({genes: fileText});
   }
 
   setGeneHint(hint) {
     this.setState({geneHintOn: hint});
+  }
+
+  handleSelectAnnotations() {
+    if (this.state.selectedAnnotation === 'tissue') {
+      this.setState({showTissueModal: true});
+    } else if (this.state.selectedAnnotation === 'kegg') {
+      this.setState({showKeggModal: true});
+    } else if (this.state.selectedAnnotation === 'gene') {
+      this.setState({showGoModal: true});
+    }
   }
 
 
@@ -448,7 +483,7 @@ export class Home extends Component {
                 <Row className="pt-4">
                   <Col sm={12}>
                     <Button className="kbl-btn-1 mr-3" onClick={e => {
-                        this.setState({showTissueModal: true});
+                        this.handleSelectAnnotations()
                       }}>Select Annotation Terms</Button>
                   </Col>
                 </Row>
@@ -528,6 +563,8 @@ export class Home extends Component {
         {newButton}
 
         <TissueModal tissues={this.state.tissueOptions} show={this.state.showTissueModal} handler={this.closeTissueModal}/>
+        <KeggModal annotations={this.state.keggOptions} show={this.state.showKeggModal} handler={this.closeKeggModal}/>
+        <GoModal show={this.state.showGoModal} handler={this.closeGoModal}/>
       </div>
     );
   }

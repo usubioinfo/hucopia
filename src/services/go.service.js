@@ -14,3 +14,18 @@ export const getGoEnrichments = async (postBody) => {
 
   return returnData;
 }
+
+export const searchGoAnnotations = (postBody) => {
+  console.log(postBody);
+
+  return new Promise((resolve, reject) => {
+    axios.post(`${env.BACKEND}/go/search/annotations`, postBody)
+      .then((res) => {
+        const data = res.data.payload;
+        resolve(data);
+      })
+      .catch(err => {
+        reject(err);
+      })
+  });
+}

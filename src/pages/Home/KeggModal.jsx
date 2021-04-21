@@ -13,16 +13,16 @@ import './TissueModal.scss';
 
 import fuzzySearch from 'utils/fuzzy-search';
 
-export class TissueModal extends Component {
+export class KeggModal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedTissues: []
+      selectedAnnotations: []
     };
 
     this.selectSearch = this.selectSearch.bind(this);
-    this.tissueChipClicked = this.tissueChipClicked.bind(this);
+    this.chipClicked = this.chipClicked.bind(this);
   }
 
   openModal() {
@@ -34,61 +34,61 @@ export class TissueModal extends Component {
   }
 
   onHide() {
-    
+
   }
 
-  selectSearch(tissue) {
-    let tissueCopy = this.state.selectedTissues;
+  selectSearch(annotation) {
+    let copy = this.state.selectedAnnotations;
 
-    if (tissueCopy.includes(tissue)) {
+    if (copy.includes(annotation)) {
       return;
     }
 
-    tissueCopy.push(tissue);
+    copy.push(annotation);
 
-    this.setState({selectedTissues: tissueCopy});
+    this.setState({selectedAnnotations: copy});
 
   }
 
-  tissueChipClicked(tissue) {
-    let index = this.state.selectedTissues.indexOf(tissue);
+  chipClicked(tissue) {
+    let index = this.state.selectedAnnotations.indexOf(tissue);
     if (index <= -1) {
       return;
     }
 
-    let tissueCopy = this.state.selectedTissues;
-    tissueCopy.splice(index, 1);
+    let copy = this.state.selectedAnnotations;
+    copy.splice(index, 1);
 
-    this.setState({selectedTissues: tissueCopy})
+    this.setState({selectedAnnotations: copy})
   }
 
   render() {
-    let protChips = this.state.selectedTissues.map(protein => (
-      <HChip text={protein} key={protein}  ch={this.tissueChipClicked}/>
+    let chips = this.state.selectedAnnotations.map(annotation => (
+      <HChip text={annotation} key={annotation}  ch={this.chipClicked}/>
     ));
 
-    let emptyTissueMsg = <div></div>;
+    let emptyMsg = <div></div>;
 
-    if (!protChips.length) {
-      emptyTissueMsg = (
+    if (!chips.length) {
+      emptyMsg = (
         <Row className="mt-3">
           <Col sm={12} className="text-center">
             <p>
-              By default, all tissues are selected. Use the searchbar to select tissues.
+              By default, all annotations are selected. Use the searchbar to select tissues.
             </p>
           </Col>
         </Row>)
     }
 
-    this.searchOptions = this.props.tissues.filter(tissue => {
-      if (!this.state.selectedTissues.includes(tissue)) {
+    this.searchOptions = this.props.annotations.filter(annotation => {
+      if (!this.state.selectedAnnotations.includes(annotation)) {
         return true;
       }
 
       return false;
     })
-    .map(tissue => {
-      return {name: tissue, value: tissue};
+    .map(annotation => {
+      return {name: annotation, value: annotation};
     });
 
     return (
@@ -99,29 +99,29 @@ export class TissueModal extends Component {
           <Container>
             <Row className="mb-4 mt-3">
               <Col sm={7}>
-                <SelectSearch emptyMessage="Tissue not found"
-                  options={this.searchOptions} search placeholder="Search tissues" name="tissue" filterOptions={fuzzySearch} onChange={this.selectSearch}
+                <SelectSearch emptyMessage="Annotation not found"
+                  options={this.searchOptions} search placeholder="Search annotations" name="tissue" filterOptions={fuzzySearch} onChange={this.selectSearch}
                   />
               </Col>
               <Col sm={5}>
                 <Button className="kbl-btn-1 mr-2" onClick={(e) => {
-                    this.setState({selectedTissues: [...this.props.tissues]});
+                    this.setState({selectedAnnotations: [...this.props.annotations]});
                   }}>Select All</Button>
                 <Button className="kbl-btn-2" onClick={(e) => {
-                    this.setState({selectedTissues: []});
+                    this.setState({selectedAnnotations: []});
                   }}>Clear All</Button>
               </Col>
             </Row>
-            {emptyTissueMsg}
+            {emptyMsg}
             <Row>
               <Col sm={12}>
-                {protChips}
+                {chips}
               </Col>
             </Row>
             <Row className="mt-3">
               <Col sm={12} className="text-center">
                 <Button className="kbl-btn-1 mr-3" onClick={e=> {
-                    this.props.handler(this.state.selectedTissues);
+                    this.props.handler(this.state.selectedAnnotations);
                   }}>Close</Button>
               </Col>
             </Row>
