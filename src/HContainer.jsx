@@ -2,20 +2,18 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import { HNavbar } from 'components/HNavbar/HNavbar';
 import { Home } from 'pages/Home/Home';
-import TissueResults from 'pages/TissueResults/TissueResults';
+
 import { ExpResultsTable } from 'components/ExpResultsTable/ExpResultsTable';
 import { GoResultsTable } from 'components/GoResultsTable/GoResultsTable';
 import { KeggResultsTable } from 'components/KeggResultsTable/KeggResultsTable';
+import { LocalResultsTable } from 'components/LocalResultsTable/LocalResultsTable';
 
 import { env } from 'env.js';
 
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useLocation,
-  withRouter
+  Route
 } from 'react-router-dom';
 
 export class HContainer extends Component {
@@ -62,6 +60,12 @@ export class HContainer extends Component {
             <Route path={`${env.BASE_URL}/kegg/result/:id`}>
               <Container className="py-5">
                 <KeggResultsTable/>
+              </Container>
+            </Route>
+
+            <Route path={`${env.BASE_URL}/local/result/:id`}>
+              <Container className="py-5">
+                <LocalResultsTable/>
               </Container>
             </Route>
         </Switch>

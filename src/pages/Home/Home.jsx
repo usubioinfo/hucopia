@@ -17,6 +17,7 @@ import * as ExpressionService from 'services/expression.service';
 import * as ResultService from 'services/result.service';
 import * as GoService from 'services/go.service';
 import * as KeggService from 'services/kegg.service';
+import * as LocalService from 'services/local.service';
 
 import './Home.scss';
 import 'scss/style.scss';
@@ -36,6 +37,7 @@ import { PATHOGEN_PROTEINS } from 'constants.js';
 
 import { TissueModal } from './TissueModal';
 import { KeggModal } from './KeggModal';
+import { LocalModal } from './LocalModal';
 import { GoModal } from './GoModal';
 
 import { env } from 'env.js';
@@ -66,6 +68,7 @@ export class Home extends Component {
       showTissueModal: false,
       tissueOptions: [],
       keggOptions: [],
+      localAnnotations: [],
       showKeggModal: false,
       showGoModal: false,
       selectedTissues: [],
@@ -73,7 +76,8 @@ export class Home extends Component {
       resultUrls: [],
       selectedGoTerms: [],
       geneHintOn: false,
-      selectedAnnotationOptions: []
+      selectedAnnotationOptions: [],
+      showLocalModal: false
     }
 
 
@@ -89,6 +93,7 @@ export class Home extends Component {
     this.fileSelected = this.fileSelected.bind(this);
     this.closeKeggModal = this.closeKeggModal.bind(this);
     this.closeGoModal = this.closeGoModal.bind(this);
+    this.closeLocalModal = this.closeLocalModal.bind(this);
   }
 
   componentDidMount() {
@@ -102,6 +107,19 @@ export class Home extends Component {
       .then(res => {
         console.log(res.data);
         this.setState({keggOptions: res.data.payload});
+      });
+
+    axios.get(`${env.BACKEND}/local/annotations`)
+      .then(res => {
+        console.log(res.data);
+        const data = res.data.payload.map(item => {
+          const maxLength = 50;
+          if (item.length > maxLength) {
+            return item.substr(0, maxLength) + '...';
+          }
+          return item.substr(0, maxLength);
+        });
+        this.setState({localAnnotations: [...new Set(data)]});
       });
   }
 
@@ -271,7 +289,11 @@ export class Home extends Component {
     };
 
     if (this.state.selectedAnnotationOptions && this.state.selectedAnnotationOptions.length) {
-      postBody['descriptions'] = this.state.selectedAnnotationOptions;
+      if (this.state.selectedAnnotation === 'local') {
+        postBody['locations'] = this.state.selectedAnnotationOptions;
+      } else {
+        postBody['descriptions'] = this.state.selectedAnnotationOptions;
+      }
     }
 
     let responseData;
@@ -285,6 +307,9 @@ export class Home extends Component {
     } else if (this.state.selectedAnnotation === 'kegg') {
       postBody.tissues = [];
       responseData = await KeggService.getKeggEnrichments(postBody);
+    } else if (this.state.selectedAnnotation === 'local') {
+      postBody.tissues = [];
+      responseData = await LocalService.getLocalEnrichments(postBody);
     }
 
     this.setState({interactionLoading: false});
@@ -309,6 +334,11 @@ export class Home extends Component {
     this.setState({showKeggModal: false, selectedAnnotationOptions: selectedAnnotations});
   }
 
+  closeLocalModal(selectedAnnotations) {
+    console.log(selectedAnnotations)
+    this.setState({showLocalModal: false, selectedAnnotationOptions: selectedAnnotations});
+  }
+
   closeGoModal(selectedAnnotations) {
     console.log(selectedAnnotations)
     this.setState({showGoModal: false, selectedAnnotationOptions: selectedAnnotations});
@@ -329,6 +359,8 @@ export class Home extends Component {
       this.setState({showKeggModal: true});
     } else if (this.state.selectedAnnotation === 'gene') {
       this.setState({showGoModal: true});
+    } else if (this.state.selectedAnnotation === 'local') {
+      this.setState({showLocalModal: true});
     }
   }
 
@@ -564,6 +596,7 @@ export class Home extends Component {
 
         <TissueModal tissues={this.state.tissueOptions} show={this.state.showTissueModal} handler={this.closeTissueModal}/>
         <KeggModal annotations={this.state.keggOptions} show={this.state.showKeggModal} handler={this.closeKeggModal}/>
+        <LocalModal annotations={this.state.localAnnotations} show={this.state.showLocalModal} handler={this.closeLocalModal}/>
         <GoModal show={this.state.showGoModal} handler={this.closeGoModal}/>
       </div>
     );
