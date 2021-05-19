@@ -21,22 +21,16 @@ export const LocalResultsTable = () => {
   }, []);
 
   const localProperties = [
-    'host',
-    'location',
-    'gene',
-    'interactions',
-    'pathogen'
-  ];
-
-  const intProperties = [
     'pathogen',
     'isolate',
     'pathogenProtein',
     'pLength',
     'gene',
+    'host',
+    'location',
+    'interactions',
     'hLength',
     'interactionType',
-    'interactionCategory'
   ];
 
   let results;
@@ -47,16 +41,21 @@ export const LocalResultsTable = () => {
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colspan="6" className="pathogen">Localization</th>
+            <th colspan="10" className="pathogen">Localization</th>
           </tr>
 
           <tr className="bottom">
             <th>#</th>
+            <th>Pathogen</th>
+            <th>Isolate</th>
+            <th>Protein</th>
+            <th>P-length</th>
+            <th>Gene</th>
             <th>Host</th>
             <th>Location</th>
-            <th>Gene</th>
             <th>Interactions</th>
-            <th>Pathogen</th>
+            <th>H-length</th>
+            <th>Int. Type</th>
           </tr>
         </thead>
 
