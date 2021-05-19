@@ -33,7 +33,7 @@ export class ResultCard extends Component {
 
     return (
       <Col sm={3}>
-        <div className="result-card">
+        <div className="result-card my-2">
 
           <span>
             <input className="result-card-input" ref={this.nameField} type="text" value={name}

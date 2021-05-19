@@ -21,11 +21,12 @@ export const KeggResultsTable = () => {
   }, []);
 
   const keggProperties = [
+    'pathogen',
     'keggId',
     'description',
     'geneRatio',
     'bgRatio',
-    'pathogen'
+    'interactionCategory'
   ];
 
   const intProperties = [
@@ -52,11 +53,12 @@ export const KeggResultsTable = () => {
 
           <tr className="bottom">
             <th>#</th>
+            <th>Pathogen</th>
             <th>KEGG ID</th>
             <th>Description</th>
             <th>Gene Ratio</th>
             <th>BG Ratio</th>
-            <th>Pathogen</th>
+            <th>Int. Category</th>
           </tr>
         </thead>
 
