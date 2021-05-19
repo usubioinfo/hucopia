@@ -287,10 +287,15 @@ export class Home extends Component {
       resultUrls: [...this.state.resultUrls, {url: newUrl, type: annotationDict[this.state.selectedAnnotation]}]
     });
 
+    let sendGenes = this.state.genes.replace(/ \s+/g, '').trim().split(',');
+    sendGenes = sendGenes.map(gene => {
+      return gene.trim();
+    });
+
     const postBody = {
       pathogenProteins: this.state.selectedPatProteins,
       pathogen: this.state.selectedVirus,
-      genes: this.state.genes.replace(/ \s+/g, '').trim().split(','),
+      genes: sendGenes,
       interactionType: this.state.selectedIntTypes,
       interactionCategory: this.state.interactionCategory,
       tissues: tissues,
@@ -382,7 +387,7 @@ export class Home extends Component {
 
     if (this.state.selectedAnnotation === 'kegg') {
       genePlaceholder = 'Example: FRA7D, FRA5E, PLEXB3';
-      geneSample = 'FRA7D, FRA5E, PLEXB3, SHP1';
+      geneSample = 'FRA7D, FRA5E, PLEXB3, SHP1, TBX5';
     }
 
     if (this.state.geneHintOn) {

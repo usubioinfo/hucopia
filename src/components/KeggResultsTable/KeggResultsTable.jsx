@@ -22,10 +22,14 @@ export const KeggResultsTable = () => {
 
   const keggProperties = [
     'pathogen',
+    'isolate',
+    'pathogenProtein',
+    'pLength',
+    'gene',
     'keggId',
     'description',
-    'geneRatio',
-    'bgRatio',
+    'hLength',
+    'interactionType',
     'interactionCategory'
   ];
 
@@ -48,16 +52,20 @@ export const KeggResultsTable = () => {
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colspan="6" className="pathogen">KEGG Enrichment</th>
+            <th colspan="10" className="pathogen">KEGG Enrichment</th>
           </tr>
 
           <tr className="bottom">
             <th>#</th>
             <th>Pathogen</th>
+            <th>Isolate</th>
+            <th>Protein</th>
+            <th>P-length</th>
+            <th>Gene</th>
             <th>KEGG ID</th>
             <th>Description</th>
-            <th>Gene Ratio</th>
-            <th>BG Ratio</th>
+            <th>H-length</th>
+            <th>Int. Type</th>
             <th>Int. Category</th>
           </tr>
         </thead>

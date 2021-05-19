@@ -21,24 +21,18 @@ export const GoResultsTable = () => {
   }, []);
 
   const goProperties = [
-    'goId',
-    'category',
-    'description',
-    'geneRatio',
-    'bgRatio',
-    'pathogen'
-  ];
-
-  const intProperties = [
     'pathogen',
     'isolate',
     'pathogenProtein',
     'pLength',
     'gene',
+    'goId',
+    'description',
     'hLength',
     'interactionType',
     'interactionCategory'
   ];
+
 
   let results;
 
@@ -48,17 +42,21 @@ export const GoResultsTable = () => {
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colspan="7" className="pathogen">GO Enrichment</th>
+            <th colspan="10" className="pathogen">GO Enrichment</th>
           </tr>
 
           <tr className="bottom">
             <th>#</th>
-            <th>GO ID</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Gene Ratio</th>
-            <th>BG Ratio</th>
             <th>Pathogen</th>
+            <th>Isolate</th>
+            <th>Protein</th>
+            <th>P-length</th>
+            <th>Gene</th>
+            <th>GO ID</th>
+            <th>Description</th>
+            <th>H-length</th>
+            <th>Int. Type</th>
+            <th>Int. Category</th>
           </tr>
         </thead>
 
