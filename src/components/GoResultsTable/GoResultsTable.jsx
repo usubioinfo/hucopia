@@ -37,6 +37,10 @@ export const GoResultsTable = () => {
   let results;
 
   if (goData.payload && goData.payload.reqTime) {
+    goData.payload.results = goData.payload.results.filter(result => {
+      return result.interactionType.length;
+    });
+
     results = (
       <Table responsive className="kbl-table table-borderless">
         <thead className="kbl-thead">

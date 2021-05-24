@@ -36,6 +36,10 @@ export const KeggResultsTable = () => {
   let results;
 
   if (data.payload && data.payload.reqTime) {
+    data.payload.results = data.payload.results.filter(result => {
+      return result.interactionType.length;
+    });
+    
     results = (
       <Table responsive className="kbl-table table-borderless">
         <thead className="kbl-thead">
