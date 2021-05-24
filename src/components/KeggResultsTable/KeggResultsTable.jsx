@@ -26,20 +26,9 @@ export const KeggResultsTable = () => {
     'pathogenProtein',
     'pLength',
     'gene',
+    'hLength',
     'keggId',
     'description',
-    'hLength',
-    'interactionType',
-    'interactionCategory'
-  ];
-
-  const intProperties = [
-    'pathogen',
-    'isolate',
-    'pathogenProtein',
-    'pLength',
-    'gene',
-    'hLength',
     'interactionType',
     'interactionCategory'
   ];
@@ -62,11 +51,11 @@ export const KeggResultsTable = () => {
             <th>Protein</th>
             <th>P-length</th>
             <th>Gene</th>
+            <th>H-length</th>
             <th>KEGG ID</th>
             <th>Description</th>
-            <th>H-length</th>
-            <th>Int. Type</th>
-            <th>Int. Category</th>
+            <th>Type</th>
+            <th>Category</th>
           </tr>
         </thead>
 

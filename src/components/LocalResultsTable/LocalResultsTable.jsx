@@ -26,11 +26,10 @@ export const LocalResultsTable = () => {
     'pathogenProtein',
     'pLength',
     'gene',
-    'host',
-    'location',
-    'interactions',
     'hLength',
+    'location',
     'interactionType',
+    'interactionCategory'
   ];
 
   let results;
@@ -41,7 +40,7 @@ export const LocalResultsTable = () => {
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colspan="10" className="pathogen">Localization</th>
+            <th colspan="9" className="pathogen">Localization</th>
           </tr>
 
           <tr className="bottom">
@@ -51,11 +50,10 @@ export const LocalResultsTable = () => {
             <th>Protein</th>
             <th>P-length</th>
             <th>Gene</th>
-            <th>Host</th>
-            <th>Location</th>
-            <th>Interactions</th>
             <th>H-length</th>
-            <th>Int. Type</th>
+            <th>Location</th>
+            <th>Type</th>
+            <th>Category</th>
           </tr>
         </thead>
 

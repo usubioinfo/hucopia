@@ -26,9 +26,9 @@ export const GoResultsTable = () => {
     'pathogenProtein',
     'pLength',
     'gene',
+    'hLength',
     'goId',
     'description',
-    'hLength',
     'interactionType',
     'interactionCategory'
   ];
@@ -52,11 +52,11 @@ export const GoResultsTable = () => {
             <th>Protein</th>
             <th>P-length</th>
             <th>Gene</th>
+            <th>H-length</th>
             <th>GO ID</th>
             <th>Description</th>
-            <th>H-length</th>
-            <th>Int. Type</th>
-            <th>Int. Category</th>
+            <th>Type</th>
+            <th>Category</th>
           </tr>
         </thead>
 
