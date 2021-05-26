@@ -53,8 +53,8 @@ export const ExpResultsTable = () => {
             <th>Protein</th>
             <th>P-length</th>
             <th>Gene</th>
-            <th>Tissue</th>
             <th>H-length</th>
+            <th>Tissue</th>
             <th>Type</th>
             <th>Category</th>
           </tr>
