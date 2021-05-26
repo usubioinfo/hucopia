@@ -46,7 +46,9 @@ export const GoResultsTable = () => {
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colspan="10" className="pathogen">GO Enrichment</th>
+            <th colSpan="4" className="pathogen">Pathogen</th>
+            <th colSpan="4" className="human">Human</th>
+            <th colSpan="2" className="interaction">Interaction</th>
           </tr>
 
           <tr className="bottom">

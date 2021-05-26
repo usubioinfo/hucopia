@@ -44,7 +44,9 @@ export const LocalResultsTable = () => {
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colspan="9" className="pathogen">Localization</th>
+            <th colSpan="4" className="pathogen">Pathogen</th>
+            <th colSpan="3" className="human">Human</th>
+            <th colSpan="2" className="interaction">Interaction</th>
           </tr>
 
           <tr className="bottom">
