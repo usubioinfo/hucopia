@@ -74,7 +74,7 @@ export class KeggModal extends Component {
         <Row className="mt-3">
           <Col sm={12} className="text-center">
             <p>
-              By default, all annotations are selected. Use the searchbar to select tissues.
+              By default, all annotations are selected. Use the searchbar to select specific annotations.
             </p>
           </Col>
         </Row>)
