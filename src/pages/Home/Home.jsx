@@ -58,7 +58,7 @@ export class Home extends Component {
       selectedVirus: 'sars-cov-2',
       interactionCategory: 'unique',
       selectedPatProteins: [],
-      selectedIntTypes: ['interolog'],
+      selectedIntTypes: ['interolog', 'domain', 'both'],
       genes: '',
       interactionLoading: false,
       displayedResults: '',
@@ -74,7 +74,7 @@ export class Home extends Component {
       selectedTissues: [],
       resultId: '',
       resultUrls: [],
-      selectedGoTerms: [],
+      selectedGoTerms: ['molecfunction', 'cellcomp', 'biopathway'],
       geneHintOn: false,
       selectedAnnotationOptions: [],
       showLocalModal: false
@@ -330,17 +330,14 @@ export class Home extends Component {
   }
 
   closeKeggModal(selectedAnnotations) {
-    console.log(selectedAnnotations)
     this.setState({showKeggModal: false, selectedAnnotationOptions: selectedAnnotations});
   }
 
   closeLocalModal(selectedAnnotations) {
-    console.log(selectedAnnotations)
     this.setState({showLocalModal: false, selectedAnnotationOptions: selectedAnnotations});
   }
 
   closeGoModal(selectedAnnotations) {
-    console.log(selectedAnnotations)
     this.setState({showGoModal: false, selectedAnnotationOptions: selectedAnnotations});
   }
 
