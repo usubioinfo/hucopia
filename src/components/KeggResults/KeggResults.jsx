@@ -25,6 +25,7 @@ class KeggResults extends Component {
     ];
 
     this.keggProperties = [
+      'pathogen',
       'keggId',
       'description',
       'geneRatio',
@@ -47,6 +48,7 @@ class KeggResults extends Component {
             <tr className="bottom">
               <th>#</th>
               <th>KEGG ID</th>
+              <th>Pathogen</th>
               <th>Description</th>
               <th>Gene Ratio</th>
               <th>BG Ratio</th>

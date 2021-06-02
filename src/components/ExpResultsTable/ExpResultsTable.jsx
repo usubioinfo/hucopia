@@ -27,8 +27,8 @@ export const ExpResultsTable = () => {
     'pathogenProtein',
     'pLength',
     'gene',
-    'tissueExpression',
     'hLength',
+    'tissueExpression',
     'interactionType',
     'interactionCategory'
   ];
@@ -53,10 +53,10 @@ export const ExpResultsTable = () => {
             <th>Protein</th>
             <th>P-length</th>
             <th>Gene</th>
-            <th>Tissue</th>
             <th>H-length</th>
-            <th>Int. Type</th>
-            <th>Int. Category</th>
+            <th>Tissue</th>
+            <th>Type</th>
+            <th>Category</th>
           </tr>
         </thead>
 

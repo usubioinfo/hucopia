@@ -21,44 +21,48 @@ export const GoResultsTable = () => {
   }, []);
 
   const goProperties = [
-    'goId',
-    'category',
-    'description',
-    'geneRatio',
-    'bgRatio',
-    'pathogen'
-  ];
-
-  const intProperties = [
     'pathogen',
     'isolate',
     'pathogenProtein',
     'pLength',
     'gene',
     'hLength',
+    'goId',
+    'description',
     'interactionType',
     'interactionCategory'
   ];
 
+
   let results;
 
   if (goData.payload && goData.payload.reqTime) {
+    goData.payload.results = goData.payload.results.filter(result => {
+      return result.interactionType.length;
+    });
+
     results = (
       <Table responsive className="kbl-table table-borderless">
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colspan="7" className="pathogen">GO Enrichment</th>
+            <th colSpan="4" className="pathogen">Pathogen</th>
+            <th colSpan="4" className="human">Human</th>
+            <th colSpan="2" className="interaction">Interaction</th>
           </tr>
 
           <tr className="bottom">
             <th>#</th>
-            <th>GO ID</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Gene Ratio</th>
-            <th>BG Ratio</th>
             <th>Pathogen</th>
+            <th>Isolate</th>
+            <th>Protein</th>
+            <th>P-length</th>
+            <th>Gene</th>
+            <th>H-length</th>
+            <th>GO ID</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Category</th>
           </tr>
         </thead>
 

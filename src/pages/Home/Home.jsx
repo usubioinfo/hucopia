@@ -101,12 +101,18 @@ export class Home extends Component {
       .then(res => {
         console.log(res.data);
         this.setState({tissueOptions: res.data.payload});
+      })
+      .catch(err => {
+        console.log(err);
       });
 
     axios.get(`${env.BACKEND}/kegg/annotations`)
       .then(res => {
         console.log(res.data);
         this.setState({keggOptions: res.data.payload});
+      })
+      .catch(err => {
+        console.log(err);
       });
 
     axios.get(`${env.BACKEND}/local/annotations`)
@@ -120,6 +126,9 @@ export class Home extends Component {
           return item.substr(0, maxLength);
         });
         this.setState({localAnnotations: [...new Set(data)]});
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 
@@ -278,10 +287,15 @@ export class Home extends Component {
       resultUrls: [...this.state.resultUrls, {url: newUrl, type: annotationDict[this.state.selectedAnnotation]}]
     });
 
+    let sendGenes = this.state.genes.replace(/ \s+/g, '').trim().split(',');
+    sendGenes = sendGenes.map(gene => {
+      return gene.trim();
+    });
+
     const postBody = {
       pathogenProteins: this.state.selectedPatProteins,
       pathogen: this.state.selectedVirus,
-      genes: this.state.genes.replace(/ \s+/g, '').trim().split(','),
+      genes: sendGenes,
       interactionType: this.state.selectedIntTypes,
       interactionCategory: this.state.interactionCategory,
       tissues: tissues,
@@ -369,8 +383,8 @@ export class Home extends Component {
     let geneSample = 'PTPRR, PTPN2, PTPN7, PTPN20, PTPN5';
 
     if (this.state.selectedAnnotation === 'kegg') {
-      genePlaceholder = 'Example: 10376, 1000, 6714';
-      geneSample = '5605, 1564, 2946, 116444';
+      genePlaceholder = 'Example: FRA7D, FRA5E, PLEXB3';
+      geneSample = 'FRA7D, FRA5E, PLEXB3, SHP1, TBX5';
     }
 
     if (this.state.geneHintOn) {

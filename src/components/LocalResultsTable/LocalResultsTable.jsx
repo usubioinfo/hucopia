@@ -21,20 +21,13 @@ export const LocalResultsTable = () => {
   }, []);
 
   const localProperties = [
-    'host',
-    'location',
-    'gene',
-    'interactions',
-    'pathogen'
-  ];
-
-  const intProperties = [
     'pathogen',
     'isolate',
     'pathogenProtein',
     'pLength',
     'gene',
     'hLength',
+    'location',
     'interactionType',
     'interactionCategory'
   ];
@@ -42,21 +35,31 @@ export const LocalResultsTable = () => {
   let results;
 
   if (data.payload && data.payload.reqTime) {
+    data.payload.results = data.payload.results.filter(result => {
+      return result.interactionType.length;
+    });
+
     results = (
       <Table responsive className="kbl-table table-borderless">
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colspan="6" className="pathogen">Localization</th>
+            <th colSpan="4" className="pathogen">Pathogen</th>
+            <th colSpan="3" className="human">Human</th>
+            <th colSpan="2" className="interaction">Interaction</th>
           </tr>
 
           <tr className="bottom">
             <th>#</th>
-            <th>Host</th>
-            <th>Location</th>
-            <th>Gene</th>
-            <th>Interactions</th>
             <th>Pathogen</th>
+            <th>Isolate</th>
+            <th>Protein</th>
+            <th>P-length</th>
+            <th>Gene</th>
+            <th>H-length</th>
+            <th>Location</th>
+            <th>Type</th>
+            <th>Category</th>
           </tr>
         </thead>
 

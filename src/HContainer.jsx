@@ -64,7 +64,7 @@ export class HContainer extends Component {
             </Route>
 
             <Route path={`${env.BASE_URL}/local/result/:id`}>
-              <Container className="py-5">
+              <Container fluid className="py-5 px-5">
                 <LocalResultsTable/>
               </Container>
             </Route>

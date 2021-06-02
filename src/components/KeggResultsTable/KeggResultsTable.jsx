@@ -8,7 +8,6 @@ import Table from 'react-bootstrap/Table';
 export const KeggResultsTable = () => {
   const { id } = useParams();
 
-  let [intData, setIntData] = useState([]);
   let [data, setData] = useState([]);
 
   useEffect(() => {
@@ -21,20 +20,14 @@ export const KeggResultsTable = () => {
   }, []);
 
   const keggProperties = [
-    'keggId',
-    'description',
-    'geneRatio',
-    'bgRatio',
-    'pathogen'
-  ];
-
-  const intProperties = [
     'pathogen',
     'isolate',
     'pathogenProtein',
     'pLength',
     'gene',
     'hLength',
+    'keggId',
+    'description',
     'interactionType',
     'interactionCategory'
   ];
@@ -42,21 +35,32 @@ export const KeggResultsTable = () => {
   let results;
 
   if (data.payload && data.payload.reqTime) {
+    data.payload.results = data.payload.results.filter(result => {
+      return result.interactionType.length;
+    });
+
     results = (
       <Table responsive className="kbl-table table-borderless">
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
-            <th colspan="6" className="pathogen">KEGG Enrichment</th>
+            <th colSpan="4" className="pathogen">Pathogen</th>
+            <th colSpan="4" className="human">Human</th>
+            <th colSpan="2" className="interaction">Interaction</th>
           </tr>
 
           <tr className="bottom">
             <th>#</th>
+            <th>Pathogen</th>
+            <th>Isolate</th>
+            <th>Protein</th>
+            <th>P-length</th>
+            <th>Gene</th>
+            <th>H-length</th>
             <th>KEGG ID</th>
             <th>Description</th>
-            <th>Gene Ratio</th>
-            <th>BG Ratio</th>
-            <th>Pathogen</th>
+            <th>Type</th>
+            <th>Category</th>
           </tr>
         </thead>
 
