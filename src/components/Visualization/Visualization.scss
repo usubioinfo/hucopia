@@ -1,0 +1,11 @@
+@import '~scss/colors';
+@import '~scss/globals';
+
+.cy-container {
+  background: #cdcdcd;
+  border-radius: $border-radius;
+}
+
+.cy-container div * {
+  left: 0;
+}
