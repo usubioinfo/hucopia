@@ -8,6 +8,8 @@ import { GoResultsTable } from 'components/GoResultsTable/GoResultsTable';
 import { KeggResultsTable } from 'components/KeggResultsTable/KeggResultsTable';
 import { LocalResultsTable } from 'components/LocalResultsTable/LocalResultsTable';
 
+import { Visualization } from 'components/Visualization/Visualization';
+
 import { env } from 'env.js';
 
 import {
@@ -66,6 +68,12 @@ export class HContainer extends Component {
             <Route path={`${env.BASE_URL}/local/result/:id`}>
               <Container fluid className="py-5 px-5">
                 <LocalResultsTable/>
+              </Container>
+            </Route>
+
+            <Route path={`${env.BASE_URL}/vis/:id`}>
+              <Container fluid className="py-5 px-5">
+                <Visualization/>
               </Container>
             </Route>
         </Switch>
