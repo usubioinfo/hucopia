@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { HNavbar } from 'components/HNavbar/HNavbar';
 import { Home } from 'pages/Home/Home';
 
@@ -9,6 +11,7 @@ import { KeggResultsTable } from 'components/KeggResultsTable/KeggResultsTable';
 import { LocalResultsTable } from 'components/LocalResultsTable/LocalResultsTable';
 
 import { Visualization } from 'components/Visualization/Visualization';
+import { VisPage } from 'pages/VisPage/VisPage';
 
 import { env } from 'env.js';
 
@@ -73,7 +76,7 @@ export class HContainer extends Component {
 
             <Route path={`${env.BASE_URL}/vis/:id`}>
               <Container fluid className="py-5 px-5">
-                <Visualization/>
+                <VisPage/>
               </Container>
             </Route>
         </Switch>

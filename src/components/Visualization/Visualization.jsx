@@ -33,8 +33,8 @@ export const Visualization = () => {
   }, []);
 
   return (
-    <div className="col-6 cy">
-      <CyComp elements={elements} style={ { width: '600px', height: '600px' } } className="cy-container"/>
+    <div className="cy">
+      <CyComp elements={elements} style={ { width: 'auto', height: '600px' } } className="cy-container"/>
     </div>
   );
 }
