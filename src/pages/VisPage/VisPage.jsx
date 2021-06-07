@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import './VisPage.scss';
 
 import { Visualization } from 'components/Visualization/Visualization';
+import { VisTable } from 'components/VisTable/VisTable';
 
 export class VisPage extends Component {
 
@@ -20,6 +21,9 @@ export class VisPage extends Component {
       <Row>
         <Col sm={7}>
           <Visualization/>
+        </Col>
+        <Col sm={5}>
+          <VisTable/>
         </Col>
       </Row>
     );

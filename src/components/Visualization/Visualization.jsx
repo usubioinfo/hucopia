@@ -25,7 +25,6 @@ export const Visualization = () => {
   useEffect(() => {
     const fetchData = async () => {
       const results = await ResultService.getResultById(id);
-      console.log(results);
       setData(results);
     }
 
