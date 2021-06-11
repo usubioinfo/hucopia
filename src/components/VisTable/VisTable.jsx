@@ -20,7 +20,6 @@ export const VisTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       const results = await ResultService.getResultById(id);
-      console.log(results);
       setData(results);
     }
 
@@ -41,13 +40,19 @@ export const VisTable = () => {
 
           <tr className="bottom">
             <th>#</th>
-            <th>Pathogen</th>
-            <th>Isolate</th>
+            <th>Gene</th>
+            <th>Protein</th>
           </tr>
         </thead>
 
         <tbody>
-
+          {Array.from(data.payload.results).map((result, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{result.gene}</td>
+              <td>{result.pathogenProtein}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     )
