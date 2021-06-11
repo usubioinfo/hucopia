@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import cytoscape from 'cytoscape';
+import cb from 'cytoscape-cose-bilkent';
 import CyComp from 'react-cytoscapejs';
 
 import { useState, useEffect, useRef } from 'react';
@@ -8,13 +10,16 @@ import * as ResultService from 'services/result.service';
 
 import './Visualization.scss';
 
+cytoscape.use(cb);
+
 export const Visualization = () => {
+  let cy = cytoscape;
 
   const { id } = useParams();
   let [data, setData] = useState([]);
 
-  const layout = {
-    name: 'cose'
+  let layout = {
+    name: 'cose-bilkent'
   }
 
   useEffect(() => {
@@ -51,11 +56,15 @@ export const Visualization = () => {
     for (let i of elements) {
       console.log(i)
     }
+
+    // This is a dumb hack that forces the graph to rerender. Don't ask.
+    layout = {name: 'cose'};
   }
 
   return (
     <div className="cy">
-      <CyComp elements={elements} style={ { width: 'auto', height: '600px' } } layout={layout} className="cy-container"/>
+      <CyComp elements={elements} cy={(cy) => {cy = cytoscape}} style={ { width: 'auto', height: '600px' } }
+          layout={layout} className="cy-container"/>
     </div>
   );
 }
