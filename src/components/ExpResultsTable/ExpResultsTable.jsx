@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 
 import * as ResultService from 'services/result.service';
 
+import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import './ExpResultsTable.scss';
 
 import { useParams } from 'react-router-dom';
+
+import { env } from 'env.js';
 
 export const ExpResultsTable = () => {
   const { id } = useParams();
@@ -80,9 +83,23 @@ export const ExpResultsTable = () => {
     )
   }
 
+  let newUrl;
+  if (env.BASE_URL.length) {
+    newUrl = `${env.BASE_URL}/vis/${id}`;
+  } else {
+    newUrl = `/vis/${id}`;
+  }
+
   return (
-    <div className="mb-5">
-      {results}
+    <div>
+      <div className="my-3">
+        <a href={newUrl} target="_blank" rel="noreferrer noopener">
+          <Button className="kbl-btn-1">Visualization</Button>
+        </a>
+      </div>
+      <div className="mb-5">
+        {results}
+      </div>
     </div>
   );
 }

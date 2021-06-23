@@ -13,13 +13,12 @@ import './Visualization.scss';
 cytoscape.use(cb);
 
 export const Visualization = () => {
-  let cy = cytoscape;
 
   const { id } = useParams();
   let [data, setData] = useState([]);
 
   let layout = {
-    name: 'cose-bilkent'
+    name: 'cose'
   }
 
   useEffect(() => {
@@ -34,23 +33,39 @@ export const Visualization = () => {
 
   let elements = [];
 
+  let uniqueGenes;
+  let uniquePatProteins;
+
+  let intIds = [];
+  let domIds = [];
+  let conIds = [];
+
+  const idDict = {
+    interolog: intIds,
+    domain: domIds,
+    consensus: conIds
+  }
+
   if (data.payload) {
     console.log(data);
     elements = data.payload.results.map((item) => {
-      return {data: { source: item.gene, target: item.pathogenProtein} };
+      const id = `${item.interactionType}-${item.gene}-${item.pathogenProtein}`;
+      idDict[item.interactionType].push(`#${id}`);
+
+      return {data: { source: item.gene, target: item.pathogenProtein, id: id} };
     });
 
-    let uniqueGenes = Array.from(new Set(data.payload.results.map(item => {return item.gene})));
-    let uniquePatProteins = Array.from(new Set(data.payload.results.map(item => {return item.pathogenProtein})));
+    uniqueGenes = Array.from(new Set(data.payload.results.map(item => {return item.gene})));
+    uniquePatProteins = Array.from(new Set(data.payload.results.map(item => {return item.pathogenProtein})));
 
     console.log(uniqueGenes);
 
     for (let item of uniqueGenes) {
-      elements.push({ data: {id: item, label: item}});
+      elements.push({ data: {id: item, label: item, className: 'host'}});
     }
 
     for (let item of uniquePatProteins) {
-      elements.push({ data: {id: item, label: item}});
+      elements.push({ data: {id: item, label: item, className: 'pat'}});
     }
 
     for (let i of elements) {
@@ -58,12 +73,41 @@ export const Visualization = () => {
     }
 
     // This is a dumb hack that forces the graph to rerender. Don't ask.
-    layout = {name: 'cose'};
+    layout = {name: 'cose-bilkent'};
   }
 
   return (
     <div className="cy">
-      <CyComp elements={elements} cy={(cy) => {cy = cytoscape}} style={ { width: 'auto', height: '600px' } }
+      <CyComp elements={elements}
+          cy={(cy) => {
+            let cyRef = cy;
+            if (uniqueGenes) {
+              const geneIds = uniqueGenes.map(item => {return `#${item}`});
+              for (let id of geneIds) {
+                cyRef.$(id).style({'background-color': '#e08351'});
+              }
+            }
+
+            if (uniquePatProteins) {
+              const patIds = uniquePatProteins.map(item => {return `#${item}`});
+              for (let id of patIds) {
+                cyRef.$(id).style({'background-color': '#266bbf'});
+              }
+            }
+
+            for (let id of intIds) {
+              cyRef.$(id).style({'line-color': '#c76181'});
+            }
+
+            for (let id of domIds) {
+              cyRef.$(id).style({'line-color': '#b560cc'});
+            }
+
+            for (let id of conIds) {
+              cyRef.$(id).style({'line-color': '#7856c7'});
+            }
+          }}
+          style={ { width: 'auto', height: '600px' } }
           layout={layout} className="cy-container"/>
     </div>
   );
