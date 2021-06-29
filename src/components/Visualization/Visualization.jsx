@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import cytoscape from 'cytoscape';
 import cb from 'cytoscape-cose-bilkent';
 import CyComp from 'react-cytoscapejs';
+import Button from 'react-bootstrap/Button';
+
+import FileSaver from 'file-saver';
 
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
@@ -11,6 +14,8 @@ import * as ResultService from 'services/result.service';
 import './Visualization.scss';
 
 cytoscape.use(cb);
+
+let cyRef;
 
 export const Visualization = () => {
 
@@ -77,38 +82,47 @@ export const Visualization = () => {
   }
 
   return (
-    <div className="cy">
-      <CyComp elements={elements}
-          cy={(cy) => {
-            let cyRef = cy;
-            if (uniqueGenes) {
-              const geneIds = uniqueGenes.map(item => {return `#${item}`});
-              for (let id of geneIds) {
-                cyRef.$(id).style({'background-color': '#e08351'});
+    <div>
+      <div className="cy">
+        <CyComp elements={elements}
+            cy={(cy) => {
+              cyRef = cy;
+              if (uniqueGenes) {
+                const geneIds = uniqueGenes.map(item => {return `#${item}`});
+                for (let id of geneIds) {
+                  cyRef.$(id).style({'background-color': '#e08351'});
+                }
               }
-            }
 
-            if (uniquePatProteins) {
-              const patIds = uniquePatProteins.map(item => {return `#${item}`});
-              for (let id of patIds) {
-                cyRef.$(id).style({'background-color': '#266bbf'});
+              if (uniquePatProteins) {
+                const patIds = uniquePatProteins.map(item => {return `#${item}`});
+                for (let id of patIds) {
+                  cyRef.$(id).style({'background-color': '#266bbf'});
+                }
               }
-            }
 
-            for (let id of intIds) {
-              cyRef.$(id).style({'line-color': '#c76181'});
-            }
+              for (let id of intIds) {
+                cyRef.$(id).style({'line-color': '#c76181'});
+              }
 
-            for (let id of domIds) {
-              cyRef.$(id).style({'line-color': '#b560cc'});
-            }
+              for (let id of domIds) {
+                cyRef.$(id).style({'line-color': '#b560cc'});
+              }
 
-            for (let id of conIds) {
-              cyRef.$(id).style({'line-color': '#7856c7'});
-            }
-          }}
-          style={ { width: 'auto', height: '600px' } }
-          layout={layout} className="cy-container"/>
+              for (let id of conIds) {
+                cyRef.$(id).style({'line-color': '#7856c7'});
+              }
+            }}
+            style={ { width: 'auto', height: '700px' } }
+            layout={layout} className="cy-container"/>
+      </div>
+
+      <Button onClick={() => {
+          console.log('test');
+          const test = cyRef.png();
+          FileSaver.saveAs(test, 'wtf.png');
+          console.log(test);
+        }}>Test</Button>
     </div>
   );
 }
