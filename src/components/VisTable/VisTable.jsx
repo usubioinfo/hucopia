@@ -14,6 +14,8 @@ import './VisTable.scss';
 export const VisTable = () => {
   const { id } = useParams();
   let [data, setData] = useState([]);
+  let [tableData, setTableData] = useState([]);
+  let [searchTerm, setSearchTerm] = useState('');
 
   const proteins = [];
 
@@ -21,6 +23,10 @@ export const VisTable = () => {
     const fetchData = async () => {
       const results = await ResultService.getResultById(id);
       setData(results);
+
+      if (results.payload && results.payload.reqTime) {
+        setTableData(results.payload.results);
+      }
     }
 
     fetchData();
@@ -46,7 +52,7 @@ export const VisTable = () => {
         </thead>
 
         <tbody>
-          {Array.from(data.payload.results).map((result, index) => (
+          {Array.from(tableData).map((result, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{result.gene}</td>
@@ -62,7 +68,22 @@ export const VisTable = () => {
     <div>
       <Row className="justify-content-center mb-4">
         <Col sm={12} className="px-4">
-          <Form.Control className="kbl-form" type="email" placeholder="Search" />
+          <Form.Control className="kbl-form" type="email" placeholder="Search" value={searchTerm}
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+              console.log(event.target.value);
+              if (event.target.value === '') {
+                const newData = data.payload.results;
+                setTableData(newData);
+              } else {
+                const newData = tableData.filter((item) => {
+                  return item.gene.toLowerCase().includes(event.target.value) || item.pathogenProtein.toLowerCase().includes(event.target.value)
+                });
+
+                setTableData(newData);
+              }
+            }
+          }/>
         </Col>
       </Row>
       {results}
