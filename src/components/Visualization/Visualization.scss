@@ -17,3 +17,14 @@
 .cy-container div * {
   left: 0;
 }
+
+.dl-icon {
+  color: $palette-1;
+  font-size: 300%;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    color: $palette-1-dark;
+  }
+}

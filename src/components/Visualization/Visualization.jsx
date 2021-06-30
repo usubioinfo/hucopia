@@ -3,6 +3,11 @@ import cytoscape from 'cytoscape';
 import cb from 'cytoscape-cose-bilkent';
 import CyComp from 'react-cytoscapejs';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import { IconContext } from 'react-icons';
+import { FaImage } from 'react-icons/fa'
 
 import FileSaver from 'file-saver';
 
@@ -117,12 +122,33 @@ export const Visualization = () => {
             layout={layout} className="cy-container"/>
       </div>
 
-      <Button onClick={() => {
-          console.log('test');
-          const test = cyRef.png();
-          FileSaver.saveAs(test, 'wtf.png');
-          console.log(test);
-        }}>Test</Button>
+      <Row className="mt-3">
+        <Col sm={4} className="text-left">
+          <Button className="kbl-btn-1 px-3 mr-4" onClick={() => {
+              const cyJson = cyRef.json();
+              const str = JSON.stringify(cyJson);
+              const bytes = new TextEncoder().encode(str);
+              const blob = new Blob([bytes], {
+                  type: "application/json;charset=utf-8"
+              });
+              console.log(blob);
+              FileSaver.saveAs(blob, 'chart.json');
+            }}>
+            <b>JSON</b>
+          </Button>
+
+          <IconContext.Provider value={{ className: "dl-icon" }}>
+            <FaImage title="Download PNG" onClick={() => {
+                const file = cyRef.png();
+                FileSaver.saveAs(file, 'chart.png');
+              }} />
+          </IconContext.Provider>
+        </Col>
+
+        <Col sm={4}>
+
+        </Col>
+      </Row>
     </div>
   );
 }
