@@ -7,6 +7,7 @@ import './VisPage.scss';
 
 import { Visualization } from 'components/Visualization/Visualization';
 import { VisTable } from 'components/VisTable/VisTable';
+import { NodeMenu } from 'components/NodeMenu/NodeMenu';
 
 export class VisPage extends Component {
 
@@ -14,12 +15,22 @@ export class VisPage extends Component {
     super(props);
 
     this.state = {
-      selectedBar: 'table'
+      selectedBar: 'table',
+      currentNodeData: {}
     };
+
+    this.handleNodeClicked = this.handleNodeClicked.bind(this);
   }
 
   handleBarSwitch(newMenu) {
     this.setState({selectedBar: newMenu});
+  }
+
+  handleNodeClicked(data) {
+    console.log(data);
+    this.setState({currentNodeData: data}, () => {
+      this.handleBarSwitch('node');
+    });
   }
 
   render() {
@@ -37,13 +48,13 @@ export class VisPage extends Component {
     if (this.state.selectedBar === 'table') {
       menuComponent = <VisTable />
     } else {
-      menuComponent = <div></div>
+      menuComponent = <NodeMenu nodeData={this.state.currentNodeData} />
     }
 
     return (
       <Row>
         <Col sm={7}>
-          <Visualization/>
+          <Visualization nodeHandler={this.handleNodeClicked} />
         </Col>
         <Col sm={5}>
           <div className="bar-selector mb-3">

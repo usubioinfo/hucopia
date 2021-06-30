@@ -23,7 +23,7 @@ cytoscape.use(cb);
 
 let cyRef;
 
-export const Visualization = () => {
+export const Visualization = ({nodeHandler}) => {
 
   const { id } = useParams();
   let [data, setData] = useState([]);
@@ -93,6 +93,12 @@ export const Visualization = () => {
         <CyComp elements={elements}
             cy={(cy) => {
               cyRef = cy;
+
+              cyRef.on('click', 'node', function(e) {
+                console.log(this.id());
+                nodeHandler(e.target.data());
+              });
+
               if (uniqueGenes) {
                 const geneIds = uniqueGenes.map(item => {return `#${item}`});
                 for (let id of geneIds) {
@@ -131,7 +137,7 @@ export const Visualization = () => {
           <h5>Edges</h5>
         </Col>
 
-        <Col sm={4} className="text-left">
+        <Col sm={4} className="text-right pr-4">
           <Button className="kbl-btn-1 px-3 mr-4" title="Download JSON" onClick={() => {
               const cyJson = cyRef.json();
               const str = JSON.stringify(cyJson);
@@ -158,7 +164,7 @@ export const Visualization = () => {
         <Col sm={4}>
           <Row>
             <Col>
-              <IconContext.Provider value={{ className: "legend-icon", color: '#266bbf' }}>
+              <IconContext.Provider value={{ className: "legend-icon host", color: '#266bbf' }}>
                 <FaCircle />
               </IconContext.Provider>
 
@@ -168,7 +174,7 @@ export const Visualization = () => {
 
           <Row className="mt-2">
             <Col>
-              <IconContext.Provider value={{ className: "legend-icon", color: '#e08351' }}>
+              <IconContext.Provider value={{ className: "legend-icon pat", color: '#e08351' }}>
                 <FaCircle />
               </IconContext.Provider>
 
@@ -179,7 +185,7 @@ export const Visualization = () => {
         <Col sm={4}>
           <Row>
             <Col>
-              <IconContext.Provider value={{ className: "legend-icon", color: '#c76181' }}>
+              <IconContext.Provider value={{ className: "legend-icon int", color: '#c76181' }}>
                 <FaCircle />
               </IconContext.Provider>
 
@@ -189,7 +195,7 @@ export const Visualization = () => {
 
           <Row className="mt-2">
             <Col>
-              <IconContext.Provider value={{ className: "legend-icon", color: '#b560cc' }}>
+              <IconContext.Provider value={{ className: "legend-icon dom", color: '#b560cc' }}>
                 <FaCircle />
               </IconContext.Provider>
 
@@ -199,7 +205,7 @@ export const Visualization = () => {
 
           <Row className="mt-2">
             <Col>
-              <IconContext.Provider value={{ className: "legend-icon", color: '#7856c7' }}>
+              <IconContext.Provider value={{ className: "legend-icon con", color: '#7856c7' }}>
                 <FaCircle />
               </IconContext.Provider>
 
