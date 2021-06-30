@@ -124,7 +124,7 @@ export const Visualization = () => {
 
       <Row className="mt-3">
         <Col sm={4} className="text-left">
-          <Button className="kbl-btn-1 px-3 mr-4" onClick={() => {
+          <Button className="kbl-btn-1 px-3 mr-4" title="Download JSON" onClick={() => {
               const cyJson = cyRef.json();
               const str = JSON.stringify(cyJson);
               const bytes = new TextEncoder().encode(str);
