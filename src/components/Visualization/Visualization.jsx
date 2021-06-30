@@ -7,7 +7,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { IconContext } from 'react-icons';
-import { FaImage } from 'react-icons/fa'
+import { FaImage } from 'react-icons/fa';
+import { FaCircle } from 'react-icons/fa';
 
 import FileSaver from 'file-saver';
 
@@ -122,7 +123,14 @@ export const Visualization = () => {
             layout={layout} className="cy-container"/>
       </div>
 
-      <Row className="mt-3">
+      <Row className="mt-3 text-left">
+        <Col sm={4}>
+          <h5>Nodes</h5>
+        </Col>
+        <Col sm={4}>
+          <h5>Edges</h5>
+        </Col>
+
         <Col sm={4} className="text-left">
           <Button className="kbl-btn-1 px-3 mr-4" title="Download JSON" onClick={() => {
               const cyJson = cyRef.json();
@@ -144,9 +152,60 @@ export const Visualization = () => {
               }} />
           </IconContext.Provider>
         </Col>
+      </Row>
 
+      <Row className="text-left">
         <Col sm={4}>
+          <Row>
+            <Col>
+              <IconContext.Provider value={{ className: "legend-icon", color: '#266bbf' }}>
+                <FaCircle />
+              </IconContext.Provider>
 
+              <span className="legend-text">Host</span>
+            </Col>
+          </Row>
+
+          <Row className="mt-2">
+            <Col>
+              <IconContext.Provider value={{ className: "legend-icon", color: '#e08351' }}>
+                <FaCircle />
+              </IconContext.Provider>
+
+              <span className="legend-text">Pathogen</span>
+            </Col>
+          </Row>
+        </Col>
+        <Col sm={4}>
+          <Row>
+            <Col>
+              <IconContext.Provider value={{ className: "legend-icon", color: '#c76181' }}>
+                <FaCircle />
+              </IconContext.Provider>
+
+              <span className="legend-text">Interolog</span>
+            </Col>
+          </Row>
+
+          <Row className="mt-2">
+            <Col>
+              <IconContext.Provider value={{ className: "legend-icon", color: '#b560cc' }}>
+                <FaCircle />
+              </IconContext.Provider>
+
+              <span className="legend-text">Domain</span>
+            </Col>
+          </Row>
+
+          <Row className="mt-2">
+            <Col>
+              <IconContext.Provider value={{ className: "legend-icon", color: '#7856c7' }}>
+                <FaCircle />
+              </IconContext.Provider>
+
+              <span className="legend-text">Consensus</span>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </div>

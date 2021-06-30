@@ -1,0 +1,33 @@
+@import '~scss/colors';
+@import '~scss/globals';
+
+.bar-selector {
+
+  span {
+    margin-right: 5px;
+    font-size: 160%;
+    font-weight: 600;
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: $border-radius;
+
+    padding: 3px 12px;
+    color: #c8c8c8;
+
+    &:hover {
+      background: $palette-1-bg;
+
+      &:not(.selected) {
+        color: $text-ghost!important;
+      }
+    }
+
+    &.selected {
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      color: $palette-1-dark;
+      border-color: $palette-1-dark;
+    }
+  }
+}
