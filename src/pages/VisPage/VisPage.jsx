@@ -32,17 +32,25 @@ export class VisPage extends Component {
       nodeClass = 'selected';
     }
 
+    let menuComponent;
+
+    if (this.state.selectedBar === 'table') {
+      menuComponent = <VisTable />
+    } else {
+      menuComponent = <div></div>
+    }
+
     return (
       <Row>
         <Col sm={7}>
           <Visualization/>
         </Col>
         <Col sm={5}>
-          <div className="bar-selector mb-2">
+          <div className="bar-selector mb-3">
             <span className={tableClass} onClick={() => this.handleBarSwitch('table')}>Table</span>
             <span className={nodeClass}  onClick={() => this.handleBarSwitch('node')}>Node Info</span>
           </div>
-          <VisTable/>
+          {menuComponent}
         </Col>
       </Row>
     );
