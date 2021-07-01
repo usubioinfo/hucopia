@@ -9,6 +9,11 @@ import { Visualization } from 'components/Visualization/Visualization';
 import { VisTable } from 'components/VisTable/VisTable';
 import { NodeMenu } from 'components/NodeMenu/NodeMenu';
 
+const NodeTypeDict = {
+  'host': 'Host',
+  'pat': 'Pathogen Protein'
+}
+
 export class VisPage extends Component {
 
   constructor(props) {
@@ -28,7 +33,15 @@ export class VisPage extends Component {
 
   handleNodeClicked(data) {
     console.log(data);
-    this.setState({currentNodeData: data}, () => {
+
+    let nodeType = NodeTypeDict[data.className];
+    let itemName = data.id;
+
+    let parsedData = {
+      nodeType,
+      name: itemName
+    }
+    this.setState({currentNodeData: parsedData}, () => {
       this.handleBarSwitch('node');
     });
   }

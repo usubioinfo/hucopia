@@ -16,7 +16,7 @@
     color: #c8c8c8;
 
     &:hover {
-      background: $palette-1-bg;
+      background: $palette-2-bg;
 
       &:not(.selected) {
         color: $text-ghost!important;
@@ -26,8 +26,8 @@
     &.selected {
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
-      color: $palette-1-dark;
-      border-color: $palette-1-dark;
+      color: $palette-2;
+      border-color: $palette-2;
     }
   }
 }

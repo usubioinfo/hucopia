@@ -23,7 +23,7 @@ cytoscape.use(cb);
 
 let cyRef;
 
-export const Visualization = ({nodeHandler}) => {
+export const Visualization = React.memo(props => {
 
   const { id } = useParams();
   let [data, setData] = useState([]);
@@ -79,10 +79,6 @@ export const Visualization = ({nodeHandler}) => {
       elements.push({ data: {id: item, label: item, className: 'pat'}});
     }
 
-    for (let i of elements) {
-      console.log(i)
-    }
-
     // This is a dumb hack that forces the graph to rerender. Don't ask.
     layout = {name: 'cose-bilkent'};
   }
@@ -96,7 +92,7 @@ export const Visualization = ({nodeHandler}) => {
 
               cyRef.on('click', 'node', function(e) {
                 console.log(this.id());
-                nodeHandler(e.target.data());
+                props.nodeHandler(e.target.data());
               });
 
               if (uniqueGenes) {
@@ -216,4 +212,4 @@ export const Visualization = ({nodeHandler}) => {
       </Row>
     </div>
   );
-}
+});

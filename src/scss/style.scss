@@ -1,9 +1,19 @@
-body {
-  font-family: 'Inter', sans-serif;
-}
-
 @import '~scss/colors';
 @import '~scss/globals';
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: $text-main;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif;
+}
 
 .kbl-table {
   overflow: hidden;
