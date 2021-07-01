@@ -2,8 +2,9 @@
 @import '~scss/globals';
 
 .node-menu-container {
-  box-shadow: 0 .155rem .180rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 .1rem .230rem rgba(0, 0, 0, 0.15);
   border-radius: $border-radius;
+  background: #fff;
 }
 
 .node-name {

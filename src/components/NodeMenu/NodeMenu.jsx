@@ -29,18 +29,26 @@ export class NodeMenu extends Component {
     }
 
     return (
-      <div className="node-menu-container text-left px-3 pt-2 pb-4">
-        <h6 className="node-type">{type}</h6>
-        <h3 className="node-name"><b>{this.props.nodeData.name}</b></h3>
+      <div>
+        <div className="node-menu-container text-left px-3 pt-2 pb-4">
+          <h6 className="node-type">{type}</h6>
+          <h3 className="node-name"><b>{this.props.nodeData.name}</b></h3>
+          <Row>
+            <Col>
+              <a href={uniLink} className="link mr-2">
+                Uniprot
+              </a>
+              |
+              <a href={ncbiLink} className="link ml-2">
+                NCBI
+              </a>
+            </Col>
+          </Row>
+        </div>
+
         <Row>
           <Col>
-            <a href={uniLink} className="link mr-2">
-              Uniprot
-            </a>
-            |
-            <a href={ncbiLink} className="link ml-2">
-              NCBI
-            </a>
+            
           </Col>
         </Row>
       </div>
