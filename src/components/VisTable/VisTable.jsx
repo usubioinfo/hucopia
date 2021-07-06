@@ -14,6 +14,7 @@ import './VisTable.scss';
 export const VisTable = () => {
   const { id } = useParams();
   let [data, setData] = useState([]);
+  let [totalData, setTotalData] = useState([]);
   let [tableData, setTableData] = useState([]);
   let [searchTerm, setSearchTerm] = useState('');
 
@@ -26,6 +27,7 @@ export const VisTable = () => {
 
       if (results.payload && results.payload.reqTime) {
         setTableData(results.payload.results);
+        setTotalData(results.payload.results);
       }
     }
 
@@ -70,14 +72,16 @@ export const VisTable = () => {
         <Col sm={12} className="px-4">
           <Form.Control className="kbl-form" type="email" placeholder="Search" value={searchTerm}
             onChange={(event) => {
-              setSearchTerm(event.target.value);
-              console.log(event.target.value);
+              const searchTerm = event.target.value.toLowerCase();
+
+              setSearchTerm(searchTerm);
+              console.log(searchTerm);
               if (event.target.value === '') {
                 const newData = data.payload.results;
                 setTableData(newData);
               } else {
-                const newData = tableData.filter((item) => {
-                  return item.gene.toLowerCase().includes(event.target.value) || item.pathogenProtein.toLowerCase().includes(event.target.value)
+                const newData = totalData.filter((item) => {
+                  return item.gene.toLowerCase().includes(searchTerm) || item.pathogenProtein.toLowerCase().includes(searchTerm)
                 });
 
                 setTableData(newData);
