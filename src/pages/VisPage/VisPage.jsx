@@ -21,14 +21,20 @@ export class VisPage extends Component {
 
     this.state = {
       selectedBar: 'table',
-      currentNodeData: {}
+      currentNodeData: {},
+      searchTerm: ''
     };
 
     this.handleNodeClicked = this.handleNodeClicked.bind(this);
+    this.setSearchTerm = this.setSearchTerm.bind(this);
   }
 
   handleBarSwitch(newMenu) {
     this.setState({selectedBar: newMenu});
+  }
+
+  setSearchTerm(term) {
+    this.setState({searchTerm: term});
   }
 
   handleNodeClicked(data) {
@@ -59,7 +65,7 @@ export class VisPage extends Component {
     let menuComponent;
 
     if (this.state.selectedBar === 'table') {
-      menuComponent = <VisTable />
+      menuComponent = <VisTable handleSearchChange={this.setSearchTerm} />
     } else {
       menuComponent = <NodeMenu nodeData={this.state.currentNodeData} />
     }
@@ -67,7 +73,7 @@ export class VisPage extends Component {
     return (
       <Row>
         <Col sm={7}>
-          <Visualization nodeHandler={this.handleNodeClicked} />
+          <Visualization nodeHandler={this.handleNodeClicked} searchTerm={this.state.searchTerm} />
         </Col>
         <Col sm={5}>
           <div className="bar-selector mb-3">

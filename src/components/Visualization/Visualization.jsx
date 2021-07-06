@@ -27,20 +27,28 @@ export const Visualization = React.memo(props => {
 
   const { id } = useParams();
   let [data, setData] = useState([]);
+  let [graphData, setGraphData] = useState([]);
+  let [searchTerm, setSearchTerm] = useState(props.searchTerm);
 
   let layout = {
     name: 'cose'
   }
 
   useEffect(() => {
+    setSearchTerm(props.searchTerm);
     const fetchData = async () => {
       const results = await ResultService.getResultById(id);
-
       setData(results);
+      /*
+      const newData = results.payload.results.filter(item => {
+        return item.gene.toLowerCase().includes(props.searchTerm) || item.pathogenProtein.toLowerCase().includes(props.searchTerm);
+      });
+      */
+      setGraphData(results.payload.results);
     }
 
     fetchData();
-  }, []);
+  }, [props.searchTerm]);
 
   let elements = [];
 
@@ -57,19 +65,28 @@ export const Visualization = React.memo(props => {
     consensus: conIds
   }
 
-  if (data.payload) {
-    console.log(data);
-    elements = data.payload.results.map((item) => {
+  if (graphData.length && data.payload) {
+
+    let useData = graphData;
+
+    if (props.searchTerm !== '') {
+      console.log('changed');
+      const newData = data.payload.results.filter(item => {
+        return item.gene.toLowerCase().includes(props.searchTerm) || item.pathogenProtein.toLowerCase().includes(props.searchTerm);
+      });
+
+    }
+
+    elements = useData.map((item) => {
       const id = `${item.interactionType}-${item.gene}-${item.pathogenProtein}`;
       idDict[item.interactionType].push(`#${id}`);
 
       return {data: { source: item.gene, target: item.pathogenProtein, id: id} };
     });
 
-    uniqueGenes = Array.from(new Set(data.payload.results.map(item => {return item.gene})));
-    uniquePatProteins = Array.from(new Set(data.payload.results.map(item => {return item.pathogenProtein})));
+    uniqueGenes = Array.from(new Set(useData.map(item => {return item.gene})));
+    uniquePatProteins = Array.from(new Set(useData.map(item => {return item.pathogenProtein})));
 
-    console.log(uniqueGenes);
 
     for (let item of uniqueGenes) {
       elements.push({ data: {id: item, label: item, className: 'host'}});

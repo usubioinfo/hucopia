@@ -11,7 +11,7 @@ import * as ResultService from 'services/result.service';
 
 import './VisTable.scss';
 
-export const VisTable = () => {
+export const VisTable = ({setVisPageSearchTerm, handleSearchChange}) => {
   const { id } = useParams();
   let [data, setData] = useState([]);
   let [totalData, setTotalData] = useState([]);
@@ -75,6 +75,7 @@ export const VisTable = () => {
               const searchTerm = event.target.value.toLowerCase();
 
               setSearchTerm(searchTerm);
+              handleSearchChange(searchTerm);
               console.log(searchTerm);
               if (event.target.value === '') {
                 const newData = data.payload.results;
