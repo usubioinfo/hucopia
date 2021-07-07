@@ -25,6 +25,9 @@ const generateComponent = (property, data) => {
   if (property === 'keggId') {
     const link = `https://www.genome.jp/pathway/${data}`;
     return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  } else if (property === 'pathogenProtein') {
+    const link = `https://www.ncbi.nlm.nih.gov/protein/?term=${data}`;
+    return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
   } else {
     return <td>{data}</td>
   }

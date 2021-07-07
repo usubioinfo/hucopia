@@ -8,6 +8,27 @@ import Table from 'react-bootstrap/Table';
 
 import { env } from 'env.js';
 
+const localProperties = [
+  'pathogen',
+  'isolate',
+  'pathogenProtein',
+  'pLength',
+  'gene',
+  'hLength',
+  'location',
+  'interactionType',
+  'interactionCategory'
+];
+
+const generateComponent = (property, data) => {
+  if (property === 'pathogenProtein') {
+    const link = `https://www.ncbi.nlm.nih.gov/protein/?term=${data}`;
+    return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  } else {
+    return <td>{data}</td>
+  }
+}
+
 export const LocalResultsTable = () => {
   const { id } = useParams();
 
@@ -22,18 +43,6 @@ export const LocalResultsTable = () => {
 
     fetchData();
   }, []);
-
-  const localProperties = [
-    'pathogen',
-    'isolate',
-    'pathogenProtein',
-    'pLength',
-    'gene',
-    'hLength',
-    'location',
-    'interactionType',
-    'interactionCategory'
-  ];
 
   let results;
 
@@ -71,7 +80,7 @@ export const LocalResultsTable = () => {
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(localProperties).map((_, index) => (
-                <td>{result[localProperties[index]]}</td>
+                generateComponent(localProperties[index], result[localProperties[index]])
               ))}
             </tr>
           ))}
