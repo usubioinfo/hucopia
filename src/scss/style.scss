@@ -43,6 +43,11 @@ h6 {
     &:last-child {
       border-bottom: none!important;
     }
+
+    &:hover td {
+      transition: 0.3s;
+      background: #f3f3f3;
+    }
   }
 }
 
