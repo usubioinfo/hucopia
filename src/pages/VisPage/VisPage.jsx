@@ -59,7 +59,10 @@ export class VisPage extends Component {
 
   handleEdgeClicked(data) {
     this.setState({infoType: 'Edge '});
-    this.handleBarSwitch('info');
+
+    this.setState({currentEdgeData: data}, () => {
+      this.handleBarSwitch('info');
+    });
   }
 
   render() {
@@ -80,7 +83,7 @@ export class VisPage extends Component {
       if (this.state.infoType.trim().toLowerCase() === 'node') {
         menuComponent = <NodeMenu nodeData={this.state.currentNodeData} />
       } else if (this.state.infoType.trim().toLowerCase() === 'edge') {
-        menuComponent = <EdgeMenu />
+        menuComponent = <EdgeMenu edgeData={this.state.currentEdgeData} />
       } else {
         menuComponent = (<div>No node or edge selected.</div>)
       }

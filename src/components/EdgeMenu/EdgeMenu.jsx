@@ -14,36 +14,21 @@ export class EdgeMenu extends Component {
   }
 
   render() {
-    if (!this.props.nodeData || Object.keys(this.props.nodeData).length === 0) {
+    if (Object.keys(this.props.edgeData).length === 0) {
       return (<div>No edge selected</div>);
     }
 
-    let type = 'Host Gene';
-    let ncbiLink = `https://www.ncbi.nlm.nih.gov/?term=${this.props.nodeData.name.toLowerCase()}`;
-    let uniLink = `https://www.uniprot.org/uniprot/?query=${this.props.nodeData.name.toLowerCase()}&fil=organism:%22Homo+sapiens+(Human)+%5B9606%5D%22&sort=score`;
-
-    if (this.props.nodeData.nodeType === 'Pathogen Protein') {
-      type = 'Pathogen Protein';
-
-      ncbiLink = `https://www.ncbi.nlm.nih.gov/protein/?term=${this.props.nodeData.name.toLowerCase()}`;
-    }
+    let intType = this.props.edgeData.id.split('-')[0];
+    intType = intType.charAt(0).toUpperCase() + intType.slice(1);
 
     return (
       <div>
-        <div className="node-menu-container text-left px-3 pt-2 pb-4">
-          <h6 className="node-type">{type}</h6>
-          <h3 className="node-name"><b>{this.props.nodeData.name}</b></h3>
-          <Row>
-            <Col>
-              <a href={uniLink} className="link mr-2">
-                Uniprot
-              </a>
-              |
-              <a href={ncbiLink} className="link ml-2">
-                NCBI
-              </a>
-            </Col>
-          </Row>
+        <div className="edge-menu-container text-left px-3 pt-2 pb-4">
+          <h6 className="edge-type">Interaction</h6>
+          <h3 className="edge-name"><b>{this.props.edgeData.id}</b></h3>
+          <h5 className="int-type">
+            <span className="edge-int">Interaction Type:</span> <span className="edge-int-type">{intType}</span>
+          </h5>
         </div>
 
         <Row>
