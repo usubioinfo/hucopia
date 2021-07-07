@@ -8,6 +8,28 @@ import Table from 'react-bootstrap/Table';
 
 import { env } from 'env.js';
 
+const goProperties = [
+  'pathogen',
+  'isolate',
+  'pathogenProtein',
+  'pLength',
+  'gene',
+  'hLength',
+  'goId',
+  'description',
+  'interactionType',
+  'interactionCategory'
+];
+
+const generateComponent = (property, data) => {
+  if (property === 'goId') {
+    const link = `http://amigo.geneontology.org/amigo/search/ontology?q=${data}`;
+    return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  } else {
+    return <td>{data}</td>
+  }
+}
+
 export const GoResultsTable = () => {
   const { id } = useParams();
 
@@ -22,19 +44,6 @@ export const GoResultsTable = () => {
 
     fetchData();
   }, []);
-
-  const goProperties = [
-    'pathogen',
-    'isolate',
-    'pathogenProtein',
-    'pLength',
-    'gene',
-    'hLength',
-    'goId',
-    'description',
-    'interactionType',
-    'interactionCategory'
-  ];
 
 
   let results;
@@ -74,7 +83,7 @@ export const GoResultsTable = () => {
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(goProperties).map((_, index) => (
-                <td>{result[goProperties[index]]}</td>
+                generateComponent(goProperties[index], result[goProperties[index]])
               ))}
             </tr>
           ))}

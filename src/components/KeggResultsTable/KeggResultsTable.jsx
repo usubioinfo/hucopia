@@ -8,6 +8,28 @@ import Table from 'react-bootstrap/Table';
 
 import { env } from 'env.js';
 
+const keggProperties = [
+  'pathogen',
+  'isolate',
+  'pathogenProtein',
+  'pLength',
+  'gene',
+  'hLength',
+  'keggId',
+  'description',
+  'interactionType',
+  'interactionCategory'
+];
+
+const generateComponent = (property, data) => {
+  if (property === 'keggId') {
+    const link = `https://www.genome.jp/pathway/${data}`;
+    return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  } else {
+    return <td>{data}</td>
+  }
+}
+
 export const KeggResultsTable = () => {
   const { id } = useParams();
 
@@ -21,19 +43,6 @@ export const KeggResultsTable = () => {
 
     fetchData();
   }, []);
-
-  const keggProperties = [
-    'pathogen',
-    'isolate',
-    'pathogenProtein',
-    'pLength',
-    'gene',
-    'hLength',
-    'keggId',
-    'description',
-    'interactionType',
-    'interactionCategory'
-  ];
 
   let results;
 
@@ -72,7 +81,7 @@ export const KeggResultsTable = () => {
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(keggProperties).map((_, index) => (
-                <td>{result[keggProperties[index]]}</td>
+                generateComponent(keggProperties[index], result[keggProperties[index]])
               ))}
             </tr>
           ))}

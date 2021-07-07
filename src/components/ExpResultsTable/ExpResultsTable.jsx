@@ -10,6 +10,26 @@ import { useParams } from 'react-router-dom';
 
 import { env } from 'env.js';
 
+const properties = [
+  'pathogen',
+  'isolate',
+  'pathogenProtein',
+  'pLength',
+  'gene',
+  'hLength',
+  'tissueExpression',
+  'interactionType',
+  'interactionCategory'
+];
+
+const generateComponent = (property, data) => {
+  if (property === 'gene') {
+    return <td><a href={`https://gtexportal.org/home/gene/${data}`} target="_blank" rel="noreferrer">{data}</a></td>
+  } else {
+    return <td>{data}</td>
+  }
+}
+
 export const ExpResultsTable = () => {
   const { id } = useParams();
 
@@ -24,21 +44,13 @@ export const ExpResultsTable = () => {
     fetchData();
   }, []);
 
-  const properties = [
-    'pathogen',
-    'isolate',
-    'pathogenProtein',
-    'pLength',
-    'gene',
-    'hLength',
-    'tissueExpression',
-    'interactionType',
-    'interactionCategory'
-  ];
-
   let results;
 
   if (data.payload && data.payload.reqTime) {
+    const mappedResults = data.payload.results.map((item, index) => {
+      console.log(properties[index]);
+    });
+
     results = (
       <Table responsive className="kbl-table table-borderless">
         <thead className="kbl-thead">
@@ -68,7 +80,7 @@ export const ExpResultsTable = () => {
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(properties).map((_, index) => (
-                <td>{result[properties[index]]}</td>
+                generateComponent(properties[index], result[properties[index]])
               ))}
             </tr>
           ))}
