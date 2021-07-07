@@ -8,6 +8,7 @@ import './VisPage.scss';
 import { Visualization } from 'components/Visualization/Visualization';
 import { VisTable } from 'components/VisTable/VisTable';
 import { NodeMenu } from 'components/NodeMenu/NodeMenu';
+import { EdgeMenu } from 'components/EdgeMenu/EdgeMenu';
 
 const NodeTypeDict = {
   'host': 'Host',
@@ -22,11 +23,14 @@ export class VisPage extends Component {
     this.state = {
       selectedBar: 'table',
       currentNodeData: {},
-      searchTerm: ''
+      currentEdgeData: {},
+      searchTerm: '',
+      infoType: ''
     };
 
     this.handleNodeClicked = this.handleNodeClicked.bind(this);
     this.setSearchTerm = this.setSearchTerm.bind(this);
+    this.handleEdgeClicked = this.handleEdgeClicked.bind(this);
   }
 
   handleBarSwitch(newMenu) {
@@ -39,6 +43,7 @@ export class VisPage extends Component {
 
   handleNodeClicked(data) {
     console.log(data);
+    this.setState({infoType: 'Node '});
 
     let nodeType = NodeTypeDict[data.className];
     let itemName = data.id;
@@ -48,8 +53,13 @@ export class VisPage extends Component {
       name: itemName
     }
     this.setState({currentNodeData: parsedData}, () => {
-      this.handleBarSwitch('node');
+      this.handleBarSwitch('info');
     });
+  }
+
+  handleEdgeClicked(data) {
+    this.setState({infoType: 'Edge '});
+    this.handleBarSwitch('info');
   }
 
   render() {
@@ -67,18 +77,25 @@ export class VisPage extends Component {
     if (this.state.selectedBar === 'table') {
       menuComponent = <VisTable handleSearchChange={this.setSearchTerm} />
     } else {
-      menuComponent = <NodeMenu nodeData={this.state.currentNodeData} />
+      if (this.state.infoType.trim().toLowerCase() === 'node') {
+        menuComponent = <NodeMenu nodeData={this.state.currentNodeData} />
+      } else if (this.state.infoType.trim().toLowerCase() === 'edge') {
+        menuComponent = <EdgeMenu />
+      } else {
+        menuComponent = (<div>No node or edge selected.</div>)
+      }
+
     }
 
     return (
       <Row>
         <Col sm={7}>
-          <Visualization nodeHandler={this.handleNodeClicked} searchTerm={this.state.searchTerm} />
+          <Visualization edgeHandler={this.handleEdgeClicked} nodeHandler={this.handleNodeClicked} searchTerm={this.state.searchTerm} />
         </Col>
         <Col sm={5}>
           <div className="bar-selector mb-3">
-            <span className={tableClass} onClick={() => this.handleBarSwitch('table')}>Table</span>
-            <span className={nodeClass}  onClick={() => this.handleBarSwitch('node')}>Node Info</span>
+            <span className={`${tableClass} mr-3`} onClick={() => this.handleBarSwitch('table')}>Table</span>
+            <span className={nodeClass}  onClick={() => this.handleBarSwitch('info')}>{this.state.infoType}Info</span>
           </div>
           {menuComponent}
         </Col>

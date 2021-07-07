@@ -112,6 +112,11 @@ export const Visualization = React.memo(props => {
                 props.nodeHandler(e.target.data());
               });
 
+              cyRef.on('click', 'edge', function(e) {
+                console.log(e.target.data());
+                props.edgeHandler(e.target.data());
+              });
+
               if (uniqueGenes) {
                 const geneIds = uniqueGenes.map(item => {return `#${item}`});
                 for (let id of geneIds) {
