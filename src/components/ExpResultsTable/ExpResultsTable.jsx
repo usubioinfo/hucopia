@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 
 import * as ResultService from 'services/result.service';
 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import './ExpResultsTable.scss';
@@ -37,6 +41,7 @@ export const ExpResultsTable = () => {
   const { id } = useParams();
 
   let [data, setData] = useState([]);
+  let [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,9 +55,14 @@ export const ExpResultsTable = () => {
   let results;
 
   if (data.payload && data.payload.reqTime) {
-    const mappedResults = data.payload.results.map((item, index) => {
-      console.log(properties[index]);
-    });
+    let tableResults = data.payload.results;
+
+    if (searchTerm !== '') {
+      tableResults = data.payload.results.filter(item => {
+        return item.gene.toLowerCase().includes(searchTerm) || item.pathogenProtein.toLowerCase().includes(searchTerm)
+      });
+    }
+
 
     results = (
       <Table responsive className="kbl-table table-borderless">
@@ -79,7 +89,7 @@ export const ExpResultsTable = () => {
         </thead>
 
         <tbody>
-          {Array.from(data.payload.results).map((result, index) => (
+          {Array.from(tableResults).map((result, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(properties).map((_, index) => (
@@ -107,11 +117,20 @@ export const ExpResultsTable = () => {
 
   return (
     <div>
-      <div className="my-3">
-        <a href={newUrl} target="_blank" rel="noreferrer noopener">
-          <Button className="kbl-btn-1">Visualization</Button>
-        </a>
-      </div>
+      <Row className="my-3 justify-content-right">
+        <Col sm={'auto'} className="text-left">
+          <a href={newUrl} target="_blank" rel="noreferrer noopener">
+            <Button className="kbl-btn-1">Visualization</Button>
+          </a>
+        </Col>
+        <Col sm={6}>
+          <Form.Control className="kbl-form" type="email" placeholder="Search" value={searchTerm}
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+            }
+          }/>
+        </Col>
+      </Row>
       <div className="mb-5">
         {results}
       </div>
