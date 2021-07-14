@@ -18,6 +18,9 @@ export class EdgeMenu extends Component {
       return (<div>No edge selected</div>);
     }
 
+    let geneLink = `https://www.ncbi.nlm.nih.gov/gene/?term=${this.props.edgeData.gene.toLowerCase()}`;
+    let proteinLink = `https://www.uniprot.org/uniprot/?query=${this.props.edgeData.pathogenProtein.toLowerCase()}&fil=organism%3A%22Severe+acute+respiratory+syndrome+coronavirus+%28SARS-CoV%29+%5B694009%5D%22&sort=score`;
+
     let intType = this.props.edgeData.id.split('-')[0];
     intType = intType.charAt(0).toUpperCase() + intType.slice(1);
 
@@ -29,13 +32,18 @@ export class EdgeMenu extends Component {
           <h5 className="int-type">
             <span className="edge-int">Interaction Type:</span> <span className="edge-int-type">{intType}</span>
           </h5>
+          <Row>
+            <Col>
+              <a href={proteinLink} className="link mr-2" target="_blank" rel="noopener noreferrer">
+                Pathogen Protein
+              </a>
+              |
+              <a href={geneLink} className="link ml-2" target="_blank" rel="noopener noreferrer">
+                Host Gene
+              </a>
+            </Col>
+          </Row>
         </div>
-
-        <Row>
-          <Col>
-
-          </Col>
-        </Row>
       </div>
     );
   }

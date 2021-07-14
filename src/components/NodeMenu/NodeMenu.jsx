@@ -19,13 +19,14 @@ export class NodeMenu extends Component {
     }
 
     let type = 'Host Gene';
-    let ncbiLink = `https://www.ncbi.nlm.nih.gov/?term=${this.props.nodeData.name.toLowerCase()}`;
+    let ncbiLink = `https://www.ncbi.nlm.nih.gov/gene/?term=${this.props.nodeData.name.toLowerCase()}`;
     let uniLink = `https://www.uniprot.org/uniprot/?query=${this.props.nodeData.name.toLowerCase()}&fil=organism:%22Homo+sapiens+(Human)+%5B9606%5D%22&sort=score`;
 
     if (this.props.nodeData.nodeType === 'Pathogen Protein') {
       type = 'Pathogen Protein';
 
       ncbiLink = `https://www.ncbi.nlm.nih.gov/protein/?term=${this.props.nodeData.name.toLowerCase()}`;
+      uniLink = `https://www.uniprot.org/uniprot/?query=${this.props.nodeData.name.toLowerCase()}&fil=organism%3A%22Severe+acute+respiratory+syndrome+coronavirus+%28SARS-CoV%29+%5B694009%5D%22&sort=score`
     }
 
     return (
@@ -35,11 +36,11 @@ export class NodeMenu extends Component {
           <h3 className="node-name"><b>{this.props.nodeData.name}</b></h3>
           <Row>
             <Col>
-              <a href={uniLink} className="link mr-2">
+              <a href={uniLink} className="link mr-2" target="_blank" rel="noopener noreferrer">
                 Uniprot
               </a>
               |
-              <a href={ncbiLink} className="link ml-2">
+              <a href={ncbiLink} className="link ml-2" target="_blank" rel="noopener noreferrer">
                 NCBI
               </a>
             </Col>

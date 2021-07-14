@@ -81,7 +81,7 @@ export const Visualization = React.memo(props => {
       const id = `${item.interactionType}-${item.gene}-${item.pathogenProtein}`;
       idDict[item.interactionType].push(`#${id}`);
 
-      return {data: { source: item.gene, target: item.pathogenProtein, id: id} };
+      return {data: { source: item.gene, target: item.pathogenProtein, id: id, pathogenProtein: item.pathogenProtein, gene: item.gene} };
     });
 
     uniqueGenes = Array.from(new Set(useData.map(item => {return item.gene})));
