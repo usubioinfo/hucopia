@@ -93,7 +93,7 @@ export class TissueModal extends Component {
 
     return (
       <Modal dialogClassName="modal-wid tissue-modal" show={this.props.show} onHide={e => {
-          this.props.handler();
+          this.props.handler('showTissueModal', 'selectedTissues', this.state.selectedTissues);
         }}>
         <Modal.Body>
           <Container>
@@ -121,7 +121,7 @@ export class TissueModal extends Component {
             <Row className="mt-3">
               <Col sm={12} className="text-center">
                 <Button className="kbl-btn-1 mr-3" onClick={e=> {
-                    this.props.handler(this.state.selectedTissues);
+                    this.props.handler('showTissueModal', 'selectedTissues', this.state.selectedTissues);
                   }}>Close</Button>
               </Col>
             </Row>

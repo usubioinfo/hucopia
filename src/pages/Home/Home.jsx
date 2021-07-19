@@ -89,11 +89,8 @@ export class Home extends Component {
     this.selectIntType = this.selectIntType.bind(this);
     this.selectSearch = this.selectSearch.bind(this);
     this.handleGeneChange = this.handleGeneChange.bind(this);
-    this.closeTissueModal = this.closeTissueModal.bind(this);
     this.fileSelected = this.fileSelected.bind(this);
-    this.closeKeggModal = this.closeKeggModal.bind(this);
-    this.closeGoModal = this.closeGoModal.bind(this);
-    this.closeLocalModal = this.closeLocalModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount() {
@@ -339,20 +336,12 @@ export class Home extends Component {
     console.log(postBody);
   }
 
-  closeTissueModal(selectedTissues) {
-    this.setState({showTissueModal: false, selectedTissues: selectedTissues});
-  }
-
-  closeKeggModal(selectedAnnotations) {
-    this.setState({showKeggModal: false, selectedAnnotationOptions: selectedAnnotations});
-  }
-
-  closeLocalModal(selectedAnnotations) {
-    this.setState({showLocalModal: false, selectedAnnotationOptions: selectedAnnotations});
-  }
-
-  closeGoModal(selectedAnnotations) {
-    this.setState({showGoModal: false, selectedAnnotationOptions: selectedAnnotations});
+  closeModal(modal, annoName, selectedAnnotations) {
+    const options = {};
+    options[modal] = false;
+    options[annoName] = selectedAnnotations;
+    console.log(options);
+    this.setState(options);
   }
 
   fileSelected(fileText) {
@@ -446,8 +435,6 @@ export class Home extends Component {
           </Col>
         </Row>);
     }
-
-    console.log(this.searchOptions);
 
     let resultUrlComponent;
 
@@ -605,10 +592,10 @@ export class Home extends Component {
 
         {newButton}
 
-        <TissueModal tissues={this.state.tissueOptions} show={this.state.showTissueModal} handler={this.closeTissueModal}/>
-        <KeggModal annotations={this.state.keggOptions} show={this.state.showKeggModal} handler={this.closeKeggModal}/>
-        <LocalModal annotations={this.state.localAnnotations} show={this.state.showLocalModal} handler={this.closeLocalModal}/>
-        <GoModal show={this.state.showGoModal} handler={this.closeGoModal}/>
+        <TissueModal tissues={this.state.tissueOptions} show={this.state.showTissueModal} handler={this.closeModal}/>
+        <KeggModal annotations={this.state.keggOptions} show={this.state.showKeggModal} handler={this.closeModal}/>
+        <LocalModal annotations={this.state.localAnnotations} show={this.state.showLocalModal} handler={this.closeModal}/>
+        <GoModal show={this.state.showGoModal} handler={this.closeModal}/>
       </div>
     );
   }

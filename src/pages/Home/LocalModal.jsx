@@ -93,7 +93,7 @@ export class LocalModal extends Component {
 
     return (
       <Modal dialogClassName="modal-wid tissue-modal" show={this.props.show} onHide={e => {
-          this.props.handler();
+          this.props.handler('showLocalModal', 'selectedAnnotationOptions', this.state.selectedAnnotations);
         }}>
         <Modal.Body>
           <Container>
@@ -121,7 +121,7 @@ export class LocalModal extends Component {
             <Row className="mt-3">
               <Col sm={12} className="text-center">
                 <Button className="kbl-btn-1 mr-3" onClick={e=> {
-                    this.props.handler(this.state.selectedAnnotations);
+                    this.props.handler('showLocalModal', 'selectedAnnotationOptions', this.state.selectedAnnotations);
                   }}>Close</Button>
               </Col>
             </Row>
