@@ -1,0 +1,9 @@
+a {
+  text-decoration: none!important;
+  transition: 0.3s;
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    border-color: #007bff;
+  }
+}

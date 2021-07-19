@@ -14,6 +14,40 @@ import { useParams } from 'react-router-dom';
 
 import { env } from 'env.js';
 
+const isolateDict = {
+  reference: '1798174254',
+  australia: 'MT007544.1',
+  brazil: 'MT126808.1',
+  'china_Beijing': 'MT291836.1',
+  'china_hw': 'MT019532.1',
+  'china_ref': 'NC_045512.2',
+  'china_Shanghai': 'MT121215.1',
+  colombia: 'MT256924.2',
+  'diamond_p': 'LC528233.1',
+  france: 'MT320538.2',
+  greece: 'MT328035.1',
+  hongkong: 'MT114419.1',
+  india: 'MT050493.1',
+  iran: 'MT320891.2',
+  israel: 'MT276598.1',
+  italy: 'MT077125.1',
+  japan: 'LC534419.1',
+  nepal: 'MT072688.1',
+  pakistan: 'MT240479.1',
+  peru: 'MT263074.1',
+  's_korea': 'MT304476.1',
+  'south_africa': 'MT324062.1',
+  spain: 'MT359866.1',
+  sweden: 'MT093571.1',
+  taiwan: 'MT066176.1',
+  turkey: 'MT327745.1',
+  'usa-ca': 'MT276324.1',
+  'usa-ny': 'MT325627.1',
+  'usa-ut': 'MT334561.1',
+  'usa-wa': 'MT358644.1',
+  vietnam: 'MT192773.1'
+}
+
 const properties = [
   'pathogen',
   'isolate',
@@ -26,12 +60,16 @@ const properties = [
   'interactionCategory'
 ];
 
-const generateComponent = (property, data) => {
+const generateComponent = (property, data, result) => {
   if (property === 'gene') {
-    return <td><a href={`https://gtexportal.org/home/gene/${data}`} target="_blank" rel="noreferrer">{data}</a></td>
+    return <td><a href={`https://www.ncbi.nlm.nih.gov/gene/?term=${data}+AND+human`} target="_blank" rel="noreferrer">{data}</a></td>
   } else if (property === 'pathogenProtein') {
     const link = `https://www.ncbi.nlm.nih.gov/protein/?term=${data}`;
     return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  } else if (property === 'tissueExpression') {
+    return <td><a href={`https://gtexportal.org/home/gene/${result['gene']}`} target="_blank" rel="noreferrer">{data}</a></td>
+  } else if (property === 'isolate') {
+    return <td><a href={`https://www.ncbi.nlm.nih.gov/nuccore/${isolateDict[data]}`} target="_blank" rel="noreferrer">{data}</a></td>
   } else {
     return <td>{data}</td>
   }
@@ -56,6 +94,7 @@ export const ExpResultsTable = () => {
 
   if (data.payload && data.payload.reqTime) {
     let tableResults = data.payload.results;
+    console.log(tableResults);
 
     if (searchTerm !== '') {
       tableResults = data.payload.results.filter(item => {
@@ -93,7 +132,7 @@ export const ExpResultsTable = () => {
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(properties).map((_, index) => (
-                generateComponent(properties[index], result[properties[index]])
+                generateComponent(properties[index], result[properties[index]], result)
               ))}
             </tr>
           ))}
