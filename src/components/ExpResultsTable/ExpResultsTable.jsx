@@ -98,7 +98,13 @@ export const ExpResultsTable = () => {
 
     if (searchTerm !== '') {
       tableResults = data.payload.results.filter(item => {
-        return item.gene.toLowerCase().includes(searchTerm) || item.pathogenProtein.toLowerCase().includes(searchTerm)
+        for (let key in item) {
+          if (String(item[key]).toLowerCase().includes(searchTerm)) {
+            return true;
+          }
+        }
+
+        return false;
       });
     }
 
