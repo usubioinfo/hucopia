@@ -387,7 +387,12 @@ export class Home extends Component {
     if (this.state.interactionLoading) {
       interactionButton = (<div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>);
     } else {
-      interactionButton = (<Button className="kbl-btn-1 px-5" onClick={(e) => {
+      let className = 'kbl-btn-1 px-5 ';
+
+      if (this.state.selectedPatProteins.length === 0) {
+        className += 'disabled';
+      }
+      interactionButton = (<Button className={className} onClick={(e) => {
           this.showInteractionsClicked();
         }}>Show Interactions
       </Button>);
@@ -578,9 +583,15 @@ export class Home extends Component {
               </Col>
             </Row>
 
-            <Row className="mt-5 mb-5">
+            <Row className="mt-5 mb-3">
               <Col>
                 {interactionButton}
+              </Col>
+            </Row>
+
+            <Row className="mb-5">
+              <Col className={this.state.selectedPatProteins.length === 0 ? '' : 'd-none'}>
+                There are currently no pathogen proteins selected.
               </Col>
             </Row>
           </Container>

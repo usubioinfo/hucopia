@@ -32,8 +32,15 @@ h6 {
     }
 
     .bottom {
-      background: $palette-2-light;
       color: $text-main;
+
+      .light {
+        background: $palette-2-light;
+      }
+
+      .dark {
+        background: $palette-2-bg;
+      }
     }
   }
 
