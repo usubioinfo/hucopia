@@ -91,6 +91,7 @@ export const ExpResultsTable = () => {
   }, []);
 
   let results;
+  let summary;
 
   if (data.payload && data.payload.reqTime) {
     let tableResults = data.payload.results;
@@ -107,6 +108,14 @@ export const ExpResultsTable = () => {
         return false;
       });
     }
+
+    const genes = tableResults.map(item => {
+      return item.gene;
+    });
+
+    const numGenes = new Set(genes);
+
+    summary = `Summary - Number of Interactions: ${tableResults.length}, Number of Genes: ${numGenes.size}`;
 
 
     results = (
@@ -150,7 +159,9 @@ export const ExpResultsTable = () => {
       <div>
         Your query is still running! Check back later.
       </div>
-    )
+    );
+
+    summary = 'Loading...';
   }
 
   let newUrl;
@@ -163,7 +174,7 @@ export const ExpResultsTable = () => {
   return (
     <div>
       <Row className="my-3 justify-content-right">
-        <Col sm={'auto'} className="text-left">
+        <Col sm={'auto'} className="text-left px-4">
           <a href={newUrl} target="_blank" rel="noreferrer noopener">
             <Button className="kbl-btn-1">Visualization</Button>
           </a>
@@ -174,6 +185,11 @@ export const ExpResultsTable = () => {
               setSearchTerm(event.target.value);
             }
           }/>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="text-left px-4">
+          {summary}
         </Col>
       </Row>
       <div className="mb-5">
