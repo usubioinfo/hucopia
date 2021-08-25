@@ -78,14 +78,31 @@ export const Visualization = React.memo(props => {
     }
 
     elements = useData.map((item) => {
-      const id = `${item.interactionType}-${item.gene}-${item.pathogenProtein}`;
-      idDict[item.interactionType].push(`#${id}`);
+      console.log(item);
 
-      return {data: { source: item.gene, target: item.pathogenProtein, id: id, pathogenProtein: item.pathogenProtein, gene: item.gene} };
+      let id = ''
+      if (item.hasOwnProperty('host')) {
+        id = `interolog-${item.gene}-${item.host}`;
+        console.log(id);
+        idDict['interolog'].push(`#${id}`);
+
+        return {data: { source: item.gene, target: item.host, id: id, pathogenProtein: item.host, gene: item.gene} };
+      } else {
+        id = `${item.interactionType}-${item.gene}-${item.pathogenProtein}`;
+        idDict[item.interactionType].push(`#${id}`);
+
+        return {data: { source: item.gene, target: item.pathogenProtein, id: id, pathogenProtein: item.pathogenProtein, gene: item.gene} };
+      }
     });
 
     uniqueGenes = Array.from(new Set(useData.map(item => {return item.gene})));
-    uniquePatProteins = Array.from(new Set(useData.map(item => {return item.pathogenProtein})));
+
+    uniquePatProteins = Array.from(new Set(useData.map(item => {
+      if (item.hasOwnProperty('host')) {
+        return item.host;
+      }
+      return item.pathogenProtein
+    })));
 
 
     for (let item of uniqueGenes) {
