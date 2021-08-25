@@ -65,17 +65,17 @@ export const KeggResultsTable = () => {
           </tr>
 
           <tr className="bottom">
-            <th>#</th>
-            <th>Pathogen</th>
-            <th>Isolate</th>
-            <th>Protein</th>
-            <th>P-length</th>
-            <th>Gene</th>
-            <th>H-length</th>
-            <th>KEGG ID</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Category</th>
+            <th className="light">#</th>
+            <th className="light">Pathogen</th>
+            <th className="light">Isolate</th>
+            <th className="light">Protein</th>
+            <th className="light">P-length</th>
+            <th className="dark">Gene</th>
+            <th className="dark">H-length</th>
+            <th className="dark">KEGG ID</th>
+            <th className="dark">Description</th>
+            <th className="light">Type</th>
+            <th className="light">Category</th>
           </tr>
         </thead>
 

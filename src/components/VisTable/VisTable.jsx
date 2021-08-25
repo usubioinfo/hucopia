@@ -47,9 +47,9 @@ export const VisTable = ({setVisPageSearchTerm, handleSearchChange}) => {
           </tr>
 
           <tr className="bottom">
-            <th>#</th>
-            <th>Gene</th>
-            <th>Protein</th>
+            <th className="light">#</th>
+            <th className="light">Gene</th>
+            <th className="dark">Protein</th>
           </tr>
         </thead>
 

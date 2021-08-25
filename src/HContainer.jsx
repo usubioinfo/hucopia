@@ -57,8 +57,12 @@ export class HContainer extends Component {
             </Route>
 
             <Route path={`${env.BASE_URL}/gene/result/:id`}>
-              <Container className="py-5">
-                <GoResultsTable/>
+              <Container fluid className="py-5">
+                <Row className="justify-content-center">
+                  <Col sm={11}>
+                    <GoResultsTable/>
+                  </Col>
+                </Row>
               </Container>
             </Route>
 
