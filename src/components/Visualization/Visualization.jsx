@@ -137,14 +137,14 @@ export const Visualization = React.memo(props => {
               if (uniqueGenes) {
                 const geneIds = uniqueGenes.map(item => {return `#${item}`});
                 for (let id of geneIds) {
-                  cyRef.$(id).style({'background-color': '#e08351'});
+                  cyRef.$(id).style({'background-color': '#266bbf'});
                 }
               }
 
               if (uniquePatProteins) {
                 const patIds = uniquePatProteins.map(item => {return `#${item}`});
                 for (let id of patIds) {
-                  cyRef.$(id).style({'background-color': '#266bbf'});
+                  cyRef.$(id).style({'background-color': '#e08351'});
                 }
               }
 
