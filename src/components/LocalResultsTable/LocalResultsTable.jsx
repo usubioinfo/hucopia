@@ -35,8 +35,8 @@ const generateComponent = (property, data) => {
 export const LocalResultsTable = () => {
   const { id } = useParams();
 
-  let [intData, setIntData] = useState([]);
   let [data, setData] = useState([]);
+  let [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +56,18 @@ export const LocalResultsTable = () => {
     data.payload.results = data.payload.results.filter(result => {
       return result.interactionType.length;
     });
+
+    if (searchTerm !== '') {
+      tableResults = data.payload.results.filter(item => {
+        for (let key in item) {
+          if (String(item[key]).toLowerCase().includes(searchTerm)) {
+            return true;
+          }
+        }
+
+        return false;
+      });
+    }
 
 
     const genes = tableResults.map(item => {
@@ -96,7 +108,7 @@ export const LocalResultsTable = () => {
         </thead>
 
         <tbody>
-          {Array.from(data.payload.results).map((result, index) => (
+          {Array.from(tableResults).map((result, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(localProperties).map((_, index) => (
@@ -131,7 +143,11 @@ export const LocalResultsTable = () => {
           </a>
         </Col>
         <Col sm={6}>
-          <Form.Control className="kbl-form" type="email" placeholder="Search" />
+          <Form.Control className="kbl-form" type="email" placeholder="Search" value={searchTerm}
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }
+            }/>
         </Col>
       </Row>
 

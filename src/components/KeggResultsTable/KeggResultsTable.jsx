@@ -40,6 +40,7 @@ export const KeggResultsTable = () => {
   const { id } = useParams();
 
   let [data, setData] = useState([]);
+  let [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,6 +56,18 @@ export const KeggResultsTable = () => {
 
   if (data.payload && data.payload.reqTime) {
     let tableResults = data.payload.results;
+
+    if (searchTerm !== '') {
+      tableResults = data.payload.results.filter(item => {
+        for (let key in item) {
+          if (String(item[key]).toLowerCase().includes(searchTerm)) {
+            return true;
+          }
+        }
+
+        return false;
+      });
+    }
 
     console.log(data.payload.results);
 
@@ -97,7 +110,7 @@ export const KeggResultsTable = () => {
         </thead>
 
         <tbody>
-          {Array.from(data.payload.results).map((result, index) => (
+          {Array.from(tableResults).map((result, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(keggProperties).map((_, index) => (
@@ -132,7 +145,11 @@ export const KeggResultsTable = () => {
           </a>
         </Col>
         <Col sm={6}>
-          <Form.Control className="kbl-form" type="email" placeholder="Search" />
+          <Form.Control className="kbl-form" type="email" placeholder="Search" value={searchTerm}
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }
+            }/>
         </Col>
       </Row>
 

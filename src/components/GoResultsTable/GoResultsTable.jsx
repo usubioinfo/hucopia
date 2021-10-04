@@ -39,7 +39,7 @@ const generateComponent = (property, data) => {
 export const GoResultsTable = () => {
   const { id } = useParams();
 
-  let [intData, setIntData] = useState([]);
+  let [searchTerm, setSearchTerm] = useState('');
   let [goData, setGoData] = useState([]);
 
   useEffect(() => {
@@ -57,6 +57,18 @@ export const GoResultsTable = () => {
 
   if (goData.payload && goData.payload.reqTime) {
     let tableResults = goData.payload.results;
+
+    if (searchTerm !== '') {
+      tableResults = goData.payload.results.filter(item => {
+        for (let key in item) {
+          if (String(item[key]).toLowerCase().includes(searchTerm)) {
+            return true;
+          }
+        }
+
+        return false;
+      });
+    }
 
     goData.payload.results = goData.payload.results.filter(result => {
       return result.interactionType.length;
@@ -101,7 +113,7 @@ export const GoResultsTable = () => {
         </thead>
 
         <tbody>
-          {Array.from(goData.payload.results).map((result, index) => (
+          {Array.from(tableResults).map((result, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               {Array.from(goProperties).map((_, index) => (
@@ -136,7 +148,11 @@ export const GoResultsTable = () => {
           </a>
         </Col>
         <Col sm={6}>
-          <Form.Control className="kbl-form" type="email" placeholder="Search" />
+          <Form.Control className="kbl-form" type="email" placeholder="Search" value={searchTerm}
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }
+            }/>
         </Col>
       </Row>
 
