@@ -113,9 +113,14 @@ export const ExpResultsTable = () => {
       return item.gene;
     });
 
-    const numGenes = new Set(genes);
+    const patProteins = tableResults.map(item => {
+      return item.pathogenProtein;
+    });
 
-    summary = `Summary - Number of Interactions: ${tableResults.length}, Number of Genes: ${numGenes.size}`;
+    const numGenes = new Set(genes);
+    const numPatProteins = new Set(patProteins);
+
+    summary = `Interactions: ${tableResults.length}, Genes: ${numGenes.size}, Pathogen Proteins: ${numPatProteins.size}`;
 
 
     results = (
@@ -176,7 +181,7 @@ export const ExpResultsTable = () => {
       <Row className="my-3 justify-content-right">
         <Col sm={'auto'} className="text-left px-4">
           <a href={newUrl} target="_blank" rel="noreferrer noopener">
-            <Button className="kbl-btn-1">Visualization</Button>
+            <Button className="kbl-btn-1">Network Visualization</Button>
           </a>
         </Col>
         <Col sm={6}>

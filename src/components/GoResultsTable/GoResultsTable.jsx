@@ -5,6 +5,9 @@ import * as ResultService from 'services/result.service';
 
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 
 import { env } from 'env.js';
 
@@ -50,11 +53,27 @@ export const GoResultsTable = () => {
 
 
   let results;
+  let summary;
 
   if (goData.payload && goData.payload.reqTime) {
+    let tableResults = goData.payload.results;
+
     goData.payload.results = goData.payload.results.filter(result => {
       return result.interactionType.length;
     });
+
+    const genes = tableResults.map(item => {
+      return item.gene;
+    });
+
+    const patProteins = tableResults.map(item => {
+      return item.pathogenProtein;
+    });
+
+    const numGenes = new Set(genes);
+    const numPatProteins = new Set(patProteins);
+
+    summary = `Interactions: ${tableResults.length}, Genes: ${numGenes.size}, Pathogen Proteins: ${numPatProteins.size}`;
 
     results = (
       <Table responsive className="kbl-table table-borderless">
@@ -110,11 +129,23 @@ export const GoResultsTable = () => {
 
   return (
     <div>
-      <div className="my-3">
-        <a href={newUrl} target="_blank" rel="noreferrer noopener">
-          <Button className="kbl-btn-1">Visualization</Button>
-        </a>
-      </div>
+      <Row className="my-3 justify-content-right">
+        <Col sm={'auto'} className="text-left px-4">
+          <a href={newUrl} target="_blank" rel="noreferrer noopener">
+            <Button className="kbl-btn-1">Network Visualization</Button>
+          </a>
+        </Col>
+        <Col sm={6}>
+          <Form.Control className="kbl-form" type="email" placeholder="Search" />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col className="text-left px-4">
+          {summary}
+        </Col>
+      </Row>
+
       <div className="mb-5">
         {results}
       </div>
