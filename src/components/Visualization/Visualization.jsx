@@ -62,7 +62,7 @@ export const Visualization = React.memo(props => {
   const idDict = {
     interolog: intIds,
     domain: domIds,
-    consensus: conIds
+    both: conIds
   }
 
   if (graphData.length && data.payload) {
@@ -74,10 +74,9 @@ export const Visualization = React.memo(props => {
       const newData = data.payload.results.filter(item => {
         return item.gene.toLowerCase().includes(props.searchTerm) || item.pathogenProtein.toLowerCase().includes(props.searchTerm);
       });
-
     }
 
-    elements = useData.map((item) => {
+    elements = useData.map(item => {
       console.log(item);
 
       let id = ''
