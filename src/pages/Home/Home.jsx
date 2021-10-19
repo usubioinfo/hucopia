@@ -490,7 +490,7 @@ export class Home extends Component {
                   <Col sm={12}>
                     <div className={geneHintClass + " pl-2 pb-2"}>Enter genes or gene IDs here.</div>
                     <Form.Control className="kbl-form mb-4" as="textarea" rows={5} placeholder={genePlaceholder} onChange={ this.handleGeneChange }
-                      value={this.state.genes} onMouseEnter={() => this.setGeneHint(true)} onMouseLeave={() => this.setGeneHint(false)}/>
+                      value={this.state.genes} onMouseEnter={() => this.setGeneHint(true)} onMouseLeave={() => this.setGeneHint(false)} spellCheck={false}/>
                     <Button className="kbl-btn-1 mr-3" onClick={e => {
                         this.setState({genes: geneSample});
                       }}>Sample Data</Button>
