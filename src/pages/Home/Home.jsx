@@ -373,7 +373,7 @@ export class Home extends Component {
 
     if (this.state.selectedAnnotation === 'kegg') {
       genePlaceholder = 'Example: FRA7D, FRA5E, PLEXB3';
-      geneSample = 'FRA7D, FRA5E, PLEXB3, SHP1, TBX5';
+      geneSample = 'RAC2, RAP2A, CDK2, MAP3K3, GSK3B';
     }
 
     if (this.state.geneHintOn) {
