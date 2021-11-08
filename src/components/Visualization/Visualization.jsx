@@ -39,11 +39,7 @@ export const Visualization = React.memo(props => {
     const fetchData = async () => {
       const results = await ResultService.getResultById(id);
       setData(results);
-      /*
-      const newData = results.payload.results.filter(item => {
-        return item.gene.toLowerCase().includes(props.searchTerm) || item.pathogenProtein.toLowerCase().includes(props.searchTerm);
-      });
-      */
+      
       setGraphData(results.payload.results);
     }
 
