@@ -162,7 +162,7 @@ export const LocalResultsTable = () => {
       </div>
 
       <div className="text-left">
-        *Reference isolate referes to all 30 genomes
+        *Reference isolate refers to all 30 genomes
       </div>
     </div>
   );
