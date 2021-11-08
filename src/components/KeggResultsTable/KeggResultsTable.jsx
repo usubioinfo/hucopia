@@ -154,7 +154,7 @@ export const KeggResultsTable = () => {
       </Row>
 
       <Row>
-        <Col className="text-left px-4">
+        <Col className="text-left px-4 mb-2">
           {summary}
         </Col>
       </Row>
