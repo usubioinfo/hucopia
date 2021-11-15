@@ -4,13 +4,13 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { HNavbar } from 'components/HNavbar/HNavbar';
 import { Home } from 'pages/Home/Home';
+import { DataSet } from 'pages/DataSet/DataSet';
 
 import { ExpResultsTable } from 'components/ExpResultsTable/ExpResultsTable';
 import { GoResultsTable } from 'components/GoResultsTable/GoResultsTable';
 import { KeggResultsTable } from 'components/KeggResultsTable/KeggResultsTable';
 import { LocalResultsTable } from 'components/LocalResultsTable/LocalResultsTable';
 
-import { Visualization } from 'components/Visualization/Visualization';
 import { VisPage } from 'pages/VisPage/VisPage';
 
 import { env } from 'env.js';
@@ -48,6 +48,10 @@ export class HContainer extends Component {
           <Switch>
             <Route path={`${env.BASE_URL}/home`}>
               <Home sendTissueData={this.getTissueData} />
+            </Route>
+
+            <Route path={`${env.BASE_URL}/dataset`}>
+              <DataSet />
             </Route>
 
             <Route path={`${env.BASE_URL}/tissue/result/:id`}>

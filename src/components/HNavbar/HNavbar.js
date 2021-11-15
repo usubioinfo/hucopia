@@ -45,7 +45,7 @@ class HNavbar extends React.Component {
             <Nav.Link href="#" className={'about' === this.props.active ? active : className}>
               About
             </Nav.Link>
-            <Nav.Link href="#" className={'dataset' === this.props.active ? active : className}>
+            <Nav.Link href={`${env.BASE_URL}/dataset`} className={'dataset' === this.props.active ? active : className}>
               Data Set
             </Nav.Link>
             <Nav.Link href="#" className={'help' === this.props.active ? active : className}>
