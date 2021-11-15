@@ -389,7 +389,7 @@ export class Home extends Component {
     } else {
       let className = 'kbl-btn-1 px-5 ';
 
-      if (this.state.selectedPatProteins.length === 0) {
+      if (this.state.selectedPatProteins.length === 0 || this.state.genes.length === 0) {
         className += 'disabled';
       }
       interactionButton = (<Button className={className} onClick={(e) => {
@@ -419,7 +419,7 @@ export class Home extends Component {
       containerClass = "px-0 pt-5 t-3 o-0";
     }
 
-    let newButton = <div></div>
+    let newButton = <div></div>;
 
     if (!this.state.showControls) {
       newButton = (<Button className="kbl-btn-1 px-5 my-4" onClick={(e) => {
