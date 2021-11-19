@@ -164,7 +164,7 @@ export const KeggResultsTable = () => {
       </div>
 
       <div className="text-left">
-        *Reference isolate refers to all 30 genomes
+        *Reference isolate refers to all 30 genomes, found <a href={`${env.BASE_URL}/dataset`} target="_blank" rel="noreferrer">here</a>
       </div>
     </div>
   );

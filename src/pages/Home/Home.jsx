@@ -445,7 +445,7 @@ export class Home extends Component {
 
     if (this.state.resultUrls.length) {
       resultUrlComponent = Array.from(this.state.resultUrls).map((urlObj, index) => (
-        <ResultCard  type={urlObj.type} url={urlObj.url} name={`Result ${index + 1}`} />
+        <ResultCard type={urlObj.type} url={urlObj.url} name={`Result ${index + 1}`} />
 
       ));
     }
