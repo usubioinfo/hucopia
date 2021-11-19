@@ -47,7 +47,7 @@ export class DataSet extends Component {
         },
         {
           id: 'LC528233.1',
-          isolate: 'diamond_p',
+          isolate: 'diamond_cruise',
           description: 'Severe acute respiratory syndrome coronavirus 2 SARS-CoV-2/Hu/DP/Kng/19-027 RNA'
         },
         {
@@ -180,7 +180,11 @@ export class DataSet extends Component {
               <tbody>
                 {Array.from(this.state.data).map((result, index) => (
                   <tr key={index}>
-                    <td>{result['id']}</td>
+                    <td>
+                      <a href={'https://www.ncbi.nlm.nih.gov/nuccore/' + result['id']} rel="noreferrer" target="_blank">
+                        {result['id']}
+                      </a>
+                      </td>
                     <td>{result['isolate']}</td>
                     <td>{result['description']}</td>
                   </tr>

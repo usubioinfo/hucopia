@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Col from 'react-bootstrap/Col';
-import { IconContext } from 'react-icons';
-import { FaPencilAlt } from 'react-icons/fa';
 
 import './ResultCard.scss';
 
