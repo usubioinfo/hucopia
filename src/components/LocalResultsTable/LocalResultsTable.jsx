@@ -23,12 +23,26 @@ const localProperties = [
   'interactionCategory'
 ];
 
+const shadingGuide = {
+  pathogen: 'light',
+  isolate: 'light',
+  pathogenProtein: 'light',
+  pLength: 'light',
+  gene: 'dark',
+  hLength: 'dark',
+  location: 'dark',
+  interactionType: 'light',
+  interactionCategory: 'light'
+}
+
 const generateComponent = (property, data) => {
+  const shading = shadingGuide[property];
+
   if (property === 'pathogenProtein') {
     const link = `https://www.ncbi.nlm.nih.gov/protein/?term=${data}`;
-    return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+    return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
   } else {
-    return <td>{data}</td>
+    return <td className={shading}>{data}</td>
   }
 }
 
@@ -84,7 +98,7 @@ export const LocalResultsTable = () => {
     summary = `Interactions: ${tableResults.length}, Genes: ${numGenes.size}, Pathogen Proteins: ${numPatProteins.size}`;
 
     results = (
-      <Table responsive className="kbl-table table-borderless">
+      <Table responsive className="kbl-table local table-borderless">
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
@@ -110,7 +124,7 @@ export const LocalResultsTable = () => {
         <tbody>
           {Array.from(tableResults).map((result, index) => (
             <tr key={index}>
-              <td>{index + 1}</td>
+              <td className="light">{index + 1}</td>
               {Array.from(localProperties).map((_, index) => (
                 generateComponent(localProperties[index], result[localProperties[index]])
               ))}

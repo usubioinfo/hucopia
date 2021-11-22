@@ -60,18 +60,32 @@ const properties = [
   'interactionCategory'
 ];
 
+const shadingGuide = {
+  pathogen: 'light',
+  isolate: 'light',
+  pathogenProtein: 'light',
+  pLength: 'light',
+  gene: 'dark',
+  hLength: 'dark',
+  tissueExpression: 'dark',
+  interactionType: 'light',
+  interactionCategory: 'light'
+}
+
 const generateComponent = (property, data, result) => {
+  const shading = shadingGuide[property];
+
   if (property === 'gene') {
-    return <td><a href={`https://www.ncbi.nlm.nih.gov/gene/?term=${data}+AND+human`} target="_blank" rel="noreferrer">{data}</a></td>
+    return <td className={shading}><a href={`https://www.ncbi.nlm.nih.gov/gene/?term=${data}+AND+human`} target="_blank" rel="noreferrer">{data}</a></td>
   } else if (property === 'pathogenProtein') {
     const link = `https://www.ncbi.nlm.nih.gov/protein/?term=${data}`;
-    return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+    return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
   } else if (property === 'tissueExpression') {
-    return <td><a href={`https://gtexportal.org/home/gene/${result['gene']}`} target="_blank" rel="noreferrer">{data}</a></td>
+    return <td className={shading}><a href={`https://gtexportal.org/home/gene/${result['gene']}`} target="_blank" rel="noreferrer">{data}</a></td>
   } else if (property === 'isolate') {
-    return <td><a href={`https://www.ncbi.nlm.nih.gov/nuccore/${isolateDict[data]}`} target="_blank" rel="noreferrer">{data}</a></td>
+    return <td className={shading}><a href={`https://www.ncbi.nlm.nih.gov/nuccore/${isolateDict[data]}`} target="_blank" rel="noreferrer">{data}</a></td>
   } else {
-    return <td>{data}</td>
+    return <td className={shading}>{data}</td>
   }
 }
 
@@ -124,7 +138,7 @@ export const ExpResultsTable = () => {
 
 
     results = (
-      <Table responsive className="kbl-table table-borderless">
+      <Table responsive className="kbl-table exp table-borderless">
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
@@ -150,7 +164,7 @@ export const ExpResultsTable = () => {
         <tbody>
           {Array.from(tableResults).map((result, index) => (
             <tr key={index}>
-              <td>{index + 1}</td>
+              <td className="light">{index + 1}</td>
               {Array.from(properties).map((_, index) => (
                 generateComponent(properties[index], result[properties[index]], result)
               ))}

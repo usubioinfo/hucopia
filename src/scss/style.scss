@@ -27,28 +27,6 @@ h6 {
     border-bottom: 1px solid $color-light-grey;
     color: white;
 
-    /*
-    .top th:first-child {
-      border-radius: 10px 0 0 0;
-    }
-
-    .top th:last-child {
-      border-radius: 0 10px 0 0;
-    }
-
-    .bottom {
-      th:first-child {
-        border-radius: 0 0 0 10px;
-      }
-
-      th:last-child {
-        border-radius: 0 0 10px 0;
-      }
-
-      margin-bottom: 10px;
-     
-    }*/
-
     .human {
       background: $palette-2-dark;
     }
@@ -73,9 +51,20 @@ h6 {
       border-bottom: none!important;
     }
 
+    td.dark {
+      background: #f8f8f8;
+    }
+
     &:hover td {
       transition: 0.3s;
-      background: #f3f3f3;
+
+      &.light {
+        background: #f3f3f3;
+      }
+
+      &.dark {
+        background: #ededed;
+      }
     }
   }
 }

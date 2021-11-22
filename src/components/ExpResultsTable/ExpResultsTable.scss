@@ -8,12 +8,42 @@ a {
   }
 }
 
-.kbl-table tbody tr td {
+.kbl-table.exp tbody tr td {
   &:nth-child(5) {
     border-right: 1px solid #e5e5e5;
   }
 
   &:nth-child(8) {
+    border-right: 1px solid #e5e5e5;
+  }
+}
+
+.kbl-table.go tbody tr td {
+  &:nth-child(5) {
+    border-right: 1px solid #e5e5e5;
+  }
+
+  &:nth-child(9) {
+    border-right: 1px solid #e5e5e5;
+  }
+}
+
+.kbl-table.local tbody tr td {
+  &:nth-child(5) {
+    border-right: 1px solid #e5e5e5;
+  }
+
+  &:nth-child(8) {
+    border-right: 1px solid #e5e5e5;
+  }
+}
+
+.kbl-table.kegg tbody tr td {
+  &:nth-child(5) {
+    border-right: 1px solid #e5e5e5;
+  }
+
+  &:nth-child(9) {
     border-right: 1px solid #e5e5e5;
   }
 }

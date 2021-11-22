@@ -75,8 +75,12 @@ export class HContainer extends Component {
             </Route>
 
             <Route path={`${env.BASE_URL}/kegg/result/:id`}>
-              <Container className="py-5">
-                <KeggResultsTable/>
+              <Container fluid className="py-5 px-5">
+                <Row className="justify-content-center">
+                  <Col sm={11}>
+                    <KeggResultsTable/>
+                  </Col>
+                </Row>
               </Container>
             </Route>
 

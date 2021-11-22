@@ -24,15 +24,30 @@ const keggProperties = [
   'interactionCategory'
 ];
 
+const shadingGuide = {
+  pathogen: 'light',
+  isolate: 'light',
+  pathogenProtein: 'light',
+  pLength: 'light',
+  gene: 'dark',
+  hLength: 'dark',
+  keggId: 'dark',
+  description: 'dark',
+  interactionType: 'light',
+  interactionCategory: 'light'
+}
+
 const generateComponent = (property, data) => {
+  const shading = shadingGuide[property];
+
   if (property === 'keggId') {
     const link = `https://www.genome.jp/pathway/${data}`;
-    return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+    return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
   } else if (property === 'pathogenProtein') {
     const link = `https://www.ncbi.nlm.nih.gov/protein/?term=${data}`;
-    return <td><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+    return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
   } else {
-    return <td>{data}</td>
+    return <td className={shading}>{data}</td>
   }
 }
 
@@ -85,7 +100,7 @@ export const KeggResultsTable = () => {
     summary = `Interactions: ${tableResults.length}, Genes: ${numGenes.size}, Pathogen Proteins: ${numPatProteins.size}`;
 
     results = (
-      <Table responsive className="kbl-table table-borderless">
+      <Table responsive className="kbl-table kegg table-borderless">
         <thead className="kbl-thead">
           <tr className="top">
             <th></th>
@@ -159,7 +174,7 @@ export const KeggResultsTable = () => {
         </Col>
       </Row>
 
-      <div className="mb-3">
+      <div className="mb-2">
         {results}
       </div>
 
