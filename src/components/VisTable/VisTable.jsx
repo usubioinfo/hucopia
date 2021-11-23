@@ -11,7 +11,7 @@ import * as ResultService from 'services/result.service';
 
 import './VisTable.scss';
 
-export const VisTable = ({setVisPageSearchTerm, handleSearchChange}) => {
+export const VisTable = ({tableRowClicked, handleSearchChange}) => {
   const { id } = useParams();
   let [data, setData] = useState([]);
   let [totalData, setTotalData] = useState([]);
@@ -28,6 +28,7 @@ export const VisTable = ({setVisPageSearchTerm, handleSearchChange}) => {
       if (results.payload && results.payload.reqTime) {
         setTableData(results.payload.results);
         setTotalData(results.payload.results);
+        console.log(results);
       }
     }
 
@@ -55,7 +56,18 @@ export const VisTable = ({setVisPageSearchTerm, handleSearchChange}) => {
 
         <tbody>
           {Array.from(tableData).map((result, index) => (
-            <tr key={index}>
+            <tr className="select" key={index} onClick={() => {
+              const data = {
+                source: result.gene,
+                target: result.pathogenProtein,
+                gene: result.gene,
+                pathogenProtein: result.pathogenProtein,
+                id: `${result.interactionType}-${result.gene}-${result.pathogenProtein}`
+              };
+
+              tableRowClicked(data);
+
+              }}>
               <td>{index + 1}</td>
               <td>{result.gene}</td>
               <td>{result.pathogenProtein}</td>

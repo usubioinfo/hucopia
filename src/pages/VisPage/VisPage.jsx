@@ -57,6 +57,11 @@ export class VisPage extends Component {
     });
   }
 
+  // The same as above
+  handleTableRowClicked(data) {
+
+  }
+
   handleEdgeClicked(data) {
     this.setState({infoType: 'Edge '});
 
@@ -78,7 +83,7 @@ export class VisPage extends Component {
     let menuComponent;
 
     if (this.state.selectedBar === 'table') {
-      menuComponent = <VisTable handleSearchChange={this.setSearchTerm} />
+      menuComponent = <VisTable handleSearchChange={this.setSearchTerm} tableRowClicked={this.handleEdgeClicked} />
     } else {
       if (this.state.infoType.trim().toLowerCase() === 'node') {
         menuComponent = <NodeMenu nodeData={this.state.currentNodeData} />

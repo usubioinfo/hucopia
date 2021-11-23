@@ -46,6 +46,10 @@ h6 {
 
   tr {
     border-bottom: 1px solid $color-light-grey;
+    
+    &.select {
+      cursor: pointer;
+    }
 
     &:last-child {
       border-bottom: none!important;
@@ -57,6 +61,7 @@ h6 {
 
     &:hover td {
       transition: 0.3s;
+      background: #f3f3f3;
 
       &.light {
         background: #f3f3f3;
