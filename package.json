@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-dotenv && react-scripts start",
-    "local": "serve -s build -l 3000",
+    "local": "serve -s build -l 3600",
     "build": "react-dotenv && react-scripts build",
     "update": "git pull origin main && npm i && react-scripts build && react-dotenv && pm2 restart hucopia",
     "test": "react-scripts test",
