@@ -3,9 +3,11 @@
 
 export const downloadCsv = (data) => {
   const csvPrefix = 'data:text/csv;charset=utf-8,';
-  
+  const data2 = data.filter(element => {
+    return element;
+  });
   // let csvData = csvPrefix + data.map(row => row.join(', ')).join('\n ');
-  let csvData = csvPrefix + data.map(function(d){
+  let csvData = csvPrefix + data2.map(function(d){
     return JSON.stringify(Object.values(d));
 })
 .join('\n') 
