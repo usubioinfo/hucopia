@@ -4,10 +4,14 @@
 export const downloadCsv = (data) => {
   const csvPrefix = 'data:text/csv;charset=utf-8,';
   console.log(data);
-  // let csvData = csvPrefix + data.map(row => row.join(', ')).join('\n ');
-  let csvData = csvPrefix + data.map(function(d){
-    return d.join();
-}).join('\n');
+  const escape = text =>
+    text.replace(/\\/g, "\\\\")
+        .replace(/\n/g, "\\n")
+        .replace(/,/g, "\\,")
+
+  let escaped_array = data.map(fields => fields.map(escape));
+  let csvData = csvPrefix + escaped_array.map(row => row.join(', ')).join('\n ');
+
   const encodedUri = encodeURI(csvData);
   window.open(encodedUri);
 
