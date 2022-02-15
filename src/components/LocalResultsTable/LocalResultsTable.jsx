@@ -65,7 +65,7 @@ export const LocalResultsTable = () => {
   let results;
   let summary;
 
-  let csvbutton = <div></div>;
+  let csvButton = <div></div>;
 
   if (data.payload && data.payload.reqTime) {
     csvButton = <Button className="kbl-btn-1" onClick={() => CSVService.downloadCsv(tableResults)}>CSV</Button>;
