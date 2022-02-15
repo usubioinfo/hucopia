@@ -1,7 +1,7 @@
 // This is going to be a general template for downloading as CSV.
 
 
-const downloadCsv = (data) => {
+export const downloadCsv = (data) => {
   const csvPrefix = 'data:text/csv;charset=utf-8,';
 
   let csvData = csvPrefix + data.map(row => row.join(',')).join('\n');

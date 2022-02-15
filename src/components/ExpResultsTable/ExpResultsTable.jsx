@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import * as ResultService from 'services/result.service';
+import * as CSVService from 'services/csvdownload.service';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -197,6 +198,12 @@ export const ExpResultsTable = () => {
           <a href={newUrl} target="_blank" rel="noreferrer noopener">
             <Button className="kbl-btn-1">Network Visualization</Button>
           </a>
+
+          
+          <Button className="kbl-btn-1" onClick={CSVService.downloadCsv(tableResults)}>CSV</Button>
+
+
+          
         </Col>
         <Col sm={6}>
           <Form.Control className="kbl-form" type="email" placeholder="Search" value={searchTerm}
