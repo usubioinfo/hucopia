@@ -17,7 +17,7 @@ export const downloadCsv = (data) => {
 
   let link = document.createElement('a');
   link.setAttribute('href', encodedUri);
-  link.setAttributeNS('download', 'data.csv');
+  link.setAttribute('download', 'data.csv');
   document.body.appendChild(link);
 
   link.click();
