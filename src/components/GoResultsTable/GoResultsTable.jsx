@@ -71,7 +71,10 @@ export const GoResultsTable = () => {
   let results;
   let summary;
 
+  let csvButton = <div></div>;
+
   if (goData.payload && goData.payload.reqTime) {
+    csvButton = <Button className="kbl-btn-1" onClick={CSVService.downloadCsv(tableResults)}>CSV</Button>;
     let tableResults = goData.payload.results;
 
     if (searchTerm !== '') {
@@ -164,7 +167,7 @@ export const GoResultsTable = () => {
           </a>
 
 
-          <Button className="kbl-btn-1" onClick={CSVService.downloadCsv(tableResults)}>CSV</Button>
+          {csvButton}
 
 
 

@@ -108,7 +108,10 @@ export const ExpResultsTable = () => {
   let results;
   let summary;
 
+  let csvButton = <div></div>;
+
   if (data.payload && data.payload.reqTime) {
+    csvButton = <Button className="kbl-btn-1" onClick={CSVService.downloadCsv(tableResults)}>CSV</Button>;
     let tableResults = data.payload.results;
     console.log(tableResults);
 
@@ -200,10 +203,10 @@ export const ExpResultsTable = () => {
           </a>
 
           
-          <Button className="kbl-btn-1" onClick={CSVService.downloadCsv(tableResults)}>CSV</Button>
+          {csvButton}
 
 
-          
+
         </Col>
         <Col sm={6}>
           <Form.Control className="kbl-form" type="email" placeholder="Search" value={searchTerm}

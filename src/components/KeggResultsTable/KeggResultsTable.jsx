@@ -70,8 +70,12 @@ export const KeggResultsTable = () => {
   let results;
   let summary;
 
+  let csvButton = <div></div>;
+
   if (data.payload && data.payload.reqTime) {
     let tableResults = data.payload.results;
+
+    csvButton = <Button className="kbl-btn-1" onClick={CSVService.downloadCsv(tableResults)}>CSV</Button>;
 
     if (searchTerm !== '') {
       tableResults = data.payload.results.filter(item => {
@@ -161,7 +165,7 @@ export const KeggResultsTable = () => {
           </a>
 
 
-          <Button className="kbl-btn-1" onClick={CSVService.downloadCsv(tableResults)}>CSV</Button>
+          {csvButton}
 
 
 

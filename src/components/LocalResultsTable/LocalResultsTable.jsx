@@ -65,7 +65,10 @@ export const LocalResultsTable = () => {
   let results;
   let summary;
 
+  let csvbutton = <div></div>;
+
   if (data.payload && data.payload.reqTime) {
+    csvButton = <Button className="kbl-btn-1" onClick={CSVService.downloadCsv(tableResults)}>CSV</Button>;
     let tableResults = data.payload.results;
 
     data.payload.results = data.payload.results.filter(result => {
@@ -159,12 +162,12 @@ export const LocalResultsTable = () => {
 
 
 
-          <Button className="kbl-btn-1" onClick={CSVService.downloadCsv(tableResults)}>CSV</Button>
+          {csvButton}
 
 
 
 
-          
+
         </Col>
         <Col sm={6}>
           <Form.Control className="kbl-form" type="email" placeholder="Search" value={searchTerm}
