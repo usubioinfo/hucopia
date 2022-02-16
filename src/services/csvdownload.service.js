@@ -29,7 +29,7 @@ export const downloadCsv = (data) => {
 
 function replacer(key, value) {
   // Filtering out properties
-  if (typeof value === 0) {
+  if (typeof value === '0') {
     return undefined;
   }
   return value;
