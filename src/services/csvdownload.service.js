@@ -6,9 +6,11 @@ export const downloadCsv = (data) => {
   const data2 = data.filter(element => {
     return element;
   });
+
+
   // let csvData = csvPrefix + data.map(row => row.join(', ')).join('\n ');
   let csvData = csvPrefix + data2.map(function(d){
-    return JSON.stringify(Object.values(d));
+    return JSON.stringify(Object.values(d, replacer));
 })
 .join('\n') 
 .replace(/(^\[)|(\]$)/mg, '');
@@ -23,4 +25,12 @@ export const downloadCsv = (data) => {
   document.body.appendChild(link);
 
   link.click();
+}
+
+function replacer(key, value) {
+  // Filtering out properties
+  if (typeof value === 0) {
+    return undefined;
+  }
+  return value;
 }
