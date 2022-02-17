@@ -74,7 +74,7 @@ export const GoResultsTable = () => {
   let csvButton = <div></div>;
 
   if (goData.payload && goData.payload.reqTime) {
-    csvButton = <Button className="kbl-btn-1" onClick={() => CSVService.downloadCsv(tableResults)}>CSV</Button>;
+    csvButton = <Button className="kbl-btn-1" onClick={() => CSVService.downloadCsv(tableResults, "go")}>CSV</Button>;
     let tableResults = goData.payload.results;
     console.log(tableResults);
     if (searchTerm !== '') {

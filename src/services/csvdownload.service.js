@@ -4,8 +4,9 @@
 export const downloadCsv = (data, tid) => {
    
   const csvPrefix = 'data:text/csv;charset=utf-8,';
+  var csvString =[];
   if (tid === "tissue"){
-    var csvString = [
+    csvString = [
       [
         "Pathogen",
         "Pathogen Protein",
@@ -31,9 +32,93 @@ export const downloadCsv = (data, tid) => {
     ].map(e => e.join(",")).join("\n");
      console.log(csvString);
   }
-  else{
-    console.log("hello");
+  if (tid === "location"){
+    csvString = [
+      [
+        "Pathogen",
+        "Pathogen Protein",
+        "Pathogen Isolate",
+        "P-Protein Length",
+        "Human Gene",
+        "H-Protein Length",
+        "Interaction Type",
+        "Interaction Category",
+        "Localization"
+      ],
+      ...data.map(item => [
+        item.pathogen,
+        item.pathogenProtein,
+        item.isolate,
+        item.pLength,
+        item.gene,
+        item.hLength,
+        item.interactionType,
+        item.interactionCategory,
+        item.location
+      ])
+    ].map(e => e.join(",")).join("\n");
+     console.log(csvString);
   }
+
+  if (tid === "go"){
+      csvString = [
+      [
+        "Pathogen",
+        "Pathogen Protein",
+        "Pathogen Isolate",
+        "P-Protein Length",
+        "Human Gene",
+        "H-Protein Length",
+        "Interaction Type",
+        "Interaction Category",
+        "GO ID",
+        "GO Description"
+      ],
+      ...data.map(item => [
+        item.pathogen,
+        item.pathogenProtein,
+        item.isolate,
+        item.pLength,
+        item.gene,
+        item.hLength,
+        item.interactionType,
+        item.interactionCategory,
+        item.goId,
+        item.description
+      ])
+    ].map(e => e.join(",")).join("\n");
+     console.log(csvString);
+  }
+
+  if (tid === "kegg"){
+    csvString = [
+    [
+      "Pathogen",
+      "Pathogen Protein",
+      "Pathogen Isolate",
+      "P-Protein Length",
+      "Human Gene",
+      "H-Protein Length",
+      "Interaction Type",
+      "Interaction Category",
+      "GO ID",
+      "GO Description"
+    ],
+    ...data.map(item => [
+      item.pathogen,
+      item.pathogenProtein,
+      item.isolate,
+      item.pLength,
+      item.gene,
+      item.hLength,
+      item.interactionType,
+      item.interactionCategory,
+      item.keggId,
+      item.description
+    ])
+  ].map(e => e.join(",")).join("\n");
+   console.log(csvString);
+}
 
 
 
