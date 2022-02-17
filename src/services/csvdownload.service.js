@@ -101,8 +101,8 @@ export const downloadCsv = (data, tid) => {
       "H-Protein Length",
       "Interaction Type",
       "Interaction Category",
-      "GO ID",
-      "GO Description"
+      "KEGG ID",
+      "KEGG Description"
     ],
     ...data.map(item => [
       item.pathogen,
