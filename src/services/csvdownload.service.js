@@ -1,11 +1,9 @@
 // This is going to be a general template for downloading as CSV.
 
-
 export const downloadCsv = (data, tid) => {
-   
-  const csvPrefix = 'data:text/csv;charset=utf-8,';
-  var csvString =[];
-  if (tid === "tissue"){
+  const csvPrefix = "data:text/csv;charset=utf-8,";
+  var csvString = [];
+  if (tid === "tissue") {
     csvString = [
       [
         "Pathogen",
@@ -16,9 +14,9 @@ export const downloadCsv = (data, tid) => {
         "H-Protein Length",
         "Interaction Type",
         "Interaction Category",
-        "Tissue"
+        "Tissue",
       ],
-      ...data.map(item => [
+      ...data.map((item) => [
         item.pathogen,
         item.pathogenProtein,
         item.isolate,
@@ -27,12 +25,14 @@ export const downloadCsv = (data, tid) => {
         item.hLength,
         item.interactionType,
         item.interactionCategory,
-        item.tissueExpression
-      ])
-    ].map(e => e.join(",")).join("\n");
-     console.log(csvString);
+        item.tissueExpression,
+      ]),
+    ]
+      .map((e) => e.join(","))
+      .join("\n");
+    //  console.log(csvString);
   }
-  if (tid === "location"){
+  if (tid === "location") {
     csvString = [
       [
         "Pathogen",
@@ -43,9 +43,9 @@ export const downloadCsv = (data, tid) => {
         "H-Protein Length",
         "Interaction Type",
         "Interaction Category",
-        "Localization"
+        "Localization",
       ],
-      ...data.map(item => [
+      ...data.map((item) => [
         item.pathogen,
         item.pathogenProtein,
         item.isolate,
@@ -54,14 +54,16 @@ export const downloadCsv = (data, tid) => {
         item.hLength,
         item.interactionType,
         item.interactionCategory,
-        item.location
-      ])
-    ].map(e => e.join(",")).join("\n");
-     console.log(csvString);
+        item.location,
+      ]),
+    ]
+      .map((e) => e.join(","))
+      .join("\n");
+    //  console.log(csvString);
   }
 
-  if (tid === "go"){
-      csvString = [
+  if (tid === "go") {
+    csvString = [
       [
         "Pathogen",
         "Pathogen Protein",
@@ -72,9 +74,9 @@ export const downloadCsv = (data, tid) => {
         "Interaction Type",
         "Interaction Category",
         "GO ID",
-        "GO Description"
+        "GO Description",
       ],
-      ...data.map(item => [
+      ...data.map((item) => [
         item.pathogen,
         item.pathogenProtein,
         item.isolate,
@@ -84,62 +86,55 @@ export const downloadCsv = (data, tid) => {
         item.interactionType,
         item.interactionCategory,
         item.goId,
-        item.description
-      ])
-    ].map(e => e.join(",")).join("\n");
-     console.log(csvString);
+        item.description,
+      ]),
+    ]
+      .map((e) => e.join(","))
+      .join("\n");
+    //  console.log(csvString);
   }
 
-  if (tid === "kegg"){
+  if (tid === "kegg") {
     csvString = [
-    [
-      "Pathogen",
-      "Pathogen Protein",
-      "Pathogen Isolate",
-      "P-Protein Length",
-      "Human Gene",
-      "H-Protein Length",
-      "Interaction Type",
-      "Interaction Category",
-      "KEGG ID",
-      "KEGG Description"
-    ],
-    ...data.map(item => [
-      item.pathogen,
-      item.pathogenProtein,
-      item.isolate,
-      item.pLength,
-      item.gene,
-      item.hLength,
-      item.interactionType,
-      item.interactionCategory,
-      item.keggId,
-      item.description
-    ])
-  ].map(e => e.join(",")).join("\n");
-   console.log(csvString);
-}
+      [
+        "Pathogen",
+        "Pathogen Protein",
+        "Pathogen Isolate",
+        "P-Protein Length",
+        "Human Gene",
+        "H-Protein Length",
+        "Interaction Type",
+        "Interaction Category",
+        "KEGG ID",
+        "KEGG Description",
+      ],
+      ...data.map((item) => [
+        item.pathogen,
+        item.pathogenProtein,
+        item.isolate,
+        item.pLength,
+        item.gene,
+        item.hLength,
+        item.interactionType,
+        item.interactionCategory,
+        item.keggId,
+        item.description,
+      ]),
+    ]
+      .map((e) => e.join(","))
+      .join("\n");
+    //  console.log(csvString);
+  }
 
+  let csvData = csvPrefix + csvString;
 
-
- 
-
-  let csvData = csvPrefix + csvString
-//   let csvData = csvPrefix + data.map(function(d){
-//     return JSON.stringify(Object.values(d));
-// })
-// .join('\n') 
-// .replace(/(^\[)|(\]$)/mg, '');
-
-  // console.log(csvData);
   const encodedUri = encodeURI(csvData);
   // window.open(encodedUri);
 
-  let link = document.createElement('a');
-  link.setAttribute('href', encodedUri);
-  link.setAttribute('download', 'data.csv');
+  let link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "data.csv");
   document.body.appendChild(link);
 
   link.click();
-}
-
+};

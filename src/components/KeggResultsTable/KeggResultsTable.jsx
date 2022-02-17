@@ -76,7 +76,7 @@ export const KeggResultsTable = () => {
     let tableResults = data.payload.results;
 
     csvButton = <Button className="kbl-btn-1 mx-2" onClick={() => CSVService.downloadCsv(tableResults, "kegg")}>CSV</Button>;
-    console.log(tableResults);
+    // console.log(tableResults);
     if (searchTerm !== '') {
       tableResults = data.payload.results.filter(item => {
         for (let key in item) {
@@ -89,7 +89,7 @@ export const KeggResultsTable = () => {
       });
     }
 
-    console.log(data.payload.results);
+    // console.log(data.payload.results);
 
     const genes = tableResults.map(item => {
       return item.gene;
