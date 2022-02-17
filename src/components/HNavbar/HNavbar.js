@@ -42,13 +42,13 @@ class HNavbar extends React.Component {
             <Nav.Link href={`${env.BASE_URL}/home`} className={'home' === this.props.active ? active : className}>
               Home
             </Nav.Link>
-            <Nav.Link href="#" className={'about' === this.props.active ? active : className}>
+            <Nav.Link href={`${env.BASE_URL}/about`} className={'about' === this.props.active ? active : className}>
               About
             </Nav.Link>
             <Nav.Link href={`${env.BASE_URL}/dataset`} className={'dataset' === this.props.active ? active : className}>
               Data Set
             </Nav.Link>
-            <Nav.Link href="#" className={'help' === this.props.active ? active : className}>
+            <Nav.Link href={`${env.BASE_URL}/help`} className={'help' === this.props.active ? active : className}>
               Help
             </Nav.Link>
           </Nav>
