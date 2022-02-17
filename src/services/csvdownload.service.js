@@ -5,7 +5,7 @@ export const downloadCsv = (data) => {
   const csvPrefix = 'data:text/csv;charset=utf-8,';
   
   const csvString = [
-    ...data.map(item => [
+    data.map(item => [
       item.pathogen,
       item.pathogenProtein,
       item.isolate,
