@@ -70,7 +70,7 @@ export const LocalResultsTable = () => {
   if (data.payload && data.payload.reqTime) {
     csvButton = <Button className="kbl-btn-1" onClick={() => CSVService.downloadCsv(tableResults)}>CSV</Button>;
     let tableResults = data.payload.results;
-
+    console.log(tableResults);
     data.payload.results = data.payload.results.filter(result => {
       return result.interactionType.length;
     });

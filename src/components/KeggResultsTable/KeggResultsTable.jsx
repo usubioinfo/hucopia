@@ -76,7 +76,7 @@ export const KeggResultsTable = () => {
     let tableResults = data.payload.results;
 
     csvButton = <Button className="kbl-btn-1" onClick={() => CSVService.downloadCsv(tableResults)}>CSV</Button>;
-
+    console.log(tableResults);
     if (searchTerm !== '') {
       tableResults = data.payload.results.filter(item => {
         for (let key in item) {
