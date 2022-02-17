@@ -3,14 +3,26 @@
 
 export const downloadCsv = (data) => {
   const csvPrefix = 'data:text/csv;charset=utf-8,';
-  const data2 = data.filter(element => {
-    return element;
-  });
+  
+  const csvString = [
+    ...data.map(item => [
+      item.pathogen,
+      item.pathogenProtein,
+      item.isolate,
+      item.pLength,
+      item.gene,
+      item.hLength,
+      item.interactionType,
+      item.interactionCategory,
+      item.tissueExpression
+    ])
+  ];
 
+  console.log(csvString);
 
   // let csvData = csvPrefix + data.map(row => row.join(', ')).join('\n ');
-  let csvData = csvPrefix + data2.map(function(d){
-    return JSON.stringify(Object.values(d, replacer));
+  let csvData = csvPrefix + data.map(function(d){
+    return JSON.stringify(Object.values(d));
 })
 .join('\n') 
 .replace(/(^\[)|(\]$)/mg, '');
@@ -27,10 +39,3 @@ export const downloadCsv = (data) => {
   link.click();
 }
 
-function replacer(key, value) {
-  // Filtering out properties
-  if (typeof value === '0') {
-    return undefined;
-  }
-  return value;
-}
