@@ -6,7 +6,7 @@ export const downloadCsv = (data, tid) => {
   const csvPrefix = 'data:text/csv;charset=utf-8,';
   if (tid === "tissue"){
     var csvString = [
-      ...data.map(({item,tid}) => [
+      ...data.map(item => [
         item.pathogen,
         item.pathogenProtein,
         item.isolate,
