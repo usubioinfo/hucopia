@@ -32,7 +32,7 @@ export const downloadCsv = (data) => {
 
   // console.log(csvData);
   const encodedUri = encodeURI(csvData);
-  window.open(encodedUri);
+  // window.open(encodedUri);
 
   let link = document.createElement('a');
   link.setAttribute('href', encodedUri);
