@@ -16,9 +16,7 @@ export const downloadCsv = (data, tid) => {
         item.interactionCategory,
         item.tissueExpression
       ])
-    ]
-    .map(e => e.join(",")) 
-     .join("\n");
+    ].map(e => e.join(",")).join("\n");
      console.log(csvString);
   
 
