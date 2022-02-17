@@ -1,11 +1,12 @@
 // This is going to be a general template for downloading as CSV.
 
 
-export const downloadCsv = (data) => {
+export const downloadCsv = (data, tid) => {
+   
   const csvPrefix = 'data:text/csv;charset=utf-8,';
-
-    const csvString = [
-      ...data.map(item => [
+  if (tid === "tissue"){
+    var csvString = [
+      ...data.map(({item,tid}) => [
         item.pathogen,
         item.pathogenProtein,
         item.isolate,
@@ -18,7 +19,11 @@ export const downloadCsv = (data) => {
       ])
     ].map(e => e.join(",")).join("\n");
      console.log(csvString);
-  
+  }
+  else{
+    console.log("hello");
+  }
+
 
 
  
