@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import { HNavbar } from 'components/HNavbar/HNavbar';
 import { Home } from 'pages/Home/Home';
 import { DataSet } from 'pages/DataSet/DataSet';
+import {About} from 'pages/About/About';
+import {Help} from 'pages/Help/Help';
 
 import { ExpResultsTable } from 'components/ExpResultsTable/ExpResultsTable';
 import { GoResultsTable } from 'components/GoResultsTable/GoResultsTable';
@@ -49,9 +51,15 @@ export class HContainer extends Component {
             <Route path={`${env.BASE_URL}/home`}>
               <Home sendTissueData={this.getTissueData} />
             </Route>
+            <Route path={`${env.BASE_URL}/about`}>
+              <About />
+            </Route>
 
             <Route path={`${env.BASE_URL}/dataset`}>
               <DataSet />
+            </Route>
+            <Route path={`${env.BASE_URL}/help`}>
+              <Help />
             </Route>
 
             <Route path={`${env.BASE_URL}/tissue/result/:id`}>
