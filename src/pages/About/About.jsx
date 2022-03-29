@@ -10,7 +10,7 @@ export class About extends Component {
         return (
           <div>
             <Row className="justify-content-center">
-                <Col sm={8}>
+                <Col sm={6}>
                     <h3 className='my-2'>About HuCoPIA</h3>
 
                     <p className='text-left t-about'>
