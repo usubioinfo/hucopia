@@ -298,7 +298,7 @@ export class Home extends Component {
       tissues: tissues,
       expId: newId
     };
-
+      console.log(postBody);
     if (this.state.selectedAnnotationOptions && this.state.selectedAnnotationOptions.length) {
       if (this.state.selectedAnnotation === 'local') {
         postBody['locations'] = this.state.selectedAnnotationOptions;
