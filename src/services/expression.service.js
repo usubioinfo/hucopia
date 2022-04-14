@@ -5,6 +5,7 @@ export const getTissueExpressions = async (postBody) => {
   let returnData;
 
   try {
+    console.log(`${env.BACKEND}/expression/new`, postBody);
     const res = await axios.post(`${env.BACKEND}/expression/new`, postBody);
     returnData = res.data;
   } catch (err) {
