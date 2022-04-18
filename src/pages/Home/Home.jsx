@@ -540,7 +540,7 @@ export class Home extends Component {
                     <h6><b>Virus</b></h6>
 
                     <HSelector text="SARS-CoV-2" selected={this.isVirusSelected('sars-cov-2')} name="sars-cov-2" ch={this.selectVirus}/><br/>
-                    <HSelector text="SARS-CoV" selected={this.isVirusSelected('sars-cov')} name="sars-cov-1" ch={this.selectVirus}/><br/>
+                    <HSelector text="SARS-CoV" selected={this.isVirusSelected('sars-cov')} name="sars-cov" ch={this.selectVirus}/><br/>
                     <HSelector text="MERS" selected={this.isVirusSelected('mers')} name="mers" ch={this.selectVirus}/><br/>
                   </Col>
                   <Col sm={6} className="text-left">
