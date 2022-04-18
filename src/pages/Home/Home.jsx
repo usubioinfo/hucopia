@@ -288,10 +288,20 @@ export class Home extends Component {
     sendGenes = sendGenes.map(gene => {
       return gene.trim();
     });
+    
+     let p_protein;
+
+    if (this.state.interactionCategory != 'common'){
+      p_protein = this.state.selectedVirus
+    }
+    if (this.state.interactionCategory === 'common'){
+      p_protein = 'common'
+    }
+
 
     const postBody = {
       pathogenProteins: this.state.selectedPatProteins,
-      pathogen: this.state.selectedVirus,
+      pathogen: p_protein,
       genes: sendGenes,
       interactionType: this.state.selectedIntTypes,
       interactionCategory: this.state.interactionCategory,
