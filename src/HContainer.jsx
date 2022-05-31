@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -16,12 +16,16 @@ import { LocalResultsTable } from 'components/LocalResultsTable/LocalResultsTabl
 import { VisPage } from 'pages/VisPage/VisPage';
 
 import { env } from 'env.js';
-
+import ReactGA from 'react-ga';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom';
+
+
+ReactGA.initialize('G-W40R9CHGXY');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 export class HContainer extends Component {
 
