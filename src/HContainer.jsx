@@ -24,8 +24,7 @@ import {
 } from 'react-router-dom';
 
 
-ReactGA.initialize('G-W40R9CHGXY');
-ReactGA.pageview(window.location.pathname + window.location.search);
+
 
 export class HContainer extends Component {
 
@@ -46,6 +45,14 @@ export class HContainer extends Component {
     window.history.replaceState(null, 'Test', '/tissue');
   }
 
+  setGA = () => {
+    ReactGA.initialize('G-W40R9CHGXY');
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  };
+
+  componentDidMount(){
+    this.setGA();
+  }
   render() {
     return (
       <Router>
