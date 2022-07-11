@@ -131,6 +131,7 @@ export class Home extends Component {
 
   handleGeneChange(e) {
     this.setState({ genes: e.target.value });
+    console.log(this.state.genes)
   }
 
   selectAnnotation(type) {
@@ -284,8 +285,16 @@ export class Home extends Component {
       resultUrls: [...this.state.resultUrls, {url: newUrl, type: annotationDict[this.state.selectedAnnotation]}]
     });
 
-    // let sendGenes = this.state.genes.replace(/ \s+/g, '').trim().split(',');
-    let sendGenes = this.state.genes.map(gene => {
+    
+
+    let sendGenes = this.state.genes.replace(/ \s+/g, '').trim().split(',');
+    sendGenes = sendGenes.map(gene => {
+      return gene.trim();
+    });
+
+
+    sendGenes = this.state.genes.replace(/ \s+/g, '').trim().split('\n');
+    sendGenes = sendGenes.map(gene => {
       return gene.trim();
     });
     
@@ -355,8 +364,8 @@ export class Home extends Component {
   }
 
   fileSelected(fileText) {
-    const protein = fileText.trim().split("\n")
-    this.setState({genes: protein});
+    // const protein = fileText.trim().split("\n")
+    this.setState({genes: fileText});
   }
 
   setGeneHint(hint) {
