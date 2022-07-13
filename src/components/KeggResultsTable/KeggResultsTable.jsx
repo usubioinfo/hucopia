@@ -18,11 +18,18 @@ const keggProperties = [
   'pathogenProtein',
   'pLength',
   'gene',
+  'humanProtein',
   'hLength',
   'keggId',
   'description',
+  'fdr',
+  'pInteractor',
+  'hInteractor',
+  'confidence',
   'interactionType',
-  'interactionCategory'
+  'interactionCategory',
+  'publication'
+  
 ];
 
 const shadingGuide = {
@@ -31,11 +38,18 @@ const shadingGuide = {
   pathogenProtein: 'light',
   pLength: 'light',
   gene: 'dark',
+  humanProtein: 'dark',
   hLength: 'dark',
   keggId: 'dark',
   description: 'dark',
+  fdr: 'dark',
+  pInteractor: 'light',
+  hInteractor:'light',
+  confidence: 'light',
   interactionType: 'light',
-  interactionCategory: 'light'
+  interactionCategory: 'light',
+  publication: 'light'
+  
 }
 
 const generateComponent = (property, data) => {
@@ -47,7 +61,15 @@ const generateComponent = (property, data) => {
   } else if (property === 'pathogenProtein') {
     const link = `https://www.ncbi.nlm.nih.gov/protein/?term=${data}`;
     return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
-  } else {
+  }else if (property === 'humanProtein') {
+    const link = `https://www.uniprot.org/uniprotkb/${data}`;
+    return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  }
+  else if (property === 'gene') {
+    const link = `https://www.uniprot.org/uniprotkb?query=${data}_HUMAN`;
+    return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  }
+  else {
     return <td className={shading}>{data}</td>
   }
 }
@@ -110,8 +132,8 @@ export const KeggResultsTable = () => {
           <tr className="top">
             <th></th>
             <th colSpan="4" className="pathogen">Pathogen</th>
-            <th colSpan="4" className="human">Human</th>
-            <th colSpan="2" className="interaction">Interaction</th>
+            <th colSpan="6" className="human">Human</th>
+            <th colSpan="6" className="interaction">Interaction Info</th>
           </tr>
 
           <tr className="bottom">
@@ -121,11 +143,18 @@ export const KeggResultsTable = () => {
             <th className="light">Protein</th>
             <th className="light">P-length</th>
             <th className="dark">Gene</th>
+            <th className="dark">H-Protein</th>
             <th className="dark">H-length</th>
             <th className="dark">KEGG ID</th>
             <th className="dark">Description</th>
+            <th className="dark">FDR</th>
+            <th className="light">P-Interactor</th>
+            <th className="light">H-Interactor</th>
+            <th className="light">Confidence</th>
             <th className="light">Type</th>
             <th className="light">Category</th>
+            <th className="light">Publication</th>
+            
           </tr>
         </thead>
 

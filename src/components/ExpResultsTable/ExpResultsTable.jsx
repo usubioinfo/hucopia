@@ -55,10 +55,15 @@ const properties = [
   'pathogenProtein',
   'pLength',
   'gene',
+  'humanProtein',
   'hLength',
   'tissueExpression',
+  'pInteractor',
+  'hInteractor',
+  'confidence',
   'interactionType',
-  'interactionCategory'
+  'interactionCategory',
+  'publication'
 ];
 
 const shadingGuide = {
@@ -67,10 +72,15 @@ const shadingGuide = {
   pathogenProtein: 'light',
   pLength: 'light',
   gene: 'dark',
+  humanProtein: 'dark',
   hLength: 'dark',
   tissueExpression: 'dark',
+  pInteractor: 'light',
+  hInteractor:'light',
+  confidence: 'light',
   interactionType: 'light',
-  interactionCategory: 'light'
+  interactionCategory: 'light',
+  publication: 'light'
 }
 
 const generateComponent = (property, data, result) => {
@@ -147,8 +157,8 @@ export const ExpResultsTable = () => {
           <tr className="top">
             <th></th>
             <th colSpan="4" className="pathogen">Pathogen</th>
-            <th colSpan="3" className="human">Human</th>
-            <th colSpan="2" className="interaction">Interaction</th>
+            <th colSpan="4" className="human">Human</th>
+            <th colSpan="6" className="interaction">Interaction info</th>
           </tr>
 
           <tr className="bottom">
@@ -158,10 +168,15 @@ export const ExpResultsTable = () => {
             <th className="light">Protein</th>
             <th className="light">P-length</th>
             <th className="dark">Gene</th>
+            <th className="dark">H-Protein</th>
             <th className="dark">H-length</th>
             <th className="dark">Tissue</th>
+            <th className="light">P-Interactor</th>
+            <th className="light">H-Interactor</th>
+            <th className="light">Confidence</th>
             <th className="light">Type</th>
             <th className="light">Category</th>
+            <th className="light">Publication</th>
           </tr>
         </thead>
 
