@@ -296,7 +296,7 @@ export class Home extends Component {
     
      let p_protein;
 
-    if (this.state.interactionCategory != 'common'){
+    if (this.state.interactionCategory !== 'common'){
       p_protein = this.state.selectedVirus
     }
     if (this.state.interactionCategory === 'common'){

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { Container } from 'react-bootstrap';
 
 import './VisPage.scss';
 
@@ -96,11 +97,12 @@ export class VisPage extends Component {
     }
 
     return (
-      <Row>
-        <Col sm={7}>
+     <div className='container-fluid'>
+      <Row className='justify-content-center'>
+        <Col sm={6}>
           <Visualization edgeHandler={this.handleEdgeClicked} nodeHandler={this.handleNodeClicked} searchTerm={this.state.searchTerm} />
         </Col>
-        <Col sm={5}>
+        <Col sm={4}>
           <div className="bar-selector mb-3">
             <span className={`${tableClass} mr-3`} onClick={() => this.handleBarSwitch('table')}>Table</span>
             <span className={nodeClass}  onClick={() => this.handleBarSwitch('info')}>{this.state.infoType}Info</span>
@@ -108,6 +110,7 @@ export class VisPage extends Component {
           {menuComponent}
         </Col>
       </Row>
+      </div>
     );
   }
 }

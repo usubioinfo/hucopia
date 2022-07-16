@@ -11,10 +11,16 @@ export const downloadCsv = (data, tid) => {
         "Pathogen Isolate",
         "P-Protein Length",
         "Human Gene",
+        "Human Protein",
         "H-Protein Length",
+        "Tissue",
+        "Pathogen Interactor",
+        "Human Interactor",
+        "Confidence",
         "Interaction Type",
         "Interaction Category",
-        "Tissue",
+        "Publication"
+        
       ],
       ...data.map((item) => [
         item.pathogen,
@@ -22,10 +28,16 @@ export const downloadCsv = (data, tid) => {
         item.isolate,
         item.pLength,
         item.gene,
+        item.humanProtein,
         item.hLength,
+        item.tissueExpression,
+        item.pInteractor,
+        item.hInteractor,
+        item.confidence,
         item.interactionType,
         item.interactionCategory,
-        item.tissueExpression,
+        item.publication
+        
       ]),
     ]
       .map((e) => e.join(","))
@@ -40,10 +52,16 @@ export const downloadCsv = (data, tid) => {
         "Pathogen Isolate",
         "P-Protein Length",
         "Human Gene",
+        "Human Protein",
         "H-Protein Length",
+        "Localization",
+        "Pathogen Interactor",
+        "Human Interactor",
+        "Confidence",
         "Interaction Type",
         "Interaction Category",
-        "Localization",
+        "Publication"
+        
       ],
       ...data.map((item) => [
         item.pathogen,
@@ -51,10 +69,17 @@ export const downloadCsv = (data, tid) => {
         item.isolate,
         item.pLength,
         item.gene,
+        item.humanProtein,
         item.hLength,
+        item.location,
+        item.pInteractor,
+        item.hInteractor,
+        item.confidence,
         item.interactionType,
         item.interactionCategory,
-        item.location,
+        item.publication
+        
+        
       ]),
     ]
       .map((e) => e.join(","))
@@ -70,11 +95,18 @@ export const downloadCsv = (data, tid) => {
         "Pathogen Isolate",
         "P-Protein Length",
         "Human Gene",
+        "Human Protein",
         "H-Protein Length",
-        "Interaction Type",
-        "Interaction Category",
         "GO ID",
         "GO Description",
+        "FDR",
+        "Pathogen Interactor",
+        "Human Interactor",
+        "Confidence",
+        "Interaction Type",
+        "Interaction Category",
+        "Publication"
+        
       ],
       ...data.map((item) => [
         item.pathogen,
@@ -82,11 +114,18 @@ export const downloadCsv = (data, tid) => {
         item.isolate,
         item.pLength,
         item.gene,
+        item.humanProtein,
         item.hLength,
-        item.interactionType,
-        item.interactionCategory,
         item.goId,
         item.description,
+        item.fdr,
+        item.pInteractor,
+        item.hInteractor,
+        item.confidence,
+        item.interactionType,
+        item.interactionCategory,
+        item.publication
+       
       ]),
     ]
       .map((e) => e.join(","))
@@ -102,11 +141,17 @@ export const downloadCsv = (data, tid) => {
         "Pathogen Isolate",
         "P-Protein Length",
         "Human Gene",
+        "Human Protein",
         "H-Protein Length",
-        "Interaction Type",
-        "Interaction Category",
         "KEGG ID",
         "KEGG Description",
+        "FDR",
+        "Pathogen Interactor",
+        "Human Interactor",
+        "Confidence",
+        "Interaction Type",
+        "Interaction Category",
+        "Publication"
       ],
       ...data.map((item) => [
         item.pathogen,
@@ -114,11 +159,18 @@ export const downloadCsv = (data, tid) => {
         item.isolate,
         item.pLength,
         item.gene,
+        item.humanProtein,
         item.hLength,
-        item.interactionType,
-        item.interactionCategory,
         item.keggId,
         item.description,
+        item.fdr,
+        item.pInteractor,
+        item.hInteractor,
+        item.confidence,
+        item.interactionType,
+        item.interactionCategory,
+        item.publication
+      
       ]),
     ]
       .map((e) => e.join(","))
@@ -133,7 +185,7 @@ export const downloadCsv = (data, tid) => {
 
   let link = document.createElement("a");
   link.setAttribute("href", encodedUri);
-  link.setAttribute("download", "data.csv");
+  link.setAttribute("download", "HuCoPIA_results.csv");
   document.body.appendChild(link);
 
   link.click();

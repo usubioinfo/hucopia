@@ -58,7 +58,7 @@ export const Visualization = React.memo(props => {
   const idDict = {
     interolog: intIds,
     domain: domIds,
-    both: conIds
+    consensus: conIds
   }
 
   if (graphData.length && data.payload) {

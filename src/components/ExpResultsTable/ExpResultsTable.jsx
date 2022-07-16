@@ -101,6 +101,7 @@ const generateComponent = (property, data, result) => {
 }
 
 export const ExpResultsTable = () => {
+  
   const { id } = useParams();
 
   let [data, setData] = useState([]);
