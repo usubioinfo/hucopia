@@ -17,8 +17,8 @@ const keggProperties = [
   'isolate',
   'pathogenProtein',
   'pLength',
-  'gene',
   'humanProtein',
+  'gene',
   'hLength',
   'keggId',
   'description',
@@ -37,8 +37,8 @@ const shadingGuide = {
   isolate: 'light',
   pathogenProtein: 'light',
   pLength: 'light',
-  gene: 'dark',
   humanProtein: 'dark',
+  gene: 'dark',
   hLength: 'dark',
   keggId: 'dark',
   description: 'dark',
@@ -67,6 +67,26 @@ const generateComponent = (property, data) => {
   }
   else if (property === 'gene') {
     const link = `https://www.uniprot.org/uniprotkb?query=${data}_HUMAN`;
+    return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  }else if (property === 'pInteractor') {
+    const link = `https://www.uniprot.org/uniprotkb/${data}`;
+    return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  }else if (property === 'hInteractor') {
+    const link = `https://www.uniprot.org/uniprotkb/${data}`;
+    return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
+  }
+  else if (property === 'publication') {
+    let link;
+    if (data.includes("/")){
+      link = `https://doi.org/${data}`;
+    }
+    else if (data.includes("888800")){
+      link = `https://wiki.thebiogrid.org/doku.php/covid:unpublished`;
+    }
+    else{
+      link = `https://pubmed.ncbi.nlm.nih.gov/?term=${data}`;
+    }
+  
     return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
   }
   else {
@@ -142,8 +162,8 @@ export const KeggResultsTable = () => {
             <th className="light">Isolate</th>
             <th className="light">Protein</th>
             <th className="light">P-length</th>
-            <th className="dark">Gene</th>
             <th className="dark">H-Protein</th>
+            <th className="dark">Gene</th>
             <th className="dark">H-length</th>
             <th className="dark">KEGG ID</th>
             <th className="dark">Description</th>
@@ -221,6 +241,10 @@ export const KeggResultsTable = () => {
 
       <div className="text-left">
         *Reference isolate refers to all 30 genomes, found <a href={`${env.BASE_URL}/dataset`} target="_blank" rel="noreferrer">here</a>
+      </div>
+      <div className="text-left">
+        *All Interolog are filtered with Identity <code>&ge;40</code>, Coverage <code>&le;80</code> and e-value <code>&le;1e-50</code><br></br>
+        *All human domain are filtered with <code>0.2 Coverage</code> and <code>1e-23 E-value</code> and Virus domain are filtered with <code> 1e-1 E-value </code> an default coverage.
       </div>
     </div>
   );
