@@ -73,8 +73,11 @@ const generateComponent = (property, data) => {
   }else if (property === 'hInteractor') {
     const link = `https://www.uniprot.org/uniprotkb/${data}`;
     return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
-  }else if (property === 'publication') {
+  }
+  else if (property === 'publication') {
     let link;
+    if (data){
+   
     if (data.includes("/")){
       link = `https://doi.org/${data}`;
     }
@@ -84,9 +87,11 @@ const generateComponent = (property, data) => {
     else{
       link = `https://pubmed.ncbi.nlm.nih.gov/?term=${data}`;
     }
-  
+  }
     return <td className={shading}><a href={link} target="_blank" rel="noreferrer">{data}</a></td>
-  }else {
+  }
+ 
+  else {
     return <td className={shading}>{data}</td>
   }
 }
