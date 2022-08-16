@@ -24,9 +24,11 @@ const localProperties = [
   'pInteractor',
   'hInteractor',
   'confidence',
+  'intdb',
   'interactionType',
   'interactionCategory',
   'publication'
+  
 ];
 
 const shadingGuide = {
@@ -41,6 +43,7 @@ const shadingGuide = {
   pInteractor: 'light',
   hInteractor:'light',
   confidence: 'light',
+  intdb:'light',
   interactionType: 'light',
   interactionCategory: 'light',
   publication: 'light'
@@ -106,7 +109,7 @@ export const LocalResultsTable = () => {
   if (data.payload && data.payload.reqTime) {
     csvButton = <Button className="kbl-btn-1 mx-2" onClick={() => CSVService.downloadCsv(tableResults, "location")}>CSV</Button>;
     let tableResults = data.payload.results;
-    // console.log(tableResults);
+    console.log(tableResults);
     data.payload.results = data.payload.results.filter(result => {
       return result.interactionType.length;
     });
@@ -144,7 +147,7 @@ export const LocalResultsTable = () => {
             <th></th>
             <th colSpan="4" className="pathogen">Pathogen</th>
             <th colSpan="4" className="human">Human</th>
-            <th colSpan="6" className="interaction">Interaction</th>
+            <th colSpan="7" className="interaction">Interaction</th>
           </tr>
 
           <tr className="bottom">
@@ -160,6 +163,7 @@ export const LocalResultsTable = () => {
             <th className="light">P-Interactor</th>
             <th className="light">H-Interactor</th>
             <th className="light">Confidence</th>
+            <th className='light'>Interaction DB</th>
             <th className="light">Type</th>
             <th className="light">Category</th>
             <th className="light">Publication</th>

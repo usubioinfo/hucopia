@@ -26,9 +26,11 @@ const keggProperties = [
   'pInteractor',
   'hInteractor',
   'confidence',
+  'intdb',
   'interactionType',
   'interactionCategory',
-  'publication'
+  'publication',
+ 
   
 ];
 
@@ -46,6 +48,7 @@ const shadingGuide = {
   pInteractor: 'light',
   hInteractor:'light',
   confidence: 'light',
+  intdb:'light',
   interactionType: 'light',
   interactionCategory: 'light',
   publication: 'light'
@@ -153,7 +156,7 @@ export const KeggResultsTable = () => {
             <th></th>
             <th colSpan="4" className="pathogen">Pathogen</th>
             <th colSpan="6" className="human">Human</th>
-            <th colSpan="6" className="interaction">Interaction Info</th>
+            <th colSpan="7" className="interaction">Interaction Info</th>
           </tr>
 
           <tr className="bottom">
@@ -171,6 +174,7 @@ export const KeggResultsTable = () => {
             <th className="light">P-Interactor</th>
             <th className="light">H-Interactor</th>
             <th className="light">Confidence</th>
+            <th className='light'>Interaction DB</th>
             <th className="light">Type</th>
             <th className="light">Category</th>
             <th className="light">Publication</th>
