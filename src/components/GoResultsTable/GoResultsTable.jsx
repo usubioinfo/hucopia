@@ -159,7 +159,7 @@ export const GoResultsTable = () => {
             <th></th>
             <th colSpan="4" className="pathogen">Pathogen</th>
             <th colSpan="6" className="human">Human</th>
-            <th colSpan="7" className="interaction">Interaction</th>
+            <th colSpan="6" className="interaction">Interaction</th>
           </tr>
 
           <tr className="bottom">

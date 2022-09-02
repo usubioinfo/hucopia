@@ -56,7 +56,7 @@ export class Home extends Component {
     this.state = {
       selectedAnnotation: 'tissue',
       selectedVirus: 'sars-cov-2',
-      interactionCategory: 'unique',
+      interactionCategory: 'both',
       selectedPatProteins: [],
       selectedIntTypes: ['interolog', 'domain', 'consensus'],
       genes: '',
