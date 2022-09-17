@@ -386,7 +386,7 @@ export class Home extends Component {
     let geneHintClass = 'gene-hint';
 
     let genePlaceholder = 'Example: NR3C1, NR1I2, ANXA1';
-    let geneSample = 'PTPRR, PTPN2, PTPN7, PTPN20, PTPN5, GRAPL, STK26, LCK, FGR, ACVRL1, STK24, GRB2';
+    let geneSample = 'STOM, DDX21, AP2M1, TBK1, ERP44, OS9, UBE3A, RBM28, HERC2, DCAF7';
 
     if (this.state.selectedAnnotation === 'kegg') {
       genePlaceholder = 'Example: FRA7D, FRA5E, PLEXB3';
