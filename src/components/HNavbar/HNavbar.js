@@ -39,7 +39,7 @@ class HNavbar extends React.Component {
           </Navbar.Brand>
 
           <Nav className="">
-            <Nav.Link href={`${env.BASE_URL}/`} className={'/' === this.props.active ? active : className}>
+            <Nav.Link href={`${env.BASE_URL}/home`} className={'home' === this.props.active ? active : className}>
               Home
             </Nav.Link>
             <Nav.Link href={`${env.BASE_URL}/about`} className={'about' === this.props.active ? active : className}>
