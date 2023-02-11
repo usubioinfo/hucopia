@@ -34,6 +34,7 @@ export class HContainer extends Component {
     this.state = {
       tissueResults: [],
       baseUrlLen: env.BASE_URL.split('/').length
+    
     }
 
     this.getTissueData = this.getTissueData.bind(this);
@@ -53,7 +54,7 @@ export class HContainer extends Component {
   componentDidMount(){
     this.setGA();
   }
-  render() {
+  render() { console.log(this.state.baseUrlLen)
     return (
       <Router>
         <Container fluid className="App px-4">
