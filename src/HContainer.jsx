@@ -60,6 +60,10 @@ export class HContainer extends Component {
           <HNavbar active={document.location.pathname.split('/')[this.state.baseUrlLen]}/>
           {/* <HNavbar /> */}
           <Switch>
+          <Route path={`${env.BASE_URL}/`}>
+              <Home sendTissueData={this.getTissueData} />
+            </Route>
+
 
              <Route path={`${env.BASE_URL}/home`}>
               <Home sendTissueData={this.getTissueData} />
