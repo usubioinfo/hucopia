@@ -68,6 +68,7 @@ export class Home extends Component {
       showTissueModal: false,
       tissueOptions: [],
       keggOptions: [],
+      goOptions: [],
       localAnnotations: [],
       showKeggModal: false,
       showGoModal: false,
@@ -107,6 +108,15 @@ export class Home extends Component {
       .then(res => {
         console.log(res.data);
         this.setState({keggOptions: res.data.payload});
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    
+    axios.get(`${env.BACKEND}/go/annotations`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({goOptions: res.data.payload});
       })
       .catch(err => {
         console.log(err);
@@ -287,7 +297,7 @@ export class Home extends Component {
       resultUrls: [...this.state.resultUrls, {url: newUrl, type: annotationDict[this.state.selectedAnnotation]}]
     });
 
-    console.log(this.state.resultUrls)
+
 
     console.log(this.state.genes)
 
@@ -627,7 +637,7 @@ export class Home extends Component {
         <TissueModal tissues={this.state.tissueOptions} show={this.state.showTissueModal} handler={this.closeModal}/>
         <KeggModal annotations={this.state.keggOptions} show={this.state.showKeggModal} handler={this.closeModal}/>
         <LocalModal annotations={this.state.localAnnotations} show={this.state.showLocalModal} handler={this.closeModal}/>
-        <GoModal show={this.state.showGoModal} handler={this.closeModal}/>
+        <GoModal annotations={this.state.goOptions} show={this.state.showGoModal} handler={this.closeModal}/>
       </div>
     );
   }
