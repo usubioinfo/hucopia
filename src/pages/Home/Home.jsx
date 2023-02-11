@@ -287,6 +287,8 @@ export class Home extends Component {
       resultUrls: [...this.state.resultUrls, {url: newUrl, type: annotationDict[this.state.selectedAnnotation]}]
     });
 
+    console.log(this.state.resultUrls)
+
     console.log(this.state.genes)
 
     let sendGenes = this.state.genes.toString().replace(/ \s+/g, '').trim().split(',');
