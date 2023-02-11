@@ -57,7 +57,8 @@ export class HContainer extends Component {
     return (
       <Router>
         <Container fluid className="App px-4">
-          <HNavbar active={document.location.pathname.split('/')[this.state.baseUrlLen]}/>
+          {/* <HNavbar active={document.location.pathname.split('/')[this.state.baseUrlLen]}/> */}
+          <HNavbar />
           <Switch>
             {/* <Route path={`${env.BASE_URL}/`}>
               <Home sendTissueData={this.getTissueData} />
