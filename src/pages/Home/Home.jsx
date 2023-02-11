@@ -271,7 +271,9 @@ export class Home extends Component {
       newUrl = `${env.BASE_URL}/${this.state.selectedAnnotation}/result/${newId}`;
     } else {
       newUrl = `/${this.state.selectedAnnotation}/result/${newId}`;
+      
     }
+    console.log(newUrl)
 
     const annotationDict = {
       tissue: 'Tissue Expression',
