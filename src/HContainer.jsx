@@ -66,7 +66,7 @@ export class HContainer extends Component {
             </Route> */}
 
 
-             <Route path={`${env.BASE_URL}/home`}>
+            <Route exact path={`${env.BASE_URL}/`}>
               <Home sendTissueData={this.getTissueData} />
             </Route>
 
