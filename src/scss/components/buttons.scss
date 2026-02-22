@@ -1,5 +1,5 @@
-@import '~scss/colors';
-@import '~scss/globals';
+@use 'scss/colors' as *;
+@use 'scss/globals' as *;
 @use "sass:list";
 
 $colors: ("1": $palette-1, "2": $palette-2, "3": $palette-3);

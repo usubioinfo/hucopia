@@ -33,11 +33,11 @@
     "web-vitals": "^2.0.1"
   },
   "scripts": {
-    "start": "NODE_OPTIONS=--openssl-legacy-provider react-dotenv && NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider SASS_SILENCE_DEPRECATIONS=legacy-js-api react-dotenv && NODE_OPTIONS=--openssl-legacy-provider SASS_SILENCE_DEPRECATIONS=legacy-js-api react-scripts start",
     "local": "serve -s build -l 3600",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider react-dotenv && NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
-    "update": "git pull origin main && npm i && NODE_OPTIONS=--openssl-legacy-provider react-dotenv && NODE_OPTIONS=--openssl-legacy-provider react-scripts build && pm2 restart hucopia",
-    "test": "NODE_OPTIONS=--openssl-legacy-provider react-scripts test",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider SASS_SILENCE_DEPRECATIONS=legacy-js-api react-dotenv && NODE_OPTIONS=--openssl-legacy-provider SASS_SILENCE_DEPRECATIONS=legacy-js-api react-scripts build",
+    "update": "git pull origin main && npm i && NODE_OPTIONS=--openssl-legacy-provider SASS_SILENCE_DEPRECATIONS=legacy-js-api react-dotenv && NODE_OPTIONS=--openssl-legacy-provider SASS_SILENCE_DEPRECATIONS=legacy-js-api react-scripts build && pm2 restart hucopia",
+    "test": "NODE_OPTIONS=--openssl-legacy-provider SASS_SILENCE_DEPRECATIONS=legacy-js-api react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
